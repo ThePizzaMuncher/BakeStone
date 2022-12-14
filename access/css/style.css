@@ -4,3 +4,6 @@ body {
 p {
     color: white;
 }
+.canvas {
+    width: 100vw;
+}
