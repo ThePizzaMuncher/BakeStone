@@ -27,7 +27,6 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
         var ctx = canvas.getContext("2d");
         var steenDx = 215;
         var steenDy = 101;
-        var steenDz = 65;
         ctx.strokeStyle = 'red';
         ctx.stroke();
         var koppenMaat = steenDz + voegDx;

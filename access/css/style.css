@@ -16,11 +16,15 @@ p {
 .logo:hover {
     cursor: pointer;
 }
-hr {
+hr, .line_2 {
     border-color: black;
     background-color: black;
     height: 0.3vw;
     width: 100%;
+}
+.line_2 {
+    width: 40vw;
+    margin-left: 20vw;
 }
 #canvas {
     margin-top: 1vw;
@@ -32,17 +36,22 @@ hr {
     justify-content: center;
     align-items: center;
 }
-.navbar {
+.navbar, .navbar_line {
     margin-top: 1vw;
-    border-color: black;
-    border-style: solid;
     height: 6.7vw;
     width: 99,70%;
-    border-width: 6px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 99.2%;
+}
+.navbar_line {
+    margin-top: -2vw;
 }
 .stone1, .stone2, .stone3 {
     border-style: solid;
@@ -76,4 +85,7 @@ hr {
 .stone3 {
     background-image: url(../media/img/vechtformaat.jpg);
     background-size: 100%;
+}
+.stone1:hover, .stone2:hover, .stone3:hover {
+    cursor: pointer;
 }
