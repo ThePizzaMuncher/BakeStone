@@ -7,3 +7,13 @@ p {
 .canvas {
     width: 100vw;
 }
+.logo {
+    width: 30vw;
+    height: 5vw;
+    background-image: url("../media/img/BGDD.png");
+    background-size: 100%;
+}
+hr {
+    border-color: black;
+    background-color: black;
+}
