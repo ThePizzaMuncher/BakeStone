@@ -1,11 +1,8 @@
 body {
-    background-color: rgb(120, 107, 107);
+    background-color: white;
 }
 p {
     color: white;
-}
-.canvas {
-    width: 100vw;
 }
 .logo {
     width: 30vw;
@@ -13,7 +10,21 @@ p {
     background-image: url("../media/img/BGDD.png");
     background-size: 100%;
 }
+.logo:hover {
+    cursor: pointer;
+}
 hr {
     border-color: black;
     background-color: black;
+    height: 0.3vw;
+}
+#canvas {
+    margin-top: 2vw;
+    border: 2px solid black;
+}
+.flex {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
