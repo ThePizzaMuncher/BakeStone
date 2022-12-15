@@ -23,8 +23,8 @@ hr, .line_2 {
     width: 100%;
 }
 .line_2 {
-    width: 40vw;
-    margin-left: 20vw;
+    width: 59vw;
+    margin-left: 10vw;
 }
 #canvas {
     margin-top: 1vw;
@@ -62,7 +62,10 @@ hr, .line_2 {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
-    border-bottom-left-radius: 1vw
+    border-bottom-left-radius: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .zijnav {
     border-color: black;
@@ -88,4 +91,9 @@ hr, .line_2 {
 }
 .stone1:hover, .stone2:hover, .stone3:hover {
     cursor: pointer;
+}
+.steen {
+    font-size: 2vw;
+    color: white;
+    text-shadow: 3px 3px 3px black;
 }

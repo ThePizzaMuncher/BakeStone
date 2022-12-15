@@ -6,7 +6,7 @@ if (canvas.getContext) {
     var steenDz = 100;
     var voegDx = 10;
     var voegDy = 10;
-    var muurDx = 3000;
+    var muurDx = 700;
     var muurDy = 2000;
     ctx.strokeStyle = 'red';
     ctx.stroke();
@@ -19,7 +19,7 @@ if (canvas.getContext) {
     }
 }
 function BGDD_website() {
-    window.open("https://BGDD.nl", '_blank');
+    window.open("https://BGDD.nl/", '_blank');
 }
 document.getElementById("#stone1").addEventListener("click", () => {//Knop steen 1 listener.
     canvas.width = canvas.width;
