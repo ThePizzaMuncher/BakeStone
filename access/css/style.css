@@ -2,7 +2,7 @@ body {
     background-color: white;
 }
 p {
-    color: white;
+    color: rgb(0, 0, 0);
 }
 .logo {
     width: 30vw;
@@ -19,7 +19,7 @@ hr {
     height: 0.3vw;
 }
 #canvas {
-    margin-top: 2vw;
+    margin-top: 1vw;
     border: 2px solid black;
 }
 .flex {
@@ -27,4 +27,23 @@ hr {
     width: 100%;
     justify-content: center;
     align-items: center;
+}
+.navbar {
+    margin-top: 1vw;
+    border-color: black;
+    border-style: solid;
+    height: 6.7vw;
+    width: 99,70%;
+    border-width: 6px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.stone1, .stone2, .stone3 {
+    border-color: black;
+    border-style: solid;
+    border-width: 4px;
+    width: 15vw;
+    height: 5vw;
 }
