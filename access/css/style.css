@@ -20,6 +20,7 @@ hr {
     border-color: black;
     background-color: black;
     height: 0.3vw;
+    width: 100%;
 }
 #canvas {
     margin-top: 1vw;
