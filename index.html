@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Baksteen Calculator</title>
+        <title>BGDD - Baksteen Calculator</title>
+        <link rel="icon" type="image/x-icon" href="access/media/img/favicon.ico">
         <meta name="Authors" content="Dijkstra draisma, Bakestone INC">
         <link rel="stylesheet" href="access/css/style.css">
         <script src="access/js/script.js" defer></script>
     </head>
-    <body>
-        <canvas class="canvas">
-        Uw browser ondersteunt de canvas niet.</canvas>
+    <body onload="teken()">
+        <div class="logo" onclick="BGDD_website()"></div>
+        <hr>
+        <div class="flex"><canvas id="canvas" width="1000px" height="488px"></canvas></div> 
     </body>
 </html>
