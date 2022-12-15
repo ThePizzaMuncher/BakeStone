@@ -1,3 +1,6 @@
+* {
+    /* border: 2px solid green */
+}
 body {
     background-color: white;
 }
@@ -42,9 +45,35 @@ hr {
     align-items: center;
 }
 .stone1, .stone2, .stone3 {
-    border-color: black;
     border-style: solid;
+    border-color: black;
     border-width: 4px;
     width: 15vw;
     height: 5vw;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    border-bottom-left-radius: 1vw
+}
+.zijnav {
+    border-color: black;
+    border-width: 6px;
+    border-style: solid;
+    width: 21vw;
+    height: 31vw;
+    position: relative;
+    left: -3.5vw;
+    top: 5px;
+}
+.stone1 {
+    background-image: url(../media/img/walformaat2.jpg);
+    background-size: 100%;
+}
+.stone2 {
+    background-image: url(../media/img/dikformaat.jpg);
+    background-size: 100%;
+}
+.stone3 {
+    background-image: url(../media/img/vechtformaat.jpg);
+    background-size: 100%;
 }
