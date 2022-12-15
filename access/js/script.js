@@ -1,7 +1,7 @@
 function teken() {
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
-        const ctx = canvas.getContext("2d");
+        var ctx = canvas.getContext("2d");
         var steenDx = 210;
         var steenDy = 50;
         var steenDz = 100;
@@ -20,4 +20,7 @@ function teken() {
 }
 function BGDD_website() {
     window.open("https://bgdd.nl", '_blank');
+}
+function deur() {
+    ctx.fillRect(200, 200, 100, 100);
 }
