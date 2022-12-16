@@ -11,10 +11,11 @@
     <body>
         <div class="logo" onclick="BGDD_website()"></div>
         <hr>
+        <div class="zijnav"></div>
         <div class="flex">
-            <div class="zijnav"></div>
-            <canvas id="canvas" width="1000px" height="488px"></canvas></div> 
-            <div class="navbar_line"><hr class="line_2"></div>
+            <canvas id="canvas" height="500" width="1000"></canvas> 
+            <div class="navbar_line"><hr class="line_2"></div></div>
+        </div>
         <div class="navbar">
             <div class="stone1" id="#stone1"><p class="steen">Walformaat</p></div>
             <div class="stone2" id="#stone2"><p class="steen">Dikformaat</p></div>
@@ -22,11 +23,13 @@
             <table>
                 <tr>
                     <td><p class="maten">Hoogte:&nbsp;</p></td>
-                    <td><input type="number"></td>
+                    <td><input type="number" id="$hoogte" value="0"></td>
+                    <td><p class="maten">(in mm)</p></td>
                 </tr>
                 <tr>
                     <td><p class="maten">Breedte:&nbsp;</p></td>
-                    <td><input type="number"></td>
+                    <td><input type="number" id="$breedte" value="0"></td>
+                    <td><p class="maten">(in mm)</p></td>
                 </tr>
             </table>
         </div>
