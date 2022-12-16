@@ -3,8 +3,8 @@ var steenDy = 50;
 var steenDz = 100;
 var voegDx = 10;
 var voegDy = 10;
-var muurDx = 10000;
-var muurDy = 10000;
+var muurDx = 500;
+var muurDy = 300;
 function teken() {//Algemene teken functie.
     //pre install functions.
     if (muurDx < 1 || muurDy < 1) {
@@ -30,11 +30,8 @@ function BGDD_website() {//Doorverwijzing naar BGDD website.
     window.open("https://BGDD.nl/", '_blank');
 }
 document.getElementById("#stone1").addEventListener("click", () => {
-    let $breedte = document.getElementById("$breedte").value;
-    let $hoogte = document.getElementById("$hoogte").value;
-    muurDx = $breedte;
-    muurDy = $hoogte;
     cv_cls();
+    get_B_en_H();
     steenDx = 210;
     steenDy = 50;
     voegDx = 10;
@@ -42,6 +39,7 @@ document.getElementById("#stone1").addEventListener("click", () => {
 });
 document.getElementById("#stone2").addEventListener("click", () => {//Knop steen 2 listener.
     cv_cls();
+    get_B_en_H();
     steenDx = 215;
     steenDy = 101;
     voegDx = 12;
@@ -49,6 +47,7 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
 });
 document.getElementById("#stone3").addEventListener("click", () => {
     cv_cls();
+    get_B_en_H();
     steenDx = 210;
     steenDy = 100;
     voegDx = 10;
@@ -56,4 +55,10 @@ document.getElementById("#stone3").addEventListener("click", () => {
 });
 function cv_cls() {//Cls voor canvas.
     canvas.width = canvas.width;
+}
+function get_B_en_H() {
+    let $breedte = document.getElementById("$breedte").value;
+    let $hoogte = document.getElementById("$hoogte").value;
+    muurDx = $breedte;
+    muurDy = $hoogte;
 }
