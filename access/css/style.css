@@ -74,15 +74,15 @@ hr, .line_2 {
     height: 31vw;
 }
 .stone1 {
-    background-image: url(../media/img/walformaat2.jpg);
+    background-image: url(../media/img/waalformaat.png);
     background-size: 100%;
 }
 .stone2 {
-    background-image: url(../media/img/dikformaat.jpg);
+    background-image: url(../media/img/dikformaat.png);
     background-size: 100%;
 }
 .stone3 {
-    background-image: url(../media/img/vechtformaat.jpg);
+    background-image: url(../media/img/ysselformaat.png);
     background-size: 100%;
 }
 .stone1:hover, .stone2:hover, .stone3:hover {
