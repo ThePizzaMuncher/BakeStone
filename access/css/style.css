@@ -24,13 +24,14 @@ hr, .line_2 {
 }
 .line_2 {
     width: 59vw;
-    margin-left: 10vw;
+    margin-left: 6.5vw;
 }
 #canvas {
     margin-top: 1vw;
     border: 2px solid black;
 }
 .flex {
+    margin-top: -32.5vw;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -68,14 +69,9 @@ hr, .line_2 {
     align-items: center;
 }
 .zijnav {
-    border-color: black;
-    border-width: 6px;
-    border-style: solid;
-    width: 21vw;
+    border: 6px solid black;
+    width: 16vw;
     height: 31vw;
-    position: relative;
-    left: -3.5vw;
-    top: 5px;
 }
 .stone1 {
     background-image: url(../media/img/walformaat2.jpg);
