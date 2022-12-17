@@ -5,21 +5,25 @@ var voegDx = 10;
 var voegDy = 10;
 var muurDx = 500;
 var muurDy = 300;
+var scale = 0;
 function teken() {//Algemene teken functie.
     const canvas = document.getElementById("canvas");
-    if (canvas.getContext) {
+    if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
+        scale = (muurDx - muurDy) / (muurDx - - muurDy) * 1.5;
+        window.alert("scale = " + scale);
+        ctx.scale(scale, scale);
         ctx.strokeStyle = 'red';
         var koppenMaat = steenDz + voegDx;
         var lagenMaat = steenDy + voegDy;
-        for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {
-            for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {
+        for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {//Voor de y-as var & lagenMaat doe...
+            for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var & koppenMaat doe...
             ctx.strokeRect(10 + xpos, 10 + ypos, steenDx, steenDy);
             }
         }
     }
 }
-teken();//Hier wordt getekend.
+teken();//Hier wordt getekend bij het laden van de pagina.
 function BGDD_website() {//Doorverwijzing naar BGDD website.
     window.open("https://BGDD.nl/", '_blank');
 }
