@@ -91,6 +91,9 @@ hr, .line_2 {
     color: white;
     text-shadow: 3px 3px 3px black;
 }
+.zoom {
+    width: 4vw;
+}
 /* @media bakvet empire */
 @media (max-width: 1100px) {
     #canvas {

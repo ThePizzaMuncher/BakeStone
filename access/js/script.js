@@ -64,7 +64,6 @@ function muur_B_en_H_check() {//Kijk als hoogte en breedte groter is dan 0.
         window.alert("Voer een groter getal in voor de hoogte.");
         muurDx = 500;
         muurDy = 300;
-        teken();
         crash();
     }
     else {
@@ -72,8 +71,6 @@ function muur_B_en_H_check() {//Kijk als hoogte en breedte groter is dan 0.
             window.alert("Voer een groter getal in voor de breedte.");
             muurDx = 500;
             muurDy = 300;
-            teken();
-            crash();
         }
     }
 }
