@@ -11,8 +11,8 @@
     <body>
         <div class="logo" onclick="BGDD_website()"></div>
         <hr>
-        <div class="zijnav"></div>
         <div class="flex">
+            <div class="zijnav"></div>
             <canvas id="canvas" height="500" width="1000"></canvas> 
             <div class="navbar_line"><hr class="line_2"></div></div>
         </div>
@@ -32,6 +32,7 @@
                     <td><p class="maten">(in mm)</p></td>
                 </tr>
             </table>
+            <input type="range" min="0.5" max="1300.00" value="1300.00" onchange="zet_schaal()" id="$schaal">
         </div>
     </body>
 </html>

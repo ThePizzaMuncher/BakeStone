@@ -23,18 +23,16 @@ hr, .line_2 {
     width: 100%;
 }
 .line_2 {
-    width: 59vw;
+    width: 50vw;
     margin-left: 6.5vw;
 }
 #canvas {
-    margin-top: 1vw;
     border: 2px solid black;
 }
 .flex {
-    margin-top: -32.5vw;
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 .navbar, .navbar_line {
@@ -69,7 +67,7 @@ hr, .line_2 {
     align-items: center;
 }
 .zijnav {
-    border: 6px solid black;
+    border: 2px solid black;
     width: 16vw;
     height: 31vw;
 }

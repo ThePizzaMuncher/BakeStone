@@ -5,11 +5,12 @@ var voegDx = 10;
 var voegDy = 10;
 var muurDx = 500;
 var muurDy = 300;
+let schaal_slider = 1.4;
 function teken() {//Algemene teken functie.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
-        ctx.scale(1.4, 1.4);
+        ctx.scale(schaal_slider, schaal_slider);
         ctx.strokeStyle = 'red';
         var koppenMaat = steenDz + voegDx;
         var lagenMaat = steenDy + voegDy;
@@ -71,4 +72,11 @@ function muur_B_en_H_check() {//Kijk als hoogte en breedte groter is dan 0.
             muurDy = 300;
         }
     }
+}
+function zet_schaal() {
+    schaal_slider = document.getElementById("$schaal").value / 1000;
+    cv_cls();
+    get_B_en_H();
+    muur_B_en_H_check();
+    teken();
 }
