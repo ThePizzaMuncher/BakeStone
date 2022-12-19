@@ -5,14 +5,11 @@ var voegDx = 10;
 var voegDy = 10;
 var muurDx = 500;
 var muurDy = 300;
-var scale = 0;
 function teken() {//Algemene teken functie.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
-        scale = (muurDx - muurDy) / (muurDx - - muurDy) * 1.5;
-        window.alert("scale = " + scale);
-        ctx.scale(scale, scale);
+        ctx.scale(1.4, 1.4);
         ctx.strokeStyle = 'red';
         var koppenMaat = steenDz + voegDx;
         var lagenMaat = steenDy + voegDy;
