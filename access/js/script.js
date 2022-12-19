@@ -5,7 +5,7 @@ var voegDx = 10;
 var voegDy = 10;
 var muurDx = 500;
 var muurDy = 300;
-let schaal_slider = 1.4;
+let schaal_slider = 1.49;
 function teken() {//Algemene teken functie.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
