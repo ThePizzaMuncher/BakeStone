@@ -64,17 +64,28 @@ function muur_B_en_H_check() {//Kijk als hoogte en breedte groter is dan 0.
         window.alert("Voer een groter getal in voor de hoogte.");
         muurDx = 500;
         muurDy = 300;
+        teken();
+        crash();
     }
     else {
         if (muurDx < 1) {//Als x-as kleiner is dan 0, doe dan...
             window.alert("Voer een groter getal in voor de breedte.");
             muurDx = 500;
             muurDy = 300;
+            teken();
+            crash();
         }
     }
 }
-function zet_schaal() {
-    schaal_slider = document.getElementById("$schaal").value / 1000;
+function zet_schaal_micro() {
+    schaal_slider = document.getElementById("$schaal_m").value / 10000;
+    cv_cls();
+    get_B_en_H();
+    muur_B_en_H_check();
+    teken();
+}
+function zet_schaal_normaal() {
+    schaal_slider = document.getElementById("$schaal_n").value / 1000;
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
