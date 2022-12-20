@@ -1,12 +1,12 @@
-var steenDx = 210;
-var steenDy = 50;
-var steenDz = 100;
-var voegDx = 10;
-var voegDy = 10;
-var muurDx = 500;
-var muurDy = 300;
+let steenDx = 210;
+let steenDy = 50;
+let steenDz = 100;
+let voegDx = 10;
+let voegDy = 10;
+let muurDx = 500;
+let muurDy = 300;
 let schaal_slider = 1.49;
-var zero_check = 0;
+let zero_check = 0;
 function teken() {//Algemene teken functie.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
@@ -30,7 +30,7 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    if (zero_check == 0) {
+    if (zero_check == 0) {//Zero check.
         steenDx = 210;
         steenDy = 50;
         voegDx = 10;
@@ -44,7 +44,7 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    if (zero_check == 0) {
+    if (zero_check == 0) {//Zero check.
         steenDx = 215;
         steenDy = 101;
         voegDx = 12;
@@ -58,7 +58,7 @@ document.getElementById("#stone3").addEventListener("click", () => {//Knop steen
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    if (zero_check == 0) {
+    if (zero_check == 0) {//Zero check.
         steenDx = 160;
         steenDy = 78;
         voegDx = -15.5;
@@ -106,7 +106,7 @@ function zet_schaal() {
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    if (zero_check == 0) {
+    if (zero_check == 0) {//Zero check.
         teken();
     }
     else {
