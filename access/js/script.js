@@ -6,6 +6,7 @@ var voegDy = 10;
 var muurDx = 500;
 var muurDy = 300;
 let schaal_slider = 1.49;
+var zero_check = 0;
 function teken() {//Algemene teken functie.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
@@ -29,28 +30,43 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    steenDx = 210;
-    steenDy = 50;
-    voegDx = 10;
-    teken();
+    if (zero_check == 0) {
+        steenDx = 210;
+        steenDy = 50;
+        voegDx = 10;
+        teken();
+    }
+    else {
+        teken();
+    }
 });
 document.getElementById("#stone2").addEventListener("click", () => {//Knop steen 2 listener. (Dikformaat baksteen)
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    steenDx = 215;
-    steenDy = 101;
-    voegDx = 12;
-    teken();
+    if (zero_check == 0) {
+        steenDx = 215;
+        steenDy = 101;
+        voegDx = 12;
+        teken();
+    }
+    else {
+        teken();
+    }
 });
 document.getElementById("#stone3").addEventListener("click", () => {//Knop steen 3 listener. (Ysselformaat baksteen)
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    steenDx = 160;
-    steenDy = 78;
-    voegDx = -15.5;
-    teken();
+    if (zero_check == 0) {
+        steenDx = 160;
+        steenDy = 78;
+        voegDx = -15.5;
+        teken();
+    }
+    else {
+        teken();
+    }
 });
 function cv_cls() {//Cls voor canvas.
     canvas.width = canvas.width;
@@ -64,27 +80,37 @@ function muur_B_en_H_check() {//Kijk als hoogte en breedte groter is dan 0.
         window.alert("Voer een groter getal in voor de hoogte.");
         muurDx = 500;
         muurDy = 300;
-        crash();
+        zero_check = 1;
     }
     else {
         if (muurDx < 1) {//Als x-as kleiner is dan 0, doe dan...
             window.alert("Voer een groter getal in voor de breedte.");
             muurDx = 500;
             muurDy = 300;
+            zero_check = 1;
+        }
+        else {
+            zero_check = 0;
         }
     }
 }
 function zet_schaal_micro() {
     schaal_slider = document.getElementById("$schaal_m").value / 10000;
-    cv_cls();
-    get_B_en_H();
-    muur_B_en_H_check();
-    teken();
+    zet_schaal();
 }
 function zet_schaal_normaal() {
     schaal_slider = document.getElementById("$schaal_n").value / 1000;
+    zet_schaal();
+}
+function zet_schaal() {
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    teken();
+    if (zero_check == 0) {
+        teken();
+    }
+    else {
+        schaal_slider = 1.49;
+        teken();
+    }
 }
