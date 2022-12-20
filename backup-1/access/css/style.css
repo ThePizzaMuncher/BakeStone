@@ -1,0 +1,103 @@
+* {
+    /* border: 2px solid green */
+}
+body {
+    background-color: white;
+}
+p {
+    color: rgb(0, 0, 0);
+}
+.logo {
+    width: 30vw;
+    height: 5vw;
+    background-image: url("../media/img/BGDD.png");
+    background-size: 100%;
+}
+.logo:hover {
+    cursor: pointer;
+}
+hr, .line_2 {
+    border-color: black;
+    background-color: black;
+    height: 0.3vw;
+    width: 100%;
+}
+.line_2 {
+    width: 44vw;
+    margin-left: 6.5vw;
+}
+#canvas {
+    border: 2px solid black;
+}
+.flex {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+.navbar, .navbar_line {
+    margin-top: 1vw;
+    height: 6.7vw;
+    width: 99,70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 99.2%;
+}
+.navbar_line {
+    margin-top: -2vw;
+}
+.stone1, .stone2, .stone3 {
+    border-style: solid;
+    border-color: black;
+    border-width: 4px;
+    width: 15vw;
+    height: 5vw;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    border-bottom-left-radius: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.zijnav {
+    border: 2px solid black;
+    width: 16vw;
+    height: 31vw;
+}
+.stone1 {
+    background-image: url(../media/img/waalformaat.png);
+    background-size: 100%;
+}
+.stone2 {
+    background-image: url(../media/img/dikformaat.png);
+    background-size: 100%;
+}
+.stone3 {
+    background-image: url(../media/img/ysselformaat.png);
+    background-size: 100%;
+}
+.stone1:hover, .stone2:hover, .stone3:hover {
+    cursor: pointer;
+}
+.steen {
+    font-size: 2vw;
+    color: white;
+    text-shadow: 3px 3px 3px black;
+}
+.zoom {
+    width: 4vw;
+}
+/* @media bakvet empire */
+@media (max-width: 1100px) {
+    #canvas {
+      width: 100%;
+      height: 100%;
+    }
+}
