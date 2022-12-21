@@ -9,6 +9,7 @@ let schaal_slider = 1.49;
 let zero_check = 0;
 let brickImage_ONLY_onload = 0;
 let RST = 0;
+let knop_press = 0;
 const brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
@@ -22,13 +23,23 @@ function teken() {//Algemene teken functie.
         for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {//Voor de y-as var & lagenMaat doe...
             for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var & koppenMaat doe...
                 if (RST == 1) {//Als Random Steen Texture aan staat doe...
-                    for (let $1 = 0; $1 <= 30; $1++) {
-                        ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
+                    for (let $1 = 0; $1 <= 50; $1++) {
                         random_steen_texture();
+                        if (knop_press == 1) {//Als de gebruiker eerst op een knop heeft gedrukt doe dan...
+                            setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 10);
+                        }
+                        else {//Als de gebruiker niet op een knop heeft gedrukt doe dan...
+                            ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
+                        }
                     }
                 }
-                else {
-                    ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
+                else {//Als Random Steen Texture uit staat doe dan...
+                    if (knop_press == 1) {
+                        setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 5);
+                    }
+                    else {
+                        ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
+                    }
                 }
             }
         }
@@ -40,15 +51,18 @@ brickImage.onload = () => {//Hier wordt getekend waneer de brickImage ready is o
             teken();
         break;
     }
+    brickImage_ONLY_onload = 1;
 }
 function BGDD_website() {//Doorverwijzing naar BGDD website.
     window.open("https://BGDD.nl/", '_blank');
 }
 document.getElementById("#stone1").addEventListener("click", () => {//Knop steen 1 listener. (Waalformaat baksteen)
+    knop_press = 1;
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
+        if (RST == 0) {brickImage.src = 'access/media/img/waalformaat-steen-1.png';}
         steenDx = 210;
         steenDy = 50;
         voegDx = 10;
@@ -59,10 +73,12 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
     }
 });
 document.getElementById("#stone2").addEventListener("click", () => {//Knop steen 2 listener. (Dikformaat baksteen)
+    knop_press = 1;
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
+        if (RST == 0) {brickImage.src = 'access/media/img/dikformaat-steen-1.png';}
         steenDx = 215;
         steenDy = 101;
         voegDx = 12;
@@ -73,10 +89,12 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
     }
 });
 document.getElementById("#stone3").addEventListener("click", () => {//Knop steen 3 listener. (Ysselformaat baksteen)
+    knop_press = 1;
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
+        if (RST == 0) {brickImage.src = 'access/media/img/ysselformaat-steen-1.png';}
         steenDx = 160;
         steenDy = 78;
         voegDx = -15.5;
@@ -113,10 +131,12 @@ function muur_B_en_H_check() {//Kijk als hoogte en breedte groter is dan 0.
     }
 }
 function zet_schaal_micro() {//Schaal balk voor micro veranderingen qua zoom.
+    knop_press = 0;
     schaal_slider = document.getElementById("$schaal_m").value / 10000;
     zet_schaal();
 }
 function zet_schaal_normaal() {//Schaal balk voor normale veranderingen qua zoom.
+    knop_press = 0;
     schaal_slider = document.getElementById("$schaal_n").value / 1000;
     zet_schaal();
 }
@@ -133,10 +153,11 @@ function zet_schaal() {//Zet schaal op origin als zero check waar is, anders sch
     }
 }
 function random_steen_texture() {//Random Steen Texture Functie.
+    knop_press = 0;
     brickImage_ONLY_onload = 1;
     var random_steen_texture = Math.floor(Math.random() * 3) + 1;
-    if (steenDx = 210) {//Random steen texture voor Waalformaat.
-        console.log(random_steen_texture);
+    if (steenDx == 210) {//Random steen texture voor Waalformaat.
+        console.log("Waalformaat");
         switch (random_steen_texture) {
             case 1:
                 brickImage.src = 'access/media/img/waalformaat-steen-1.png';
@@ -146,16 +167,30 @@ function random_steen_texture() {//Random Steen Texture Functie.
             break;
             case 3:
                 brickImage.src = 'access/media/img/waalformaat-steen-3.png';
-            break;
+            default:
+                brickImage.src = 'access/media/img/waalformaat-steen-3.png';
         }
     }
     else {
-        if (steenDx = 215) {//Random steen texture voor Dikformaat.
-
+        if (steenDx == 215) {//Random steen texture voor Dikformaat.
+            console.log("Dikformaat");
+            switch (random_steen_texture) {
+                case 1:
+                    brickImage.src = 'access/media/img/dikformaat-steen-1.png';
+                break;
+                case 2:
+                    brickImage.src = 'access/media/img/dikformaat-steen-2.png';
+                break;
+                case 3:
+                    brickImage.src = 'access/media/img/dikformaat-steen-3.png';
+                break;
+                default:
+                    brickImage.src = 'access/media/img/waalformaat-steen-3.png';
+            }
         }
         else {
             if (steenDx = 160) {//Random steen texture voor Ysselformaat.
-
+                console.log("Ysselformaat");
             }
         }
     }
