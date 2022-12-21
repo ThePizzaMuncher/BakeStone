@@ -191,6 +191,19 @@ function random_steen_texture() {//Random Steen Texture Functie.
         else {
             if (steenDx = 160) {//Random steen texture voor Ysselformaat.
                 console.log("Ysselformaat");
+                switch (random_steen_texture) {
+                    case 1:
+                        brickImage.src = 'access/media/img/ysselformaat-steen-1.png';
+                    break;
+                    case 2:
+                        brickImage.src = 'access/media/img/ysselformaat-steen-2.png';
+                    break;
+                    case 3:
+                        brickImage.src = 'access/media/img/ysselkformaat-steen-3.png';
+                    break;
+                    default:
+                        brickImage.src = 'access/media/img/ysselformaat-steen-3.png';
+                }
             }
         }
     }
