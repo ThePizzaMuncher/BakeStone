@@ -1,6 +1,12 @@
 * {
     /* border: 2px solid green */
 }
+.stone1, .stone2, .stone3, .patronen {
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    border-bottom-left-radius: 1vw;
+}
 body {
     background-color: white;
 }
@@ -58,10 +64,6 @@ hr, .line_2 {
     border-width: 4px;
     width: 15vw;
     height: 5vw;
-    border-top-left-radius: 1vw;
-    border-top-right-radius: 1vw;
-    border-bottom-right-radius: 1vw;
-    border-bottom-left-radius: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,6 +72,10 @@ hr, .line_2 {
     border: 2px solid black;
     width: 16vw;
     height: 31vw;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
 }
 .stone1 {
     background-image: url(../media/img/waalformaat.png);
@@ -86,7 +92,7 @@ hr, .line_2 {
 .stone1:hover, .stone2:hover, .stone3:hover {
     cursor: pointer;
 }
-.steen {
+.steen, .patronen, .steen_p {
     font-size: 2vw;
     color: white;
     text-shadow: 3px 3px 3px black;
@@ -101,10 +107,21 @@ hr, .line_2 {
 .RSTK_txt {
     margin-left: -15.6vw;
 }
-p {
+p, .patronen {
     font-size: 1.06vw;
 }
-/* @media bakvet empire */
+.patronen {
+    width: 14vw;
+    height: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.646);
+}
+.steen_p {
+    font-size: 1.6vw;
+}
+/* @media empire */
 @media (max-width: 1100px) {
     #canvas {
       width: 100%;
