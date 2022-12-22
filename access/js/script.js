@@ -227,6 +227,6 @@ document.getElementById("$Random_steen_texture").addEventListener("change", () =
 /*
 ---Aantekeningen---
 
-Fix texture voor elke baksteen inc random optie. Kijk bij "random_steen_texture()".
+
 
 */
