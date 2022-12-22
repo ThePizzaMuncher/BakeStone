@@ -10,6 +10,8 @@ let zero_check = 0;
 let brickImage_ONLY_onload = 0;
 let RST = 0;
 let knop_press = 0;
+let half_steen_value = 0;
+let stone_count = 0;
 const brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
@@ -22,6 +24,11 @@ function teken() {//Algemene teken functie.
         var lagenMaat = steenDy + voegDy;
         for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {//Voor de y-as var & lagenMaat doe...
             for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var & koppenMaat doe...
+                ++stone_count;
+                //test
+                console.log("------");
+                console.log()
+                //
                 if (RST == 1) {//Als Random Steen Texture aan staat doe...
                     for (let $1 = 0; $1 <= 50; $1++) {
                         random_steen_texture();
@@ -224,6 +231,9 @@ document.getElementById("$Random_steen_texture").addEventListener("change", () =
         }
     }
 });
+function half_steen_verband() {
+    
+}
 /*
 ---Aantekeningen---
 
