@@ -33,6 +33,7 @@ function teken() {//Algemene teken functie.
             for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var & koppenMaat doe...
                 ++stone_count;
                 if (steenverband == 1) {
+                    if (voegDx == -15.5) {voegDx = 10;}
                     if (rij_y % 2 == 0 ) {
                         ctx.drawImage(brickImage, xpos, ypos, (steenDx / 2), steenDy);
                         xpos += (steenDx / 2) + voegDx;
@@ -45,7 +46,7 @@ function teken() {//Algemene teken functie.
                     for (let $1 = 0; $1 <= 50; $1++) {
                         random_steen_texture();
                         if (knop_press == 1) {//Als de gebruiker eerst op een knop heeft gedrukt doe dan...
-                            setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 10);
+                            setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 50);
                         }
                         else {//Als de gebruiker niet op een knop heeft gedrukt doe dan...
                             ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
