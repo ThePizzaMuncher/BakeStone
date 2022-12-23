@@ -10,7 +10,6 @@ let zero_check = 0;
 let brickImage_ONLY_onload = 0;
 let RST = 0;
 let knop_press = 0;
-let half_steen_value = 0;
 let stone_count = 0;
 let steenverband = 0;
 let rij_y = 0;
@@ -25,21 +24,23 @@ function teken() {//Algemene teken functie.
         ctx.strokeStyle = 'red';
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
-        for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {
+        for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++rij_x;
         }
-        for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {//Voor de y-as var & lagenMaat doe...
+        for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {//Voor de y-as var && lagenMaat doe...
             ++rij_y;
-            for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var & koppenMaat doe...
+            for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
                 ++stone_count;
-                if (steenverband == 1) {
-                    if (voegDx == -15.5) {voegDx = 10;}
-                    if (rij_y % 2 == 0 ) {
-                        ctx.drawImage(brickImage, xpos, ypos, (steenDx / 2), steenDy);
-                        xpos += (steenDx / 2) + voegDx;
-                    }
-                    for (; xpos < muurDx; xpos += (steenDx + voegDx)) {
-                        ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);
+                if (steenverband == 1) {//Als steenverband half-steen is doe dan...
+                    for (let loop_1 = 0; loop_1 <= 2; loop_1++) {
+                        if (voegDx <= 0) {voegDx = 10;}
+                        if (rij_y % 2 == 0 ) {//Om en om functie voor y-as.
+                            ctx.drawImage(brickImage, xpos, ypos, (steenDx / 2), steenDy);
+                            xpos += (steenDx / 2) + voegDx;
+                        }
+                        for (; xpos < muurDx; xpos += (steenDx + voegDx)) {
+                            ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);
+                        }
                     }
                 }
                 if (RST == 1) {//Als Random Steen Texture aan staat doe...
@@ -78,49 +79,40 @@ function BGDD_website() {//Doorverwijzing naar BGDD website.
 }
 document.getElementById("#stone1").addEventListener("click", () => {//Knop steen 1 listener. (Waalformaat baksteen)
     knop_press = 1;
-    cv_cls();
-    get_B_en_H();
-    muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
+        cv_cls();
+        get_B_en_H();
+        muur_B_en_H_check();
         if (RST == 0) {brickImage.src = 'access/media/img/waalformaat-steen-1.png';}
         steenDx = 210;
         steenDy = 50;
         voegDx = 10;
         teken();
     }
-    else {
-        teken();
-    }
 });
 document.getElementById("#stone2").addEventListener("click", () => {//Knop steen 2 listener. (Dikformaat baksteen)
     knop_press = 1;
-    cv_cls();
-    get_B_en_H();
-    muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
+        cv_cls();
+        get_B_en_H();
+        muur_B_en_H_check();
         if (RST == 0) {brickImage.src = 'access/media/img/dikformaat-steen-1.png';}
         steenDx = 215;
         steenDy = 101;
         voegDx = 12;
         teken();
     }
-    else {
-        teken();
-    }
 });
 document.getElementById("#stone3").addEventListener("click", () => {//Knop steen 3 listener. (Ysselformaat baksteen)
     knop_press = 1;
-    cv_cls();
-    get_B_en_H();
-    muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
+        cv_cls();
+        get_B_en_H();
+        muur_B_en_H_check();
         if (RST == 0) {brickImage.src = 'access/media/img/ysselformaat-steen-1.png';}
         steenDx = 160;
         steenDy = 78;
         voegDx = -15.5;
-        teken();
-    }
-    else {
         teken();
     }
 });
