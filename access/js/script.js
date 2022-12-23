@@ -12,7 +12,10 @@ let RST = 0;
 let knop_press = 0;
 let half_steen_value = 0;
 let stone_count = 0;
-const brickImage = new Image();
+let steenverband = 0;
+let rij_y = 0;
+let rij_x = 0;
+let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
     const canvas = document.getElementById("canvas");
@@ -20,15 +23,24 @@ function teken() {//Algemene teken functie.
         var ctx = canvas.getContext("2d");
         ctx.scale(schaal_slider, schaal_slider);
         ctx.strokeStyle = 'red';
-        var koppenMaat = steenDz + voegDx;
-        var lagenMaat = steenDy + voegDy;
+        let koppenMaat = steenDz + voegDx;
+        let lagenMaat = steenDy + voegDy;
+        for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {
+            ++rij_x;
+        }
         for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {//Voor de y-as var & lagenMaat doe...
+            ++rij_y;
             for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var & koppenMaat doe...
                 ++stone_count;
-                //test
-                console.log("------");
-                console.log()
-                //
+                if (steenverband == 1) {
+                    if (rij_y % 2 == 0 ) {
+                        ctx.drawImage(brickImage, xpos, ypos, (steenDx / 2), steenDy);
+                        xpos += (steenDx / 2) + voegDx;
+                    }
+                    for (; xpos < muurDx; xpos += (steenDx + voegDx)) {
+                        ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);
+                    }
+                }
                 if (RST == 1) {//Als Random Steen Texture aan staat doe...
                     for (let $1 = 0; $1 <= 50; $1++) {
                         random_steen_texture();
@@ -232,7 +244,24 @@ document.getElementById("$Random_steen_texture").addEventListener("change", () =
     }
 });
 function half_steen_verband() {
-    
+    steenverband = 1;
+    knop_press = 1;
+    if (zero_check == 0) {
+        cv_cls();
+        get_B_en_H();
+        muur_B_en_H_check();
+        teken();
+    }
+}
+function tegel_verband() {
+    steenverband = 2;
+    knop_press = 1;
+    if (zero_check == 0) {
+        cv_cls();
+        get_B_en_H();
+        muur_B_en_H_check();
+        teken();
+    }
 }
 /*
 ---Aantekeningen---
