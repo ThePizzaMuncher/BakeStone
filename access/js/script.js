@@ -14,6 +14,7 @@ let stone_count = 0;
 let steenverband = 0;
 let rij_y = 0;
 let rij_x = 0;
+let bg_color_for_p = "tegel_verband";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
@@ -243,6 +244,8 @@ function half_steen_verband() {
         cv_cls();
         steenverband = 1;
         knop_press = 1;
+        document.getElementById("$halfsteen").style.backgroundColor = "rgba(25, 35, 230, 0.711)";
+        document.getElementById("$tegel").style.backgroundColor = "rgb(0, 15, 186)";
         teken();
     }
 }
@@ -253,9 +256,27 @@ function tegel_verband() {
         cv_cls();
         steenverband = 2;
         knop_press = 1;
+        document.getElementById("$halfsteen").style.backgroundColor = "rgb(0, 15, 186)";
+        document.getElementById("$tegel").style.backgroundColor = "rgba(25, 35, 230, 0.711)";
         teken();
     }
 }
+document.getElementById("$hoogte").addEventListener("change", () => {
+    get_B_en_H();
+    muur_B_en_H_check();
+    if (zero_check == 0) {
+        cv_cls();
+        teken();
+    }
+});
+document.getElementById("$breedte").addEventListener("change", () => {
+    get_B_en_H();
+    muur_B_en_H_check();
+    if (zero_check == 0) {
+        cv_cls();
+        teken();
+    }
+});
 /*
 ---Aantekeningen---
 

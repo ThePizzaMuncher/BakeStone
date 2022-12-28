@@ -1,7 +1,7 @@
 * {
     /* border: 2px solid green */
 }
-.stone1, .stone2, .stone3, .patronen {
+.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
@@ -94,7 +94,7 @@ hr, .line_2 {
 .stone1:hover, .stone2:hover, .stone3:hover {
     cursor: pointer;
 }
-.steen, .patronen, .steen_p {
+.steen, .patronen_Halfsteen, .patronen_Tegel, .steen_p {
     font-size: 2vw;
     color: white;
     text-shadow: 3px 3px 3px black;
@@ -109,16 +109,19 @@ hr, .line_2 {
 .RSTK_txt {
     margin-left: -15.6vw;
 }
-p, .patronen {
+p, .patronen_Halfsteen, .patronen_Tegel {
     font-size: 1.06vw;
 }
-.patronen {
+.patronen_Halfsteen, .patronen_Tegel {
     width: 14vw;
     height: 5vw;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgb(0, 15, 186);
+}
+.patronen_Tegel {
+    background-color: rgba(25, 35, 230, 0.711);
 }
 .steen_p {
     font-size: 1.6vw;
