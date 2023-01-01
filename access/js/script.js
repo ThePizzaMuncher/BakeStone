@@ -18,6 +18,7 @@ let bg_color_for_p = "tegel_verband";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
+    stone_count = 0; //Aantal stenen wordt ge reset.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
@@ -66,6 +67,7 @@ function teken() {//Algemene teken functie.
             }
         }
     }
+    document.getElementById("$stone_count").innerHTML = stone_count;
 }
 brickImage.onload = () => {//Hier wordt getekend waneer de brickImage ready is om een img te printen.
     switch (brickImage_ONLY_onload) {
