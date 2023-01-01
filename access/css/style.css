@@ -120,6 +120,9 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     justify-content: center;
     background-color: rgb(0, 15, 186);
 }
+.patronen_Halfsteen:hover, .patronen_Tegel:hover {
+    cursor: pointer;
+}
 .patronen_Tegel {
     background-color: rgba(25, 35, 230, 0.711);
 }
