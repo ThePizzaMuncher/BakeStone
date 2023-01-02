@@ -301,6 +301,6 @@ function get_voeg_B_en_H() {
     }
 }
 function set_voeg_B_en_H() {
-    voeg_b_check = document.getElementById("$voeg_b").value;
-    voeg_h_check = document.getElementById("$voeg_h").value;
+    voegDx = Number(document.getElementById("$voeg_b").value);
+    voegDy = Number(document.getElementById("$voeg_h").value);
 }
