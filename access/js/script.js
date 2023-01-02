@@ -3,6 +3,10 @@ let steenDy = 50;
 let steenDz = 100;
 let voegDx = 10;
 let voegDy = 10;
+/* tmp var's */ 
+let voeg_h_check = 0;
+let voeg_b_check = 0;
+/* einde tmp var's */
 let muurDx = 500;
 let muurDy = 300;
 let schaal_slider = 1.49;
@@ -14,7 +18,7 @@ let stone_count = 0;
 let steenverband = 0;
 let rij_y = 0;
 let rij_x = 0;
-let bg_color_for_p = "tegel_verband";
+let steensoort = "";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
@@ -85,11 +89,11 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
     muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
         knop_press = 1;
+        steensoort = "waalformaat";
         cv_cls();
         if (RST == 0) {brickImage.src = 'access/media/img/waalformaat-steen-1.png';}
         steenDx = 210;
         steenDy = 50;
-        voegDx = 10;
         teken();
     }
 });
@@ -98,6 +102,7 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
     muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
         knop_press = 1;
+        steensoort = "dikformaat";
         cv_cls();
         if (RST == 0) {brickImage.src = 'access/media/img/dikformaat-steen-1.png';}
         steenDx = 215;
@@ -111,6 +116,7 @@ document.getElementById("#stone3").addEventListener("click", () => {//Knop steen
     muur_B_en_H_check();
     if (zero_check == 0) {//Zero check.
         knop_press = 1;
+        steensoort = "ysselformaat";
         cv_cls();
         if (RST == 0) {brickImage.src = 'access/media/img/ysselformaat-steen-1.png';}
         steenDx = 160;
@@ -279,9 +285,22 @@ document.getElementById("$breedte").addEventListener("change", () => {
         teken();
     }
 });
-/*
----Aantekeningen---
-
-
-
-*/
+function get_voeg_B_en_H() {
+    if (steensoort == "waalformaat") {set_voeg_B_en_H();}
+    else {
+        if (steensoort == "dikformaat") {set_voeg_B_en_H();}
+        else {
+            if (steensoort == "ysselformaat") {set_voeg_B_en_H();}
+            else {
+                window.alert("Kies eerst een steen soort!");
+                //een reset voor het getal in de input.
+                document.getElementById("$voeg_h").value = 10;
+                document.getElementById("$voeg_b").value = 10;
+            }
+        }
+    }
+}
+function set_voeg_B_en_H() {
+    voeg_b_check = document.getElementById("$voeg_b").value;
+    voeg_h_check = document.getElementById("$voeg_h").value;
+}

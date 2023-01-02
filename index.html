@@ -16,11 +16,23 @@
             <canvas id="canvas" height="500" width="1000"></canvas>
             <div class="zijnav"> <!-- Zij-nav rechts -->
                 <div class="patronen_Halfsteen" onclick="half_steen_verband()" id="$halfsteen"><p class="steen_p">Half steen verband</p></div>
+                <table>
+                    <tr>
+                        <td><p class="maten">Voeg hoogte:&nbsp;</p></td>
+                        <td><input type="number" style="width: 4vw;" value="10" onchange="get_voeg_B_en_H()" id="$voeg_h"></td>
+                        <td><p class="maten">(in mm)</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="maten">Voeg breedte:&nbsp;</p></td>
+                        <td><input type="number" style="width: 4vw;" value="10" onchange="get_voeg_B_en_H()" id="$voeg_b"></td>
+                        <td><p class="maten">(in mm)</p></td>
+                    </tr>
+                </table>
                 <div class="patronen_Tegel" onclick="tegel_verband()" id="$tegel"><p class="steen_p">Tegel verband</p></div>
             </div>
             <div class="navbar_line"><hr class="line_2"></div></div> <!-- streep door de div's -->
         </div>
-        <div class="stone_counter"><p>Aantal stenen: <span id="$stone_count"></span></p></div>
+        <div class="stone_counter"><p>Aantal stenen: <span id="$stone_count">15</span></p></div>
         <div class="navbar"> <!-- selectie menu onder (is eigenlijk een footer) -->
             <div class="stone1" id="#stone1"><p class="steen">Waalformaat</p></div>
             <div class="stone2" id="#stone2"><p class="steen">Dikformaat</p></div>
