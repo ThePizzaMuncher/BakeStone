@@ -9,7 +9,7 @@ let voeg_b_check = 0;
 /* einde tmp var's */
 let muurDx = 500;
 let muurDy = 300;
-let schaal_slider = 1.49;
+let schaal_slider = 5.6;
 let zero_check = 0;
 let brickImage_ONLY_onload = 0;
 let RST = 0;
@@ -18,7 +18,7 @@ let stone_count = 0;
 let steenverband = 0;
 let rij_y = 0;
 let rij_x = 0;
-let steensoort = "";
+let steensoort = "waalformaat";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
@@ -94,6 +94,8 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
         if (RST == 0) {brickImage.src = 'access/media/img/waalformaat-steen-1.png';}
         steenDx = 210;
         steenDy = 50;
+        voegDx = 10;
+        voegDy = 10;
         teken();
     }
 });
@@ -286,11 +288,20 @@ document.getElementById("$breedte").addEventListener("change", () => {
     }
 });
 function get_voeg_B_en_H() {
-    if (steensoort == "waalformaat") {set_voeg_B_en_H();}
+    if (steensoort == "waalformaat") {
+        voegDx = (Number(document.getElementById("$voeg_b").value) * 0,23809523809523809523809523809524);
+        voegDy = Number(document.getElementById("$voeg_h").value);
+    }
     else {
-        if (steensoort == "dikformaat") {set_voeg_B_en_H();}
+        if (steensoort == "dikformaat") {
+            voegDx = (Number(document.getElementById("$voeg_b").value) * 1.2);
+            voegDy = Number(document.getElementById("$voeg_h").value);
+        }
         else {
-            if (steensoort == "ysselformaat") {set_voeg_B_en_H();}
+            if (steensoort == "ysselformaat") {
+                voegDx = Number(document.getElementById("$voeg_b").value) * 1.2;
+                voegDy = Number(document.getElementById("$voeg_h").value);
+            }
             else {
                 window.alert("Kies eerst een steen soort!");
                 //een reset voor het getal in de input.
@@ -299,8 +310,6 @@ function get_voeg_B_en_H() {
             }
         }
     }
-}
-function set_voeg_B_en_H() {
-    voegDx = Number(document.getElementById("$voeg_b").value);
-    voegDy = Number(document.getElementById("$voeg_h").value);
+    cv_cls();
+    teken();
 }

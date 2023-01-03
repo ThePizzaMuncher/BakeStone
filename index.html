@@ -13,7 +13,7 @@
         <hr>
         <div class="flex">
             <div class="zijnav"></div> <!-- Zij-nav links -->
-            <canvas id="canvas" height="500" width="1000"></canvas>
+            <canvas id="canvas" height="2000" width="4000"></canvas>
             <div class="zijnav"> <!-- Zij-nav rechts -->
                 <div class="patronen_Halfsteen" onclick="half_steen_verband()" id="$halfsteen"><p class="steen_p">Half steen verband</p></div>
                 <table>
@@ -52,11 +52,11 @@
             <table>
                 <tr>
                     <td><p class="maten">Micro zoom:&nbsp;</p></td>
-                    <td><input type="range" min="1" max="13000.00" value="13000.00" onchange="zet_schaal_micro()" id="$schaal_m" class="zoom"></td>
+                    <td><input type="range" min="1" max="52000.00" value="52000.00" onchange="zet_schaal_micro()" id="$schaal_m" class="zoom"></td>
                 </tr>
                 <tr>
                     <td><p class="maten">Normale zoom:&nbsp;</p></td>
-                    <td><input type="range" min="1" max="1300.00" value="1300.00" onchange="zet_schaal_normaal()" id="$schaal_n" class="zoom"></td>
+                    <td><input type="range" min="1" max="5200.00" value="5200.00" onchange="zet_schaal_normaal()" id="$schaal_n" class="zoom"></td>
                 </tr>
             </table>
             <p class="RSTK_txt">Random steen texture?</p><input type="range" min="-10000" max="10000" value="-10000" class="Random_stenen_texture_keuze" id="$Random_steen_texture">
