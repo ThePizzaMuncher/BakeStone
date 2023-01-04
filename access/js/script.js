@@ -22,7 +22,9 @@ let steensoort = "waalformaat";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
-    stone_count = 0; //Aantal stenen wordt ge reset.
+    stone_count = 0; //Aantal stenen wordt gereset.
+    rij_y = 0; //Rij y wordt gereset.
+    rij_x = 0; //Rij x wordt gereset. 
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
@@ -49,22 +51,19 @@ function teken() {//Algemene teken functie.
                         console.log(xpos, ypos);
                     }
                 }
-                if (RST == 1) {//Als Random Steen Texture aan staat doe...
-                    for (let $1 = 0; $1 <= 50; $1++) {
-                        random_steen_texture();
-                        if (knop_press == 1) {//Als de gebruiker eerst op een knop heeft gedrukt doe dan...
+                else {//Als steenverband tegel is doe dan...
+                    if (knop_press == 1) {//Als de gebruiker eerst op een knop heeft gedrukt doe dan...
+                        if (RST == 1) {
+                            for (let $1 = 0; $1 <= 50; $1++) {
+                                random_steen_texture();
+                                ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
+                            }
+                        }
+                        else {
                             setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 50);
                         }
-                        else {//Als de gebruiker niet op een knop heeft gedrukt doe dan...
-                            ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
-                        }
                     }
-                }
-                else {//Als Random Steen Texture uit staat doe dan...
-                    if (knop_press == 1) {
-                        setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 50);
-                    }
-                    else {
+                    else {//Als de gebruiker niet op een knop heeft gedrukt doe dan...
                         ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
                     }
                 }
@@ -222,7 +221,7 @@ function random_steen_texture() {//Random Steen Texture Functie.
                         brickImage.src = 'access/media/img/ysselformaat-steen-2.png';
                     break;
                     case 3:
-                        brickImage.src = 'access/media/img/ysselkformaat-steen-3.png';
+                        brickImage.src = 'access/media/img/ysselformaat-steen-3.png';
                     break;
                     default:
                         brickImage.src = 'access/media/img/ysselformaat-steen-3.png';
