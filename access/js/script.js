@@ -289,17 +289,17 @@ document.getElementById("$breedte").addEventListener("change", () => {
 });
 function get_voeg_B_en_H() {
     if (steensoort == "waalformaat") {
-        voegDx = (Number(document.getElementById("$voeg_b").value) * 0,23809523809523809523809523809524);
+        voegDx = Number(document.getElementById("$voeg_b").value);
         voegDy = Number(document.getElementById("$voeg_h").value);
     }
     else {
         if (steensoort == "dikformaat") {
-            voegDx = (Number(document.getElementById("$voeg_b").value) * 1.2);
+            voegDx = Number(document.getElementById("$voeg_b").value);
             voegDy = Number(document.getElementById("$voeg_h").value);
         }
         else {
             if (steensoort == "ysselformaat") {
-                voegDx = Number(document.getElementById("$voeg_b").value) * 1.2;
+                voegDx = Number(document.getElementById("$voeg_b").value);
                 voegDy = Number(document.getElementById("$voeg_h").value);
             }
             else {
