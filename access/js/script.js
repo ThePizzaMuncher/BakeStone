@@ -51,20 +51,9 @@ function teken() {//Algemene teken functie.
                         console.log(xpos, ypos);
                     }
                 }
-                if (RST == 1) {//Als Random Steen Texture aan staat doe...
-                    for (let $1 = 0; $1 <= 50; $1++) {
-                        random_steen_texture();
-                        if (knop_press == 1) {//Als de gebruiker eerst op een knop heeft gedrukt doe dan...
-                            setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 50);
-                        }
-                        else {//Als de gebruiker niet op een knop heeft gedrukt doe dan...
-                            ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
-                        }
-                    }
-                }
-                else {//Als Random Steen Texture uit staat doe dan...
+                else {//Als steenverband tegel is doe dan...
                     if (knop_press == 1) {
-                        setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 50);
+                            setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 50);
                     }
                     else {
                         ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
