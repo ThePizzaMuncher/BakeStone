@@ -12,7 +12,6 @@ let muurDy = 300;
 let schaal_slider = 5.6;
 let zero_check = 0;
 let brickImage_ONLY_onload = 0;
-let RST = 0;
 let knop_press = 0;
 let stone_count = 0;
 let steenverband = 0;
@@ -40,7 +39,6 @@ function teken() {//Algemene teken functie.
             for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
                 ++stone_count;
                 if (steenverband == 1 && knop_press == 1) {//Als steenverband half-steen is doe dan...
-                    if (RST == 1) {random_steen_texture();}
                     if (voegDx <= 0) {voegDx = 10;}
                     if (rij_y % 2 == 0 ) {//Om en om functie voor y-as.
                         ctx.drawImage(brickImage, xpos, ypos, (steenDx / 2), steenDy);
@@ -82,7 +80,7 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
         knop_press = 1;
         steensoort = "waalformaat";
         cv_cls();
-        if (RST == 0) {brickImage.src = 'access/media/img/waalformaat-steen-1.png';}
+        brickImage.src = 'access/media/img/waalformaat-steen-1.png';
         steenDx = 210;
         steenDy = 50;
         voegDx = 10;
@@ -97,7 +95,7 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
         knop_press = 1;
         steensoort = "dikformaat";
         cv_cls();
-        if (RST == 0) {brickImage.src = 'access/media/img/dikformaat-steen-1.png';}
+        brickImage.src = 'access/media/img/dikformaat-steen-1.png';
         steenDx = 215;
         steenDy = 101;
         voegDx = 12;
@@ -111,7 +109,7 @@ document.getElementById("#stone3").addEventListener("click", () => {//Knop steen
         knop_press = 1;
         steensoort = "ysselformaat";
         cv_cls();
-        if (RST == 0) {brickImage.src = 'access/media/img/ysselformaat-steen-1.png';}
+        brickImage.src = 'access/media/img/ysselformaat-steen-1.png';
         steenDx = 160;
         steenDy = 78;
         voegDx = -15.5;
@@ -166,78 +164,6 @@ function zet_schaal() {//Zet schaal op origin als zero check waar is, anders sch
         teken();
     }
 }
-function random_steen_texture() {//Random Steen Texture Functie.
-    knop_press = 0;
-    brickImage_ONLY_onload = 1;
-    var random_steen_texture = Math.floor(Math.random() * 3) + 1;
-    if (steenDx == 210) {//Random steen texture voor Waalformaat.
-        console.log("Waalformaat");
-        switch (random_steen_texture) {
-            case 1:
-                brickImage.src = 'access/media/img/waalformaat-steen-1.png';
-            break;
-            case 2:
-                brickImage.src = 'access/media/img/waalformaat-steen-2.png';
-            break;
-            case 3:
-                brickImage.src = 'access/media/img/waalformaat-steen-3.png';
-            default:
-                brickImage.src = 'access/media/img/waalformaat-steen-3.png';
-        }
-    }
-    else {
-        if (steenDx == 215) {//Random steen texture voor Dikformaat.
-            console.log("Dikformaat");
-            switch (random_steen_texture) {
-                case 1:
-                    brickImage.src = 'access/media/img/dikformaat-steen-1.png';
-                break;
-                case 2:
-                    brickImage.src = 'access/media/img/dikformaat-steen-2.png';
-                break;
-                case 3:
-                    brickImage.src = 'access/media/img/dikformaat-steen-3.png';
-                break;
-                default:
-                    brickImage.src = 'access/media/img/waalformaat-steen-3.png';
-            }
-        }
-        else {
-            if (steenDx = 160) {//Random steen texture voor Ysselformaat.
-                console.log("Ysselformaat");
-                switch (random_steen_texture) {
-                    case 1:
-                        brickImage.src = 'access/media/img/ysselformaat-steen-1.png';
-                    break;
-                    case 2:
-                        brickImage.src = 'access/media/img/ysselformaat-steen-2.png';
-                    break;
-                    case 3:
-                        brickImage.src = 'access/media/img/ysselkformaat-steen-3.png';
-                    break;
-                    default:
-                        brickImage.src = 'access/media/img/ysselformaat-steen-3.png';
-                }
-            }
-        }
-    }
-}
-document.getElementById("$Random_steen_texture").addEventListener("change", () => {//Zet de Random stenen texture knop naar de STR waarde 0 of 1.
-    let RST_number = document.getElementById("$Random_steen_texture").value;
-    if (RST_number < 0) {//Als RST nummer kleiner is dan nul. Zet RST dan uit.
-        document.getElementById("$Random_steen_texture").value = -10000;
-        RST = 0;
-    }
-    else {
-        if (RST_number > 0) {//Als RST nummer groter is dan nul. Zet RST dan aan.
-            document.getElementById("$Random_steen_texture").value = 10000;
-            RST = 1;
-        }
-        else {//Als RST nummer nul is, alert gebruiker 'Opnieuw proberen!'.
-            window.alert("Error! Sleep nog eens.");
-        }
-    }
-});
 function half_steen_verband() {
     get_B_en_H();
     muur_B_en_H_check();
