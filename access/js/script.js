@@ -51,10 +51,10 @@ function teken() {//Algemene teken functie.
                 }
                 else {//Als steenverband tegel is doe dan...
                     if (knop_press == 1) {
-                            setTimeout(() => {ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);}, 50);
+                            setTimeout(() => {ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);}, 50);
                     }
                     else {
-                        ctx.drawImage(brickImage, 10 + xpos, 10 + ypos, steenDx, steenDy);
+                        ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);
                     }
                 }
             }
