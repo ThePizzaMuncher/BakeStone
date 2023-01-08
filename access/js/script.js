@@ -3,10 +3,6 @@ let steenDy = 50;
 let steenDz = 100;
 let voegDx = 10;
 let voegDy = 10;
-/* tmp var's */ 
-let voeg_h_check = 0;
-let voeg_b_check = 0;
-/* einde tmp var's */
 let muurDx = 500;
 let muurDy = 300;
 let schaal_slider = 5.6;
@@ -14,6 +10,7 @@ let zero_check = 0;
 let brickImage_ONLY_onload = 0;
 let knop_press = 0;
 let stone_count = 0;
+let stone_count_half = 0;
 let steenverband = 0;
 let rij_y = 0;
 let rij_x = 0;
@@ -22,6 +19,7 @@ let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
     stone_count = 0; //Aantal stenen wordt gereset.
+    stone_count_half = 0; //Aantal halve stenen worden gereset.
     rij_y = 0; //Rij y wordt gereset.
     rij_x = 0; //Rij x wordt gereset. 
     const canvas = document.getElementById("canvas");
@@ -38,15 +36,17 @@ function teken() {//Algemene teken functie.
             ++rij_y;
             for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
                 ++stone_count;
-                if (steenverband == 1 && knop_press == 1) {//Als steenverband half-steen is doe dan...
+                if (steenverband == 1) {//Als steenverband half-steen is doe dan...
                     if (voegDx <= 0) {voegDx = 10;}
                     if (rij_y % 2 == 0 ) {//Om en om functie voor y-as.
                         ctx.drawImage(brickImage, xpos, ypos, (steenDx / 2), steenDy);
                         xpos += (steenDx / 2) + voegDx;
+                        stone_count_half += 0.5;
                     }
                     for (; xpos < muurDx; xpos += (steenDx - - voegDx)) {
                         ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);
                         console.log(xpos, ypos);
+                        ++stone_count_half;
                     }
                 }
                 else {//Als steenverband tegel is doe dan...
@@ -60,7 +60,12 @@ function teken() {//Algemene teken functie.
             }
         }
     }
-    document.getElementById("$stone_count").innerHTML = stone_count;
+    if (steenverband == 1) {
+        document.getElementById("$stone_count").innerHTML = stone_count_half;
+    }
+    else {
+        document.getElementById("$stone_count").innerHTML = stone_count;
+    }
 }
 brickImage.onload = () => {//Hier wordt getekend waneer de brickImage ready is om een img te printen.
     switch (brickImage_ONLY_onload) {
