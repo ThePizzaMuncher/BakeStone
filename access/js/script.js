@@ -16,6 +16,7 @@ let rij_y = 0;
 let rij_x = 0;
 let prefire_rij_x = 0;
 let prefire_rij_y = 0;
+let steensoort_half_maat = 0;
 let steensoort = "waalformaat";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
@@ -50,8 +51,7 @@ function teken() {//Algemene teken functie.
                             console.log(xpos, ypos);
                             ++stone_count_half;
                     }
-                    if (rij_y % 2 == 0 ) {//Halfe steen aan het einde van de muur.
-                        let steensoort_half_maat = 2;
+                    if (rij_y % 2 == 0 && muurDx != 440) {//Halve steen aan het einde van de muur.
                         if (steensoort == "waalformaat") {
                             steensoort_half_maat = 2.21;
                         }
@@ -68,6 +68,26 @@ function teken() {//Algemene teken functie.
                         ctx.drawImage(brickImage, xpos, ypos, (steenDx / steensoort_half_maat), steenDy);
                         xpos += (steenDx / 2) + voegDx;
                         stone_count_half += 0.5;
+                    }
+                    else {
+                        if (rij_y % 2 != 0 && muurDx >= (muurDx / steenDx)) {
+                            if (steensoort == "waalformaat") {
+                                steensoort_half_maat = 2;
+                            }
+                            else {
+                                if (steensoort == "dikformaat") {
+                                    steensoort_half_maat = 2.24;
+                                }
+                                else {
+                                    if (steensoort == "ysselformaat") {
+                                        steensoort_half_maat = 2.27;
+                                    }
+                                }
+                            }
+                            ctx.drawImage(brickImage, xpos, ypos, (steenDx / steensoort_half_maat), steenDy);
+                            xpos += (steenDx / 2) + voegDx;
+                            stone_count_half += 0.5;
+                        }
                     }
                 }
                 else {//Als steenverband tegel is doe dan...
