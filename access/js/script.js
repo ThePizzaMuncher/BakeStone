@@ -17,6 +17,8 @@ let rij_x = 0;
 let prefire_rij_x = 0;
 let prefire_rij_y = 0;
 let steensoort_half_maat = 0;
+let steen_plek_x = 0;
+let steen_plek_y = 0;
 let steensoort = "waalformaat";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
@@ -24,7 +26,7 @@ function teken() {//Algemene teken functie.
     stone_count = 0; //Aantal stenen wordt gereset.
     stone_count_half = 0; //Aantal halve stenen worden gereset.
     rij_y = 0; //Rij y wordt gereset.
-    rij_x = 0; //Rij x wordt gereset. 
+    rij_x = 0; //Rij x wordt gereset.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
@@ -51,7 +53,7 @@ function teken() {//Algemene teken functie.
                             console.log(xpos, ypos);
                             ++stone_count_half;
                     }
-                    if (rij_y % 2 == 0 && muurDx != 440) {//Halve steen aan het einde van de muur.
+                    if (rij_y % 2 == 0) {//Halve steen aan het einde van de muur.
                         if (steensoort == "waalformaat") {
                             steensoort_half_maat = 2.21;
                         }
@@ -167,7 +169,7 @@ function cv_cls() {//Cls voor canvas.
 }
 function get_B_en_H() {//Stel hoogte en breedte in, in canvas.
     muurDx = document.getElementById("$breedte").value;
-    muurDy = document.getElementById("$hoogte").value;
+    muurDy = document.getElementById("$hoogte").value; 
 }
 function muur_B_en_H_check() {//Kijk als hoogte en breedte groter is dan 0.
     if (muurDy < 1) {//Als y-as kleiner is dan 0, doe dan...
@@ -275,4 +277,26 @@ function get_voeg_B_en_H() {
     }
     cv_cls();
     teken();
+}
+function stone_bijter() {
+    rij_y = 0;
+    rij_x = 0;
+    const canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+        var ctx = canvas.getContext("2d");
+        let koppenMaat = steenDz + voegDx;
+        let lagenMaat = steenDy + voegDy;
+        for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
+            ++rij_x;
+        }
+        for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {
+            ++rij_y;
+            for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {
+                console.log("xpos: " + xpos + ", ypos: " + ypos + ".");
+                steen_plek_x = xpos;
+                steen_plek_y = ypos;
+            }
+        }
+        ctx.clearRect(steen_plek_x + 200 + voegDx, 0, steenDx + 10, muurDy);
+    }
 }
