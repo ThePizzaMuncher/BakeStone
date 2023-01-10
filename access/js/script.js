@@ -19,6 +19,8 @@ let prefire_rij_y = 0;
 let steensoort_half_maat = 0;
 let steen_plek_x = 0;
 let steen_plek_y = 0;
+let steen_plek_half_status = 0;
+let string_test_json = "";
 let steensoort = "waalformaat";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
@@ -47,13 +49,14 @@ function teken() {//Algemene teken functie.
                         ctx.drawImage(brickImage, xpos, ypos, (steenDx / 2), steenDy);
                         xpos += (steenDx / 2) + voegDx;
                         stone_count_half += 0.5;
+                        steen_plek_half_status = 1;
                     }
                     for (; xpos < muurDx; xpos += (steenDx - - voegDx)) {
                             ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);
                             console.log(xpos, ypos);
                             ++stone_count_half;
                     }
-                    if (rij_y % 2 == 0) {//Halve steen aan het einde van de muur.
+                    if (rij_y % 2 == 0 && muurDx >= (muurDx / steenDx)) {//Halve steen aan het einde van de muur.
                         if (steensoort == "waalformaat") {
                             steensoort_half_maat = 2.21;
                         }
@@ -294,9 +297,8 @@ function stone_bijter() {
             for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {
                 console.log("xpos: " + xpos + ", ypos: " + ypos + ".");
                 steen_plek_x = xpos;
-                steen_plek_y = ypos;
             }
         }
-        ctx.clearRect(steen_plek_x + 200 + voegDx, 0, steenDx + 10, muurDy);
+        //ctx.clearRect(steen_plek_x + steenDx + voegDx, 0, steenDx + 10, muurDy);
     }
 }
