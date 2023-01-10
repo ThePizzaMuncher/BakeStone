@@ -299,6 +299,6 @@ function stone_bijter() {
                 steen_plek_x = xpos;
             }
         }
-        //ctx.clearRect(steen_plek_x + steenDx + voegDx, 0, steenDx + 10, muurDy);
+        ctx.clearRect(steen_plek_x + steenDx + voegDx, 0, steenDx + 10, muurDy);
     }
 }
