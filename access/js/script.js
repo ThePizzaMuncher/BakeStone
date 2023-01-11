@@ -18,6 +18,7 @@ let steensoortHalf_maat = 0;
 let steen_plek_x = 0;
 let steen_plek_y = 0;
 let steen_plekHalf_status = 0;
+let testVar1 = 0;
 let ArrHalfsteen = [];
 let steensoort = "waalformaat";
 let brickImage = new Image();
@@ -26,7 +27,7 @@ function teken() {//Algemene teken functie.
     stoneCount = 0; //Aantal stenen wordt gereset.
     stoneCountHalf = 0; //Aantal halve stenen worden gereset.
     rijY = 0; //Rij y wordt gereset.
-    rij_x = 0; //Rij x wordt gereset.
+    rijX = 0; //Rij x wordt gereset.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
@@ -35,7 +36,7 @@ function teken() {//Algemene teken functie.
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
         for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
-            ++rij_x;
+            ++rijX;
         }
         for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {//Voor de y-as var && lagenMaat doe...
             ++rijY;
@@ -105,10 +106,10 @@ function teken() {//Algemene teken functie.
         }
     }
     if (steenVerband == 1) {
-        document.getElementById("$stoneCount").innerHTML = stoneCountHalf;
+        document.getElementById("$stone_count").innerHTML = stoneCountHalf;
     }
     else {
-        document.getElementById("$stoneCount").innerHTML = stoneCount;
+        document.getElementById("$stone_count").innerHTML = stoneCount;
     }
 }
 brickImage.onload = () => {//Hier wordt getekend waneer de brickImage ready is om een img te printen.
@@ -281,14 +282,15 @@ function get_voeg_B_en_H() {
 }
 function stone_bijter() {
     rijY = 0;
-    rij_x = 0;
+    rijX = 0;
+    ArrHalfsteen.splice(0,ArrHalfsteen.length);
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
         for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
-            ++rij_x;
+            ++rijX;
         }
         for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {
             ++rijY;
@@ -296,9 +298,14 @@ function stone_bijter() {
                 console.log("xpos: " + xpos + ", ypos: " + ypos + ".");
                 steen_plek_x = xpos;
                 ArrHalfsteen.push({ "xPos": xpos, "yPos": ypos });
+                ++testVar1;
             }
         }
-        ArrHalfsteen.sort()
-        ctx.clearRect(steen_plek_x + steenDx + voegDx, 0, steenDx + 10, muurDy);
+        for (let i = 0; i < testVar1; i++) {
+            if (ArrHalfsteen[i].xPos == Math.max(...ArrHalfsteen.map(o => o.xPos))) {
+                console.log((ArrHalfsteen[i].xPos + ", " + ArrHalfsteen[i].yPos));
+                ctx.clearRect(ArrHalfsteen[i].xPos + steenDx + voegDx, ArrHalfsteen[i].yPos, steenDx, steenDy);
+            }
+        }
     }
 }
