@@ -35,24 +35,24 @@ function teken() {//Algemene teken functie.
         ctx.strokeStyle = 'red';
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
-        for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
+        for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++rijX;
         }
-        for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {//Voor de y-as var && lagenMaat doe...
+        for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {//Voor de y-as var && lagenMaat doe...
             ++rijY;
-            for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
+            for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
                 ++stoneCount;
                 if (steenVerband == 1) {//Als steenVerband half-steen is doe dan...
                     if (voegDx <= 0) {voegDx = 10;}
                     if (rijY % 2 == 0 ) {//Om en om functie voor y-as.
-                        ctx.drawImage(brickImage, xpos, ypos, (steenDx / 2), steenDy);
-                        xpos += (steenDx / 2) + voegDx;
+                        ctx.drawImage(brickImage, xPos, yPos, (steenDx / 2), steenDy);
+                        xPos += (steenDx / 2) + voegDx;
                         stoneCountHalf += 0.5;
                         steen_plekHalf_status = 1;
                     }
-                    for (; xpos < muurDx; xpos += (steenDx - - voegDx)) {
-                            ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);
-                            console.log(xpos, ypos);
+                    for (; xPos < muurDx; xPos += (steenDx - - voegDx)) {
+                            ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
+                            console.log(xPos, yPos);
                             ++stoneCountHalf;
                     }
                     if (rijY % 2 == 0 && muurDx >= (muurDx / steenDx)) {//Halve steen aan het einde van de muur.
@@ -69,8 +69,8 @@ function teken() {//Algemene teken functie.
                                 }
                             }
                         }
-                        ctx.drawImage(brickImage, xpos, ypos, (steenDx / steensoortHalf_maat), steenDy);
-                        xpos += (steenDx / 2) + voegDx;
+                        ctx.drawImage(brickImage, xPos, yPos, (steenDx / steensoortHalf_maat), steenDy);
+                        xPos += (steenDx / 2) + voegDx;
                         stoneCountHalf += 0.5;
                     }
                     else {
@@ -88,18 +88,18 @@ function teken() {//Algemene teken functie.
                                     }
                                 }
                             }
-                            ctx.drawImage(brickImage, xpos, ypos, (steenDx / steensoortHalf_maat), steenDy);
-                            xpos += (steenDx / 2) + voegDx;
+                            ctx.drawImage(brickImage, xPos, yPos, (steenDx / steensoortHalf_maat), steenDy);
+                            xPos += (steenDx / 2) + voegDx;
                             stoneCountHalf += 0.5;
                         }
                     }
                 }
                 else {//Als steenVerband tegel is doe dan...
                     if (knopPress == 1) {
-                            setTimeout(() => {ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);}, 50);
+                            setTimeout(() => {ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);}, 50);
                     }
                     else {
-                        ctx.drawImage(brickImage, xpos, ypos, steenDx, steenDy);
+                        ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
                     }
                 }
             }
@@ -289,22 +289,22 @@ function stone_bijter() {
         var ctx = canvas.getContext("2d");
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
-        for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
+        for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++rijX;
         }
-        for (let ypos = 0; ypos < muurDy; ypos += lagenMaat) {
+        for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {
             ++rijY;
-            for (let xpos = 0; xpos < muurDx; xpos += (2 * koppenMaat)) {
-                console.log("xpos: " + xpos + ", ypos: " + ypos + ".");
-                steen_plek_x = xpos;
-                ArrHalfsteen.push({ "xPos": xpos, "yPos": ypos });
+            for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {
+                console.log("xPos: " + xPos + ", yPos: " + yPos + ".");
+                steen_plek_x = xPos;
+                ArrHalfsteen.push({ "posX": xPos, "posY": yPos });
                 ++testVar1;
             }
         }
         for (let i = 0; i < testVar1; i++) {
-            if (ArrHalfsteen[i].xPos == Math.max(...ArrHalfsteen.map(o => o.xPos))) {
-                console.log((ArrHalfsteen[i].xPos + ", " + ArrHalfsteen[i].yPos));
-                ctx.clearRect(ArrHalfsteen[i].xPos + steenDx + voegDx, ArrHalfsteen[i].yPos, steenDx, steenDy);
+            if (ArrHalfsteen[i].posX == Math.max(...ArrHalfsteen.map(o => o.posX))) {
+                console.log((ArrHalfsteen[i].posX + ", " + ArrHalfsteen[i].posY));
+                ctx.clearRect(ArrHalfsteen[i].posX + steenDx + voegDx, ArrHalfsteen[i].posY, steenDx, steenDy);
             }
         }
     }
