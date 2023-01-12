@@ -16,14 +16,16 @@ let rijY = 0;
 let rijX = 0;
 let steensoortHalf_maat = 0;
 let steen_plek_x = 0;
-let steen_plek_y = 0;
 let steen_plekHalf_status = 0;
 let testVar1 = 0;
+let matenError = 0;
+let variabele_aan_of_uit = 0;
 let ArrHalfsteen = [];
 let steensoort = "waalformaat";
 let brickImage = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
+    berekenen_steen_plek_x();
     stoneCount = 0; //Aantal stenen wordt gereset.
     stoneCountHalf = 0; //Aantal halve stenen worden gereset.
     rijY = 0; //Rij y wordt gereset.
@@ -44,54 +46,20 @@ function teken() {//Algemene teken functie.
                 ++stoneCount;
                 if (steenVerband == 1) {//Als steenVerband half-steen is doe dan...
                     if (voegDx <= 0) {voegDx = 10;}
-                    if (rijY % 2 == 0 ) {//Om en om functie voor y-as.
+                    if (rijY % 2 == 0) {//Om en om functie voor y-as.
                         ctx.drawImage(brickImage, xPos, yPos, (steenDx / 2), steenDy);
                         xPos += (steenDx / 2) + voegDx;
-                        stoneCountHalf += 0.5;
+                        stoneCountHalf += 0.5; 
                         steen_plekHalf_status = 1;
+                        if (rijX == steen_plek_x) {
+                            ctx.drawImage(brickImage, (steen_plek_x * steenDx) - (steenDx / 2) - - voegDx, yPos, (steenDx / 2), steenDy);
+                            console.log("werkt. De xPos is:" + 545 + ". De yPos is:" + yPos + ".");
+                        }
                     }
                     for (; xPos < muurDx; xPos += (steenDx - - voegDx)) {
-                            ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
-                            console.log(xPos, yPos);
-                            ++stoneCountHalf;
-                    }
-                    if (rijY % 2 == 0 && muurDx >= (muurDx / steenDx)) {//Halve steen aan het einde van de muur.
-                        if (steensoort == "waalformaat") {
-                            steensoortHalf_maat = 2.21;
-                        }
-                        else {
-                            if (steensoort == "dikformaat") {
-                                steensoortHalf_maat = 2.24;
-                            }
-                            else {
-                                if (steensoort == "ysselformaat") {
-                                    steensoortHalf_maat = 2.27;
-                                }
-                            }
-                        }
-                        ctx.drawImage(brickImage, xPos, yPos, (steenDx / steensoortHalf_maat), steenDy);
-                        xPos += (steenDx / 2) + voegDx;
-                        stoneCountHalf += 0.5;
-                    }
-                    else {
-                        if (rijY % 2 != 0 && muurDx >= (muurDx / steenDx)) {
-                            if (steensoort == "waalformaat") {
-                                steensoortHalf_maat = 2;
-                            }
-                            else {
-                                if (steensoort == "dikformaat") {
-                                    steensoortHalf_maat = 2.24;
-                                }
-                                else {
-                                    if (steensoort == "ysselformaat") {
-                                        steensoortHalf_maat = 2.27;
-                                    }
-                                }
-                            }
-                            ctx.drawImage(brickImage, xPos, yPos, (steenDx / steensoortHalf_maat), steenDy);
-                            xPos += (steenDx / 2) + voegDx;
-                            stoneCountHalf += 0.5;
-                        }
+                        ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
+                        console.log(xPos, yPos);
+                        ++stoneCountHalf;
                     }
                 }
                 else {//Als steenVerband tegel is doe dan...
@@ -171,7 +139,13 @@ function cv_cls() {//Cls voor canvas.
 }
 function get_B_en_H() {//Stel hoogte en breedte in, in canvas.
     muurDx = document.getElementById("$breedte").value;
-    muurDy = document.getElementById("$hoogte").value; 
+    muurDy = document.getElementById("$hoogte").value;
+    if (matenError == 0) {
+        if (muurDx > 500 || muurDy > 300) {
+            window.alert("Tip: gebruik de zoom sliders rechts onder om de muur op het scherm te laten passen.")
+            matenError = 1;
+        }
+    }
 }
 function muur_B_en_H_check() {//Kijk als hoogte en breedte groter is dan 0.
     if (muurDy < 1) {//Als y-as kleiner is dan 0, doe dan...
@@ -280,32 +254,15 @@ function get_voeg_B_en_H() {
     cv_cls();
     teken();
 }
-function stone_bijter() {
-    rijY = 0;
-    rijX = 0;
-    ArrHalfsteen.splice(0,ArrHalfsteen.length);
+function berekenen_steen_plek_x() {
+    steen_plek_x = 0;
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
-            ++rijX;
-        }
-        for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {
-            ++rijY;
-            for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {
-                console.log("xPos: " + xPos + ", yPos: " + yPos + ".");
-                steen_plek_x = xPos;
-                ArrHalfsteen.push({ "posX": xPos, "posY": yPos });
-                ++testVar1;
-            }
-        }
-        for (let i = 0; i < testVar1; i++) {
-            if (ArrHalfsteen[i].posX == Math.max(...ArrHalfsteen.map(o => o.posX))) {
-                console.log((ArrHalfsteen[i].posX + ", " + ArrHalfsteen[i].posY));
-                ctx.clearRect(ArrHalfsteen[i].posX + steenDx + voegDx, ArrHalfsteen[i].posY, steenDx, steenDy);
-            }
+            ++steen_plek_x;
         }
     }
 }

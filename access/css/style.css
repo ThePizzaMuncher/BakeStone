@@ -1,7 +1,7 @@
 * {
     /* border: 2px solid green */
 }
-.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3 {
+.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
@@ -166,6 +166,7 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     overflow: auto;
     justify-content: center;
     align-items: center;
+    margin-left: 1vw;
 }
 .slider::-webkit-scrollbar {
     background-color: grey;
@@ -188,5 +189,19 @@ p, .patronen_Halfsteen, .patronen_Tegel {
 }
 .deur_3, .raam_3 {
     margin-bottom: 0.5vw;
+}
+.steen_textures {
+    background-color: rgba(212, 4, 4, 0.489);
+    position: relative;
+    width: 15vw;
+    height: 9vw;
+    top: 0.9vw;
+    bottom: 2vw;
+    left: 16vw;
+    margin-left: -16vw;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 /* @media empire */
