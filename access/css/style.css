@@ -1,7 +1,7 @@
 * {
     /* border: 2px solid green */
 }
-.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures {
+.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1, .rij_2 {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
@@ -191,7 +191,7 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     margin-bottom: 0.5vw;
 }
 .steen_textures {
-    background-color: rgba(212, 4, 4, 0.489);
+    background-color: rgba(212, 4, 4, 0.365);
     position: relative;
     width: 15vw;
     height: 9vw;
@@ -203,5 +203,13 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     align-items: center;
     display: flex;
     flex-direction: column;
+}
+.rij_1, .rij_2 {
+    width: 14vw;
+    height: 3vw;
+    border: 2px solid black;
+}
+.rij_1 {
+    margin-bottom: 1vw;
 }
 /* @media empire */
