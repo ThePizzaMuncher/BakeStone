@@ -26,6 +26,7 @@ let maxDeuren = 0;
 let currentDeuren = 0;
 let deurSoort = 0;
 let raamSoort = 0;
+let SPRHMIS = 0; //Sparingen Hoogte Maat In Stenen
 let werkelijkeBreedteMuur = 0;
 let werkelijkeHoogteMuur = 0;
 let brickImage = new Image();
@@ -281,7 +282,7 @@ document.getElementById("deur_1").addEventListener("click", () => {
         tekenSparing();
     }
     else {
-        window.alert("De muur is te smal voor een deur/nog een deur.")
+        window.alert("De muur is te smal voor een deur of voor nog een deur.")
     }
 });
 document.getElementById("deur_2").addEventListener("click", () => {
@@ -314,6 +315,6 @@ function tekenSparing() {
         var ctx = canvas.getContext("2d");
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
-        ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - steenDy), steenDx, steenDy);
+        ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), steenDx, (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
     }
 }
