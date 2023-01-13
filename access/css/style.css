@@ -87,7 +87,7 @@ hr, .line_2 {
     background-image: url("../media/img/ysselformaat.png");
     background-size: 100%;
 }
-.stone1:hover, .stone2:hover, .stone3:hover, .patronen_Halfsteen:hover, .patronen_Tegel:hover, .logo:hover, .patronen:hover {
+.stone1:hover, .stone2:hover, .stone3:hover, .patronen_Halfsteen:hover, .patronen_Tegel:hover, .logo:hover, .patronen:hover, .deur_1_textr:hover, .deur_2_textr:hover, .deur_3_textr:hover, .raam_1_textr:hover, .raam_2_textr:hover, .raam_3_textr:hover {
     cursor: pointer;
 }
 .steen, .patronen_Halfsteen, .patronen_Tegel, .steen_p {
@@ -97,10 +97,7 @@ hr, .line_2 {
 }
 .zoom {
     width: 4vw;
-}
-.Random_stenen_texture_keuze {
-    width: 2vw;
-    margin-left: -3.5vw;
+    cursor: grab;
 }
 p, .patronen_Halfsteen, .patronen_Tegel {
     font-size: 1.06vw;
@@ -181,19 +178,42 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     align-items: center;
     display: flex;
 }
+.raam, .raam_1, .raam_2, .raam_3 {
+    height: 10vw;
+}
 .deur_1, .raam_1 {
     margin-top: 0.5vw;
 }
 .deur_3, .raam_3 {
     margin-bottom: 0.5vw;
 }
-.deur_1_textr {
+.deur_1_textr, .deur_2_textr, .deur_3_textr, .raam_1_textr, .raam_2_textr, .raam_3_textr {
     width: 8vw;
     height: 19vw;
     background-image: url("../media/img/deur_1.png");
     background-size: 100%;
     background-position-y: center;
     background-repeat: no-repeat;
+    box-shadow: 4px 4px 4px black;
+}
+.raam_1_textr, .raam_2_textr, .raam_3_textr {
+    height: 6.7vw;
+    width: 9vw;
+    background-image: url("../media/img/raam_1.png");
+}
+.deur_2_textr {
+    background-image: url("../media/img/deur_2.png");
+}
+.deur_3_textr {
+    background-image: url("../media/img/deur_3.png");
+}
+.raam_2_textr {
+    height: 9vw;
+    background-image: url("../media/img/raam_2.png");
+}
+.raam_3_textr {
+    height: 9vw;
+    background-image: url("../media/img/raam_3.png");
 }
 .steen_textures {
     background-color: rgba(212, 4, 4, 0.365);

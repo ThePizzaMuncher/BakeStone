@@ -22,7 +22,14 @@ let matenError = 0;
 let variabele_aan_of_uit = 0;
 let ArrHalfsteen = [];
 let steensoort = "waalformaat";
+let maxDeuren = 0;
+let currentDeuren = 0;
+let deurSoort = 0;
+let raamSoort = 0;
+let werkelijkeBreedteMuur = 0;
+let werkelijkeHoogteMuur = 0;
 let brickImage = new Image();
+let deurTexture = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
     berekenen_steen_plek_x();
@@ -264,5 +271,49 @@ function berekenen_steen_plek_x() {
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++steen_plek_x;
         }
+    }
+}
+document.getElementById("deur_1").addEventListener("click", () => {
+    if (zeroCheck == 0 && currentDeuren < $maxDeuren()) {
+        deurSoort = 1;
+        deurTexture.src = "access/media/img/deur_1.png"
+        ++currentDeuren;
+        tekenSparing();
+    }
+    else {
+        window.alert("De muur is te smal voor een deur/nog een deur.")
+    }
+});
+document.getElementById("deur_2").addEventListener("click", () => {
+    deurSoort = 2;
+});
+document.getElementById("deur_3").addEventListener("click", () => {
+    deurSoort = 3;
+});
+document.getElementById("raam_1").addEventListener("click", () => {
+    raamSoort = 1;
+});
+document.getElementById("raam_2").addEventListener("click", () => {
+    raamSoort = 2;
+});
+document.getElementById("raam_3").addEventListener("click", () => {
+    raamSoort = 3;
+});
+function werkelijkeMuurAfmetingen() {
+    werkelijkeBreedteMuur = ((steenDx * rijX) - - (rijX * voegDx - voegDx));
+    werkelijkeHoogteMuur = ((steenDy * rijY) - - (rijY * voegDy - voegDy));
+}
+function $maxDeuren() {
+    werkelijkeMuurAfmetingen();
+    maxDeuren = Math.round((werkelijkeBreedteMuur / (steenDx * 2) / 3.5));
+    return maxDeuren;
+}
+function tekenSparing() {
+    const canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+        var ctx = canvas.getContext("2d");
+        let koppenMaat = steenDz + voegDx;
+        let lagenMaat = steenDy + voegDy;
+        ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - steenDy), steenDx, steenDy);
     }
 }

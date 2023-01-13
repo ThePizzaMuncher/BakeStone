@@ -4,28 +4,14 @@
 <body id="body">
 
 	<script>
-		let piraat = [];
-		piraat.push({"Naam": "wwwqr", "Ja": "nee", "getal": 100});
-		piraat.push({"Naam": "sjon", "Ja": "ja"});
-	
-		const test123 = document.createElement("p");
-		test123.id = "test";
-        test123.innerHTML = piraat[0].Naam + " ";
-		test123.innerHTML += piraat[0].Ja + " ";
-        test123.innerHTML += piraat[0].getal + " ";
-		document.body.appendChild(test123);
-
-        let test_69 = [];
-        for (let i = 0; i < 3; i++) {
-            test_69.push({"Xpos": 100, "Ypos": 120});
-        }
-
-
-		let kapitrein = [];
-
-		
-		
-
+		let $Nummer = 0;
+		let promptvar = 0;
+			let test_69 = [];
+        	for (let i = 0; i < 100; i++) {
+        	    test_69.push({"Xpos": (i * 2), "Ypos": (i / 2), "Nummer": i});
+        	}
+			$Nummer = (Math.max(...test_69.map(o => o.Nummer)));
+			promptvar = Number(window.prompt("Enter a number") - 1);
+			window.alert("Xpos: " + test_69[promptvar].Xpos + " | Ypos: " + test_69[promptvar].Ypos);
 	</script>
-
 </body>
