@@ -12,7 +12,7 @@
         <div class="logo" onclick="BGDD_website()" title="Ga naar de website van BGDD"></div> <!-- Logo links boven -->
         <hr>
         <div class="flex">
-            <div class="zijnav"> <!-- Zij-nav links -->
+            <div class="zijnav_links"> <!-- Zij-nav links -->
                 <div class="sparingen"> <!-- Sparingen vak -->
                     <div class="steen_textures"> <!-- Extra steen textures -->
                         <div class="rij_1">
@@ -20,12 +20,6 @@
                             <div class="steen_textr_2"></div>
                             <div class="steen_textr_3"></div>
                             <div class="steen_textr_4"></div>
-                        </div>
-                        <div class="rij_2">
-                            <div class="steen_textr_5"></div>
-                            <div class="steen_textr_6"></div>
-                            <div class="steen_textr_7"></div>
-                            <div class="steen_textr_8"></div>
                         </div>
                     </div>
                     <div class="slider"> <!-- Een slider voor Deuren en Ramen -->
@@ -49,6 +43,18 @@
                         <div class="raam_3">
                             <div class="raam_3_textr" id="raam_3" title="2x2 raam hout"></div>
                         </div>
+                    </div>
+                </div>
+                <div class="matenSparingen"> <!-- Sparingen maten -->
+                    <div class="Sparing_flex">
+                        <p class="maten">Sparing <span title="Hoogte" class="simbol_cursor">&#8593</span>:&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <input type="number" style="width: 4vw;" id="$sparingHoogte" value="0">
+                        <p class="maten">(in mm)</p>
+                    </div>
+                    <div class="Sparing_flex">
+                        <p class="maten">Sparing <span title="Breedte" class="simbol_cursor">&#8594</span>:&nbsp;</p>
+                        <input type="number" style="width: 4vw;" id="$sparingBreedte" value="0">
+                        <p class="maten">(in mm)</p>
                     </div>
                 </div>
             </div>

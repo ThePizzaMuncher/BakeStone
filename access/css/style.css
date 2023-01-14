@@ -1,7 +1,7 @@
 * {
     /* border: 2px solid green */
 }
-.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1, .rij_2 {
+.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1 {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
@@ -67,13 +67,16 @@ hr, .line_2 {
     justify-content: center;
     align-items: center;
 }
-.zijnav {
+.zijnav, .zijnav_links {
     width: 16vw;
     height: 31vw;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
+}
+.zijnav_links {
+    height: 34vw;
 }
 .stone1 {
     background-image: url("../media/img/waalformaat.png");
@@ -89,6 +92,12 @@ hr, .line_2 {
 }
 .stone1:hover, .stone2:hover, .stone3:hover, .patronen_Halfsteen:hover, .patronen_Tegel:hover, .logo:hover, .patronen:hover, .deur_1_textr:hover, .deur_2_textr:hover, .deur_3_textr:hover, .raam_1_textr:hover, .raam_2_textr:hover, .raam_3_textr:hover {
     cursor: pointer;
+}
+.simbol_cursor:hover {
+    cursor: progress;
+}
+.simbol_cursor {
+    font-size: 1.4vw;
 }
 .steen, .patronen_Halfsteen, .patronen_Tegel, .steen_p {
     font-size: 2vw;
@@ -117,6 +126,7 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     font-size: 1.6vw;
 }
 .stone_counter {
+    margin-top: -3vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,11 +138,13 @@ p, .patronen_Halfsteen, .patronen_Tegel {
 }
 .sparingen {
     width: 16vw;
-    height: 31vw;
+    height: 26.5vw;
     background-color: rgba(255, 98, 0, 0.881);
     justify-content: center;
     align-self: center;
     display: flex;
+    border-bottom-left-radius: 0vw;
+    border-bottom-right-radius: 0vw;
 }
 .sp_txt {
     display: flex;
@@ -153,11 +165,12 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     width: 15vw;
     height: 20vw;
     background-color: rgba(212, 4, 4, 0.489);
-    margin-top: 10.5vw;
+    margin-top: 6vw;
     overflow: auto;
     justify-content: center;
     align-items: center;
     margin-left: 1vw;
+    margin-bottom: 1vw;
 }
 .slider::-webkit-scrollbar {
     background-color: grey;
@@ -219,7 +232,7 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     background-color: rgba(212, 4, 4, 0.365);
     position: relative;
     width: 15vw;
-    height: 9vw;
+    height: 4vw;
     top: 0.9vw;
     bottom: 2vw;
     left: 16vw;
@@ -229,12 +242,33 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     display: flex;
     flex-direction: column;
 }
-.rij_1, .rij_2 {
+.rij_1 {
     width: 14vw;
-    height: 3vw;
+    height: 7vw;
     border: 2px solid black;
 }
 .rij_1 {
     margin-bottom: 1vw;
+}
+.matenSparingen {
+    background-color: rgb(255, 116, 30);
+    width: 16vw;
+    height: 10vw;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    margin-top: 0vw;
+}
+.Sparing_flex {
+    width: 16vw;
+    height: 3vw;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    /* border: 2px solid black; */
 }
 /* @media empire */

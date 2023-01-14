@@ -26,10 +26,11 @@ let maxDeuren = 0;
 let currentDeuren = 0;
 let deurSoort = 0;
 let raamSoort = 0;
-let SPRHMIS = 5; //Sparingen Hoogte Maat In Stenen.
-let SPRBMIS = 1; //Sparingen Breedte Maat In Stenen.
+let SPRHMIS = 0; //Sparingen Hoogte Maat In Stenen.
+let SPRBMIS = 0; //Sparingen Breedte Maat In Stenen.
 let werkelijkeBreedteMuur = 0;
 let werkelijkeHoogteMuur = 0;
+let KeuzeResetSparingen = "";
 let brickImage = new Image();
 let deurTexture = new Image();
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
@@ -282,14 +283,49 @@ function berekenen_steen_plek_x() {
     }
 }
 document.getElementById("deur_1").addEventListener("click", () => {
-    if (zeroCheck == 0 && currentDeuren < $maxDeuren() && SPRBMIS <= rijX) {
-        deurSoort = 1;
-        deurTexture.src = "access/media/img/deur_1.png"
-        ++currentDeuren;
-        tekenSparing();
+    if (zeroCheck == 0 && currentDeuren < $maxDeuren() && SPRBMIS <= rijX && SPRHMIS <= rijY) {
+        krijgSparingsMaten()
+        if (SPRHMIS < 1 || SPRBMIS < 1) {
+            if (SPRHMIS == 0 && SPRBMIS == 0) {
+                window.alert("Voer een grotere breedte en hoogte in voor de sparing.");
+            }
+            else {
+                if (SPRHMIS == 0) {
+                    window.alert("Voer een grotere hoogte in voor de sparing.");
+                }
+                if (SPRBMIS == 0) {
+                    window.alert("Voer een grotere breedte in voor de sparing.");
+                }
+                else {
+                    window.alert("Error!");
+                }
+            }
+        }
+        else {
+            deurSoort = 1;
+            deurTexture.src = "access/media/img/deur_1.png";
+            ++currentDeuren;
+            tekenSparing();
+        }
     }
     else {
-        window.alert("De muur is te smal voor een deur of voor nog een deur.")
+        if (currentDeuren >= maxDeuren) {
+            KeuzeResetSparingen = window.prompt("Het limiet sparingen is bereikt. Wilt u alle sparingen verwijderen? (Ja | Nee)");
+            if (KeuzeResetSparingen.includes("Ja") || KeuzeResetSparingen.includes("ja")) {
+                SparingReset();
+                cv_cls();
+                teken();
+            }
+            else {
+                if (KeuzeResetSparingen.includes("Nee") || KeuzeResetSparingen.includes("nee")) {}
+                else {
+                    window.alert("Ongeldige invoer!");
+                }
+            }
+        }
+        else {
+            window.alert("De muur is te smal voor een deur of voor nog een deur.");
+        }
     }
 });
 document.getElementById("deur_2").addEventListener("click", () => {
@@ -321,11 +357,19 @@ function SparingReset() {
     currentDeuren = 0;
 }
 function tekenSparing() {
-    const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
-        ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
+        if (knopPress == 1) {
+            setTimeout(() => {ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));}, 50);
+        }
+        else {
+            ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
+        }
     }
+}
+function krijgSparingsMaten() {
+    SPRHMIS = Number(document.getElementById("$sparingHoogte").value);
+    SPRBMIS = Number(document.getElementById("$sparingBreedte").value);
 }
