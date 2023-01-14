@@ -26,7 +26,8 @@ let maxDeuren = 0;
 let currentDeuren = 0;
 let deurSoort = 0;
 let raamSoort = 0;
-let SPRHMIS = 0; //Sparingen Hoogte Maat In Stenen
+let SPRHMIS = 5; //Sparingen Hoogte Maat In Stenen.
+let SPRBMIS = 1; //Sparingen Breedte Maat In Stenen.
 let werkelijkeBreedteMuur = 0;
 let werkelijkeHoogteMuur = 0;
 let brickImage = new Image();
@@ -87,6 +88,9 @@ function teken() {//Algemene teken functie.
     else {
         document.getElementById("$stone_count").innerHTML = stoneCount;
     }
+    if (deurTexture.src != '') {
+        tekenSparing();
+    }
 }
 brickImage.onload = () => {//Hier wordt getekend waneer de brickImage ready is om een img te printen.
     switch (brickImage_ONLY_onload) {
@@ -102,6 +106,7 @@ function BGDD_website() {//Doorverwijzing naar BGDD website.
 document.getElementById("#stone1").addEventListener("click", () => {//Knop steen 1 listener. (Waalformaat baksteen)
     get_B_en_H();
     muur_B_en_H_check();
+    SparingReset();
     if (zeroCheck == 0) {//Zero check.
         knopPress = 1;
         steensoort = "waalformaat";
@@ -117,6 +122,7 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
 document.getElementById("#stone2").addEventListener("click", () => {//Knop steen 2 listener. (Dikformaat baksteen)
     get_B_en_H();
     muur_B_en_H_check();
+    SparingReset();
     if (zeroCheck == 0) {//Zero check.
         knopPress = 1;
         steensoort = "dikformaat";
@@ -131,6 +137,7 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
 document.getElementById("#stone3").addEventListener("click", () => {//Knop steen 3 listener. (Ysselformaat baksteen)
     get_B_en_H();
     muur_B_en_H_check();
+    SparingReset();
     if (zeroCheck == 0) {//Zero check.
         knopPress = 1;
         steensoort = "ysselformaat";
@@ -275,7 +282,7 @@ function berekenen_steen_plek_x() {
     }
 }
 document.getElementById("deur_1").addEventListener("click", () => {
-    if (zeroCheck == 0 && currentDeuren < $maxDeuren()) {
+    if (zeroCheck == 0 && currentDeuren < $maxDeuren() && SPRBMIS <= rijX) {
         deurSoort = 1;
         deurTexture.src = "access/media/img/deur_1.png"
         ++currentDeuren;
@@ -309,12 +316,16 @@ function $maxDeuren() {
     maxDeuren = Math.round((werkelijkeBreedteMuur / (steenDx * 2) / 3.5));
     return maxDeuren;
 }
+function SparingReset() {
+    deurTexture.src = '';
+    currentDeuren = 0;
+}
 function tekenSparing() {
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
-        ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), steenDx, (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
+        ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
     }
 }
