@@ -5,6 +5,7 @@ let voegDx = 10;
 let voegDy = 10;
 let muurDx = 500;
 let muurDy = 300;
+let om_en_om = 0;
 let schaalSlider = 5.6;
 let zeroCheck = 0;
 let brickImage_ONLY_onload = 0;
@@ -15,6 +16,7 @@ let stoneCountHalf = 0;
 let steenVerband = 0;
 let rijY = 0;
 let rijX = 0;
+let xPos_2 = 0;
 let steensoortHalf_maat = 0;
 let steen_plek_x = 0;
 let steen_plekHalf_status = 0;
@@ -62,6 +64,7 @@ function teken() {//Algemene teken functie.
                     switch (halfsteenSwitch) {
                         case 1:
                             halfSteensTeken();
+                            halfsteenSwitch += 1;
                         break;
                     }
                 }
@@ -96,6 +99,7 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
     get_B_en_H();
     muur_B_en_H_check();
     SparingReset();
+    werkelijkeMuurAfmetingen();
     if (zeroCheck == 0) {//Zero check.
         knopPress = 1;
         steensoort = "waalformaat";
@@ -112,6 +116,7 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
     get_B_en_H();
     muur_B_en_H_check();
     SparingReset();
+    werkelijkeMuurAfmetingen();
     if (zeroCheck == 0) {//Zero check.
         knopPress = 1;
         steensoort = "dikformaat";
@@ -126,6 +131,7 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
 document.getElementById("#stone3").addEventListener("click", () => {//Knop steen 3 listener. (Ysselformaat baksteen)
     get_B_en_H();
     muur_B_en_H_check();
+    werkelijkeMuurAfmetingen();
     SparingReset();
     if (zeroCheck == 0) {//Zero check.
         knopPress = 1;
@@ -395,25 +401,44 @@ function SparingMogelijkheid_en_teken() {
 function halfSteensTeken() {
     cv_cls();
     berekenen_steen_plek_x();
+    werkelijkeMuurAfmetingen();
     stoneCount = 0; //Aantal stenen wordt gereset.
     rijY = 0; //Rij y wordt gereset.
     rijX = 0; //Rij x wordt gereset.
     halfsteenSwitch = 0;
+    xPos_2 = 0;
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
         ctx.scale(schaalSlider, schaalSlider);
-        ctx.strokeStyle = 'red';
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
-        for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
-            ++rijX;
+        for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Prefire berekening rijX
+            xPos_2 = xPos;
         }
-        for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {//Voor de y-as var && lagenMaat doe...
+        for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {//Voor de y-as doe...
             ++rijY;
-            for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
-                ++stoneCount;
-                ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
+            if (rijY % 2 == 0) {//even
+                window.alert("even getal:" + yPos + ".");
+                for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Prefire berekening rijX
+                    ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
+                }
+            }
+            else {//oneven
+                window.alert("oneven getal:" + yPos + ".");
+                for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Prefire berekening rijX
+                    if (xPos == 0) {//eerste steen rij-x
+                        ctx.drawImage(brickImage, xPos, yPos, (steenDx / 2), steenDy);
+                    }
+                    if (xPos == xPos_2) {//Laatste steen rij-x
+                        ctx.drawImage(brickImage, (xPos - (steenDx / 2)), yPos, steenDx, steenDy);
+                        ctx.drawImage(brickImage, (xPos - - (steenDx / 2)), yPos, (steenDx / 2), steenDy); //Dé laatste steen.
+                    }
+                    else {
+                        window.alert("xPos:" + xPos + ". yPos:" + yPos + ".");
+                        ctx.drawImage(brickImage, (xPos - (steenDx / 2)), yPos, steenDx, steenDy);
+                    }
+                }
             }
         }
     }
