@@ -432,7 +432,7 @@ function halfSteensTeken() {
                     }
                     if (xPos == xPos_2) {//Laatste steen rij-x
                         ctx.drawImage(brickImage, (xPos - (steenDx / 2)), yPos, steenDx, steenDy);
-                        ctx.drawImage(brickImage, (xPos - - (steenDx / 2)), yPos, (steenDx / 2), steenDy); //Dé laatste steen.
+                        ctx.drawImage(brickImage, (xPos - - (steenDx / 2) - - voegDx), yPos, (steenDx / 2) - voegDx, steenDy); //Dé laatste steen.
                     }
                     else {
                         window.alert("xPos:" + xPos + ". yPos:" + yPos + ".");
