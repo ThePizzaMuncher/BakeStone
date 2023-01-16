@@ -46,15 +46,32 @@
                     </div>
                 </div>
                 <div class="matenSparingen"> <!-- Sparingen maten -->
-                    <div class="Sparing_flex">
-                        <p class="maten">Sparing <span title="Hoogte" class="simbol_cursor">&#8593</span>:&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                        <input type="number" style="width: 4vw;" id="$sparingHoogte" value="0">
-                        <p class="maten">(in mm)</p>
+                    <div class="Sparing_flex_txt">
+                        <p class="flex_txt">Sparingen</p>
                     </div>
                     <div class="Sparing_flex">
-                        <p class="maten">Sparing <span title="Breedte" class="simbol_cursor">&#8594</span>:&nbsp;</p>
-                        <input type="number" style="width: 4vw;" id="$sparingBreedte" value="0">
-                        <p class="maten">(in mm)</p>
+                        <table class="sparingMaten">
+                            <tr>
+                                <td><p class="maten">Hoogte:</p></td>
+                                <td><input type="number" style="width: 4vw;" id="$sparingHoogte" value="0"></td>
+                                <td><p class="maten">(in mm)</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="maten">Breedte:</p></td>
+                                <td><input type="number" style="width: 4vw;" id="$sparingBreedte" value="0"></td>
+                                <td><p class="maten">(in mm)</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="maten">Positie &rarr;:</p></td>
+                                <td><input type="number" style="width: 4vw;" id="" value="0"></td>
+                                <td><p class="maten">(in mm)</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="maten">Positie &uarr;:</p></td>
+                                <td><input type="number" style="width: 4vw;" id="" value="0"></td>
+                                <td><p class="maten">(in mm)</p></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

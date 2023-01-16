@@ -10,6 +10,7 @@ let zeroCheck = 0;
 let brickImage_ONLY_onload = 0;
 let knopPress = 0;
 let stoneCount = 0;
+let stoneCountPreNum = 0;
 let stoneCountHalf = 0;
 let steenVerband = 0;
 let rijY = 0;
@@ -17,7 +18,7 @@ let rijX = 0;
 let steensoortHalf_maat = 0;
 let steen_plek_x = 0;
 let steen_plekHalf_status = 0;
-let testVar1 = 0;
+let halfsteenSwitch = 0;
 let matenError = 0;
 let variabele_aan_of_uit = 0;
 let ArrHalfsteen = [];
@@ -33,6 +34,7 @@ let werkelijkeHoogteMuur = 0;
 let KeuzeResetSparingen = "";
 let brickImage = new Image();
 let deurTexture = new Image();
+let laagVoorHalfsteen = 0;
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
     berekenen_steen_plek_x();
@@ -40,6 +42,7 @@ function teken() {//Algemene teken functie.
     stoneCountHalf = 0; //Aantal halve stenen worden gereset.
     rijY = 0; //Rij y wordt gereset.
     rijX = 0; //Rij x wordt gereset.
+    halfsteenSwitch = 0;
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
@@ -55,21 +58,11 @@ function teken() {//Algemene teken functie.
             for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
                 ++stoneCount;
                 if (steenVerband == 1) {//Als steenVerband half-steen is doe dan...
-                    if (voegDx <= 0) {voegDx = 10;}
-                    if (rijY % 2 == 0) {//Om en om functie voor y-as.
-                        ctx.drawImage(brickImage, xPos, yPos, (steenDx / 2), steenDy);
-                        xPos += (steenDx / 2) + voegDx;
-                        stoneCountHalf += 0.5; 
-                        steen_plekHalf_status = 1;
-                        if (rijX == steen_plek_x) {
-                            ctx.drawImage(brickImage, (steen_plek_x * steenDx) - (steenDx / 2) - - voegDx, yPos, (steenDx / 2), steenDy);
-                            console.log("werkt. De xPos is:" + 545 + ". De yPos is:" + yPos + ".");
-                        }
-                    }
-                    for (; xPos < muurDx; xPos += (steenDx - - voegDx)) {
-                        ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
-                        console.log(xPos, yPos);
-                        ++stoneCountHalf;
+                    halfsteenSwitch += 1;
+                    switch (halfsteenSwitch) {
+                        case 1:
+                            halfSteensTeken();
+                        break;
                     }
                 }
                 else {//Als steenVerband tegel is doe dan...
@@ -83,12 +76,7 @@ function teken() {//Algemene teken functie.
             }
         }
     }
-    if (steenVerband == 1) {
-        document.getElementById("$stone_count").innerHTML = stoneCountHalf;
-    }
-    else {
-        document.getElementById("$stone_count").innerHTML = stoneCount;
-    }
+    document.getElementById("$stone_count").innerHTML = stoneCount;
     if (deurTexture.src != '') {
         tekenSparing();
     }
@@ -221,7 +209,7 @@ function tegel_verband() {
     muur_B_en_H_check();
     if (zeroCheck == 0) {
         cv_cls();
-        steenVerband = 2;
+        steenVerband = 0;
         knopPress = 1;
         document.getElementById("$halfsteen").style.backgroundColor = "rgb(0, 15, 186)";
         document.getElementById("$tegel").style.backgroundColor = "rgba(25, 35, 230, 0.711)";
@@ -283,56 +271,16 @@ function berekenen_steen_plek_x() {
     }
 }
 document.getElementById("deur_1").addEventListener("click", () => {
-    if (zeroCheck == 0 && currentDeuren < $maxDeuren() && SPRBMIS <= rijX && SPRHMIS <= rijY) {
-        krijgSparingsMaten()
-        if (SPRHMIS < 1 || SPRBMIS < 1) {
-            if (SPRHMIS == 0 && SPRBMIS == 0) {
-                window.alert("Voer een grotere breedte en hoogte in voor de sparing.");
-            }
-            else {
-                if (SPRHMIS == 0) {
-                    window.alert("Voer een grotere hoogte in voor de sparing.");
-                }
-                if (SPRBMIS == 0) {
-                    window.alert("Voer een grotere breedte in voor de sparing.");
-                }
-                else {
-                    window.alert("Error!");
-                }
-            }
-        }
-        else {
-            deurSoort = 1;
-            deurTexture.src = "access/media/img/deur_1.png";
-            ++currentDeuren;
-            tekenSparing();
-        }
-    }
-    else {
-        if (currentDeuren >= maxDeuren) {
-            KeuzeResetSparingen = window.prompt("Het limiet sparingen is bereikt. Wilt u alle sparingen verwijderen? (Ja | Nee)");
-            if (KeuzeResetSparingen.includes("Ja") || KeuzeResetSparingen.includes("ja")) {
-                SparingReset();
-                cv_cls();
-                teken();
-            }
-            else {
-                if (KeuzeResetSparingen.includes("Nee") || KeuzeResetSparingen.includes("nee")) {}
-                else {
-                    window.alert("Ongeldige invoer!");
-                }
-            }
-        }
-        else {
-            window.alert("De muur is te smal voor een deur of voor nog een deur.");
-        }
-    }
+    deurSoort = 1;
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_2").addEventListener("click", () => {
     deurSoort = 2;
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_3").addEventListener("click", () => {
     deurSoort = 3;
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_1").addEventListener("click", () => {
     raamSoort = 1;
@@ -359,8 +307,6 @@ function SparingReset() {
 function tekenSparing() {
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
-        let koppenMaat = steenDz + voegDx;
-        let lagenMaat = steenDy + voegDy;
         if (knopPress == 1) {
             setTimeout(() => {ctx.drawImage(deurTexture, 0, (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));}, 50);
         }
@@ -372,4 +318,103 @@ function tekenSparing() {
 function krijgSparingsMaten() {
     SPRHMIS = Number(document.getElementById("$sparingHoogte").value);
     SPRBMIS = Number(document.getElementById("$sparingBreedte").value);
+}
+function sparingSoortCheck() {
+    if (deurSoort > 0) {return "deur";}
+    if (raamSoort > 0) {return "raam";}
+    else               {return "sparing";}
+}
+function SparingMogelijkheid_en_teken() {
+    if (zeroCheck == 0 && currentDeuren < $maxDeuren() && SPRBMIS <= rijX && SPRHMIS <= rijY) {
+        krijgSparingsMaten();
+        if (SPRHMIS < 1 || SPRBMIS < 1) {
+            if (SPRHMIS == 0 && SPRBMIS == 0) {
+                window.alert("Voer een grotere breedte en hoogte in voor de " + sparingSoortCheck() + ".");
+            }
+            else {
+                if (SPRHMIS == 0) {
+                    window.alert("Voer een grotere hoogte in voor de " + sparingSoortCheck() + ".");
+                }
+                if (SPRBMIS == 0) {
+                    window.alert("Voer een grotere breedte in voor de " + sparingSoortCheck() + ".");
+                }
+                else {
+                    window.alert("Error!");
+                }
+            }
+        }
+        else {
+            switch (deurSoort) {
+                case 1:
+                    deurTexture.src = "access/media/img/deur_1.png";
+                break;
+                case 2:
+                    deurTexture.src = "access/media/img/deur_2.png";
+                break;
+                case 3:
+                    deurTexture.src = "access/media/img/deur_3.png";
+                break;
+            }
+            switch (raamSoort) {
+                case 1:
+                    deurTexture.src = "access/media/img/raam_1.png";
+                break;
+                case 2:
+                    deurTexture.src = "access/media/img/raam_2.png";
+                break;
+                case 3:
+                    deurTexture.src = "access/media/img/raam_3.png";
+                break;
+            }
+            ++currentDeuren;
+            tekenSparing();
+        }
+    }
+    else {
+        if (currentDeuren >= maxDeuren) {
+            if (currentDeuren == 0) {
+                window.alert("De muur is te klein voor een " + sparingSoortCheck() + ".");
+            }
+            else {
+                KeuzeResetSparingen = window.prompt("Het limiet sparingen is bereikt. Wilt u alle sparingen verwijderen? (Ja | Nee)");
+                if (KeuzeResetSparingen.includes("J") || KeuzeResetSparingen.includes("j")) {
+                    SparingReset();
+                    cv_cls();
+                    teken();
+                }
+                else {
+                    if (KeuzeResetSparingen.includes("N") || KeuzeResetSparingen.includes("n")) {}
+                    else {
+                        window.alert("Ongeldige invoer!");
+                    }
+                }
+            }
+        }
+    }
+}
+function halfSteensTeken() {
+    cv_cls();
+    berekenen_steen_plek_x();
+    stoneCount = 0; //Aantal stenen wordt gereset.
+    rijY = 0; //Rij y wordt gereset.
+    rijX = 0; //Rij x wordt gereset.
+    halfsteenSwitch = 0;
+    const canvas = document.getElementById("canvas");
+    if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
+        var ctx = canvas.getContext("2d");
+        ctx.scale(schaalSlider, schaalSlider);
+        ctx.strokeStyle = 'red';
+        let koppenMaat = steenDz + voegDx;
+        let lagenMaat = steenDy + voegDy;
+        for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
+            ++rijX;
+        }
+        for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {//Voor de y-as var && lagenMaat doe...
+            ++rijY;
+            for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
+                ++stoneCount;
+                ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
+            }
+        }
+    }
 }

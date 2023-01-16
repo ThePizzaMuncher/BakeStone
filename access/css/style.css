@@ -1,7 +1,7 @@
 * {
     /* border: 2px solid green */
 }
-.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1 {
+.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1, .zijnav_links {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
@@ -76,7 +76,9 @@ hr, .line_2 {
     align-items: center;
 }
 .zijnav_links {
-    height: 34vw;
+    height: 35vw;
+    background-color: rgba(255, 98, 0, 0.881);
+    overflow: auto;
 }
 .stone1 {
     background-image: url("../media/img/waalformaat.png");
@@ -93,12 +95,7 @@ hr, .line_2 {
 .stone1:hover, .stone2:hover, .stone3:hover, .patronen_Halfsteen:hover, .patronen_Tegel:hover, .logo:hover, .patronen:hover, .deur_1_textr:hover, .deur_2_textr:hover, .deur_3_textr:hover, .raam_1_textr:hover, .raam_2_textr:hover, .raam_3_textr:hover {
     cursor: pointer;
 }
-.simbol_cursor:hover {
-    cursor: progress;
-}
-.simbol_cursor {
-    font-size: 1.4vw;
-}
+
 .steen, .patronen_Halfsteen, .patronen_Tegel, .steen_p {
     font-size: 2vw;
     color: white;
@@ -139,7 +136,6 @@ p, .patronen_Halfsteen, .patronen_Tegel {
 .sparingen {
     width: 16vw;
     height: 26.5vw;
-    background-color: rgba(255, 98, 0, 0.881);
     justify-content: center;
     align-self: center;
     display: flex;
@@ -153,13 +149,16 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     justify-content: center;
     height: 3vw;
 }
-.slider p {
+.slider p, .flex_txt {
     color: white;
     justify-content: center;
     align-items: center;
     font-size: 1.2vw;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-shadow: 3px 3px 3px black;
+}
+.flex_txt {
+    font-size: 1.1vw;
 }
 .slider {
     width: 15vw;
@@ -262,13 +261,31 @@ p, .patronen_Halfsteen, .patronen_Tegel {
     border-bottom-right-radius: 1vw;
     margin-top: 0vw;
 }
-.Sparing_flex {
+.Sparing_flex, .Sparing_flex_txt {
     width: 16vw;
     height: 3vw;
     justify-content: space-around;
     align-items: center;
     display: flex;
     flex-direction: row;
+    margin-bottom: -1.4vw;
+    border: 0vw;
     /* border: 2px solid black; */
+}
+.Sparing_flex_txt {
+    margin-top: -5.5vw;
+    margin-bottom: 1vw;
+}
+.sparingMaten tr {
+    height: 10px;
+    border-spacing: 1vw;
+}
+.sparingMaten {
+    column-width: 1vw;
+    border-spacing: 0vw;
+}
+
+.maten {
+    display: inline;
 }
 /* @media empire */
