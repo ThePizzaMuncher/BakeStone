@@ -419,13 +419,13 @@ function halfSteensTeken() {
         for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {//Voor de y-as doe...
             ++rijY;
             if (rijY % 2 == 0) {//even
-                window.alert("even getal:" + yPos + ".");
+                //window.alert("even getal:" + yPos + ".");
                 for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Prefire berekening rijX
                     ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
                 }
             }
             else {//oneven
-                window.alert("oneven getal:" + yPos + ".");
+                //window.alert("oneven getal:" + yPos + ".");
                 for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Prefire berekening rijX
                     if (xPos == 0) {//eerste steen rij-x
                         ctx.drawImage(brickImage, xPos, yPos, (steenDx / 2), steenDy);
@@ -435,7 +435,7 @@ function halfSteensTeken() {
                         ctx.drawImage(brickImage, (xPos - - (steenDx / 2) - - voegDx), yPos, (steenDx / 2) - voegDx, steenDy); //Dé laatste steen.
                     }
                     else {
-                        window.alert("xPos:" + xPos + ". yPos:" + yPos + ".");
+                        //window.alert("xPos:" + xPos + ". yPos:" + yPos + ".");
                         ctx.drawImage(brickImage, (xPos - (steenDx / 2)), yPos, steenDx, steenDy);
                     }
                 }
