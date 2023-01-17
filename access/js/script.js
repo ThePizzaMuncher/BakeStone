@@ -389,10 +389,9 @@ function SparingMogelijkheid_en_teken() {
                     teken();
                 }
                 else {
-                    if (KeuzeResetSparingen.includes("N") || KeuzeResetSparingen.includes("n")) {}
-                    else {
-                        window.alert("Ongeldige invoer!");
-                    }
+                    if (!KeuzeResetSparingen.includes("n") && !KeuzeResetSparingen.includes("N")) {
+						window.alert("Ongeldige invoer!");
+					}
                 }
             }
         }
