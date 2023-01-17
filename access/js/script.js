@@ -70,6 +70,7 @@ function teken() {//Algemene teken functie.
                             else {
                                 halfSteensTeken();
                                 halfsteenSwitch += 1;
+                                halfSteensTeken()
                             }
                         break;
                     }
@@ -472,5 +473,6 @@ function halfSteensTeken() {
             }
         }
     }
+    rijY - 4;
     werkelijkeMuurAfmetingen();
 }
