@@ -58,7 +58,6 @@ function teken() {//Algemene teken functie.
         for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {//Voor de y-as var && lagenMaat doe...
             ++rijY;
             for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
-                ++stoneCount;
                 if (steenVerband == 1) {//Als steenVerband half-steen is doe dan...
                     halfsteenSwitch += 1;
                     switch (halfsteenSwitch) {
@@ -69,6 +68,7 @@ function teken() {//Algemene teken functie.
                     }
                 }
                 else {//Als steenVerband tegel is doe dan...
+                    stoneCount = (rijX * rijY);
                     if (knopPress == 1) {
                             setTimeout(() => {ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);}, 50);
                     }
@@ -402,11 +402,13 @@ function halfSteensTeken() {
     cv_cls();
     berekenen_steen_plek_x();
     werkelijkeMuurAfmetingen();
-    stoneCount = 0; //Aantal stenen wordt gereset.
-    rijY = 0; //Rij y wordt gereset.
-    rijX = 0; //Rij x wordt gereset.
+    //Begin resets variabelen.
+    stoneCount = 0;
+    rijY = 0; 
+    rijX = 0; 
     halfsteenSwitch = 0;
     xPos_2 = 0;
+    //Einde reset variabelen.
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
@@ -415,6 +417,7 @@ function halfSteensTeken() {
         let lagenMaat = steenDy + voegDy;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Prefire berekening rijX
             xPos_2 = xPos;
+            ++rijX;
         }
         for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {//Voor de y-as doe...
             ++rijY;
@@ -442,4 +445,5 @@ function halfSteensTeken() {
             }
         }
     }
+    rijY -= 4;
 }
