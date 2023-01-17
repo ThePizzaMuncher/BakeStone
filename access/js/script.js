@@ -31,8 +31,8 @@ let deurSoort = 0;
 let raamSoort = 0;
 let SPRHMIS = 0; //Sparingen Hoogte Maat In Stenen.
 let SPRBMIS = 0; //Sparingen Breedte Maat In Stenen.
-let SPRP_H_MIS = 0; //Sparing Positie Hoogte Maten In Stenen.
-let SPRP_NR_MIS = 0; //Sparing Positie Naar Rechts Maten In Stenen.
+let SPRP_H_MIS = 1; //Sparing Positie Hoogte Maten In Stenen.
+let SPRP_NR_MIS = 1; //Sparing Positie Naar Rechts Maten In Stenen.
 let werkelijkeBreedteMuur = 0;
 let werkelijkeHoogteMuur = 0;
 let KeuzeResetSparingen = "";
@@ -70,7 +70,6 @@ function teken() {//Algemene teken functie.
                             else {
                                 halfSteensTeken();
                                 halfsteenSwitch += 1;
-                                halfSteensTeken()
                             }
                         break;
                     }
@@ -323,10 +322,10 @@ function tekenSparing() {
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         if (knopPress == 1) {
-            setTimeout(() => {ctx.drawImage(deurTexture, ((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));}, 50);
+            setTimeout(() => {ctx.drawImage(/* Texture voor sparingen */deurTexture, /* xPos */((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), /* yPos */((werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1)))) - (SPRP_H_MIS * (steenDy - - voegDy)), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), /*  */(steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));}, 50);
         }
         else {
-            ctx.drawImage(deurTexture, ((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), (werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1))), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
+                              ctx.drawImage(deurTexture, ((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), ((werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1)))) - (SPRP_H_MIS * (steenDy - - voegDy)), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
         }
     }
 }
@@ -343,9 +342,12 @@ function sparingSoortCheck() {
 }
 function SparingMogelijkheid_en_teken() {
     krijgSparingsMaten();
-    if (zeroCheck == 0 && (currentDeuren < $maxDeuren()) && SPRBMIS <= rijX && SPRHMIS <= rijY && SPRP_NR_MIS <= 0) {
-        if (SPRP_NR_MIS == -1) {
+    if (zeroCheck == 0 && (currentDeuren < $maxDeuren()) && SPRBMIS <= rijX && SPRHMIS <= rijY) {
+        if (SPRP_NR_MIS <= -1) {
             window.alert("Voer een groter getal in voor de 'Positie naar rechts' voor de " + sparingSoortCheck() + ".")
+        }
+        if (SPRP_H_MIS <= -1) {
+            window.alert("Voer een groter getal in voor de 'Positie omhoog' voor de " + sparingSoortCheck() + ".")
         }
         if (SPRHMIS < 1 || SPRBMIS < 1) {
             if (SPRHMIS == 0 && SPRBMIS == 0) {
