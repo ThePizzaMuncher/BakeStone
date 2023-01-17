@@ -333,7 +333,7 @@ function krijgSparingsMaten() {
     SPRHMIS = Number(document.getElementById("$sparingHoogte").value);
     SPRBMIS = Number(document.getElementById("$sparingBreedte").value);
     SPRP_H_MIS = Number(document.getElementById("$sparingPositieHoogte").value);
-    SPRP_NR_MIS = Number(document.getElementById("$sparingPositieNaarRechts").value - 1);
+    SPRP_NR_MIS = Number(document.getElementById("$sparingPositieNaarRechts").value);
 }
 function sparingSoortCheck() {
     if (deurSoort > 0) {return "deur";}
