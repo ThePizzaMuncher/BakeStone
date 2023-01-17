@@ -288,4 +288,7 @@ p, .patronen_Halfsteen, .patronen_Tegel {
 .maten {
     display: inline;
 }
+.cursorLoad:hover {
+    cursor: progress;
+}
 /* @media empire */
