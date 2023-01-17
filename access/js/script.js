@@ -298,12 +298,15 @@ document.getElementById("deur_3").addEventListener("click", () => {
 });
 document.getElementById("raam_1").addEventListener("click", () => {
     raamSoort = 1;
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_2").addEventListener("click", () => {
     raamSoort = 2;
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_3").addEventListener("click", () => {
     raamSoort = 3;
+    SparingMogelijkheid_en_teken();
 });
 function werkelijkeMuurAfmetingen() {
     werkelijkeBreedteMuur = ((steenDx * rijX) - - (rijX * voegDx - voegDx));
