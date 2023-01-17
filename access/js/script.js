@@ -66,6 +66,7 @@ function teken() {//Algemene teken functie.
                             halfsteenSwitch += 1;
                         break;
                     }
+                    stoneCount = (rijX * rijY);
                 }
                 else {//Als steenVerband tegel is doe dan...
                     stoneCount = (rijX * rijY);
