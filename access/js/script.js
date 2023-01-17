@@ -333,10 +333,10 @@ function tekenSparing() {
     }
 }
 function krijgSparingsMaten() {
-    SPRHMIS = Number(document.getElementById("$sparingHoogte").value);
-    SPRBMIS = Number(document.getElementById("$sparingBreedte").value);
-    SPRP_H_MIS = Number(document.getElementById("$sparingPositieHoogte").value);
-    SPRP_NR_MIS = Number(document.getElementById("$sparingPositieNaarRechts").value);
+    SPRHMIS = Math.round(document.getElementById("$sparingHoogte").value / steenDy);
+    SPRBMIS = Math.round(document.getElementById("$sparingBreedte").value / steenDx);
+    SPRP_H_MIS = Math.round(document.getElementById("$sparingPositieHoogte").value / steenDy);
+    SPRP_NR_MIS = Math.round(document.getElementById("$sparingPositieNaarRechts").value / steenDx);
 }
 function sparingSoortCheck() {
     if (deurSoort > 0) {return "deur";}
