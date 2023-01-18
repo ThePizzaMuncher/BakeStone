@@ -324,10 +324,10 @@ function tekenSparing() {
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         if (knopPress == 1) {
-            setTimeout(() => {ctx.drawImage(/* Texture voor sparingen */deurTexture, /* xPos */((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), /* yPos */((werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1)))) - (SPRP_H_MIS * (steenDy - - voegDy)), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), /*  */(steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));}, 50);
+            setTimeout(() => {ctx.drawImage(deurTexture, ((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), ((werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1)))) - (SPRP_H_MIS * (steenDy - - voegDy)), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));}, 50);
         }
         else {
-                              ctx.drawImage(deurTexture, ((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), ((werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1)))) - (SPRP_H_MIS * (steenDy - - voegDy)), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
+            ctx.drawImage(deurTexture, ((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), ((werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1)))) - (SPRP_H_MIS * (steenDy - - voegDy)), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
         }
     }
 }
