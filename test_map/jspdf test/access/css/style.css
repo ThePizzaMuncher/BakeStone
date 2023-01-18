@@ -1,0 +1,33 @@
+html {
+    background-color: gray;
+}
+#canvas {
+    aspect-ratio: auto;
+    width: 30vw;
+    height: 20vw;
+    border: 0.15vw solid black;
+}
+.flexRail {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.knop {
+    margin-top: 3vw;
+    height: 2vw;
+    width: 4vw;
+    background-color: rgba(0, 128, 0, 0.692);
+    border-bottom-left-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+h4 {
+    color: white;
+    text-shadow: 0.3vw 0.3vw 0.3vw black;
+    font-size: 1vw;
+}
