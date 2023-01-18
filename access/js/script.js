@@ -27,8 +27,7 @@ let ArrHalfsteen = [];
 let steensoort = "waalformaat";
 let maxDeuren = 0;
 let currentDeuren = 0;
-let deurSoort = 0;
-let raamSoort = 0;
+let sparingSoort = 0;
 let SPRHMIS = 0; //Sparingen Hoogte Maat In Stenen.
 let SPRBMIS = 0; //Sparingen Breedte Maat In Stenen.
 let SPRP_H_MIS = 1; //Sparing Positie Hoogte Maten In Stenen.
@@ -285,27 +284,27 @@ function berekenen_steen_plek_x() {
     }
 }
 document.getElementById("deur_1").addEventListener("click", () => {
-    deurSoort = 1;
+    sparingSoort = 1;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_2").addEventListener("click", () => {
-    deurSoort = 2;
+    sparingSoort = 2;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_3").addEventListener("click", () => {
-    deurSoort = 3;
+    sparingSoort = 3;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_1").addEventListener("click", () => {
-    raamSoort = 1;
+    sparingSoort = 4;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_2").addEventListener("click", () => {
-    raamSoort = 2;
+    sparingSoort = 5;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_3").addEventListener("click", () => {
-    raamSoort = 3;
+    sparingSoort = 6;
     SparingMogelijkheid_en_teken();
 });
 function werkelijkeMuurAfmetingen() {
@@ -339,9 +338,9 @@ function krijgSparingsMaten() {
     SPRP_NR_MIS = Math.round(document.getElementById("$sparingPositieNaarRechts").value / steenDx);
 }
 function sparingSoortCheck() {
-    if (deurSoort > 0) {return "deur";}
-    if (raamSoort > 0) {return "raam";}
-    else               {return "sparing";}
+    if (sparingSoort >= 1 && sparingSoort <= 3) {return "deur";}
+    if (sparingSoort >= 4 && sparingSoort <= 6) {return "raam";}
+    else                                        {return "sparing";}
 }
 function SparingMogelijkheid_en_teken() {
     krijgSparingsMaten();
@@ -352,15 +351,15 @@ function SparingMogelijkheid_en_teken() {
         if (SPRP_H_MIS <= -1) {
             window.alert("Voer een groter getal in voor de 'Positie omhoog' voor de " + sparingSoortCheck() + ".")
         }
-        if (SPRHMIS < 1 || SPRBMIS < 1) {
-            if (SPRHMIS == 0 && SPRBMIS == 0) {
+        if (SPRHMIS <= 0 || SPRBMIS <= 0) {
+            if (SPRHMIS <= 0 && SPRBMIS <= 0) {
                 window.alert("Voer een grotere breedte en hoogte in voor de " + sparingSoortCheck() + ".");
             }
             else {
-                if (SPRHMIS == 0) {
+                if (SPRHMIS <= 0) {
                     window.alert("Voer een grotere hoogte in voor de " + sparingSoortCheck() + ".");
                 }
-                if (SPRBMIS == 0) {
+                if (SPRBMIS <= 0) {
                     window.alert("Voer een grotere breedte in voor de " + sparingSoortCheck() + ".");
                 }
                 else {
@@ -369,7 +368,7 @@ function SparingMogelijkheid_en_teken() {
             }
         }
         else {
-            switch (deurSoort) {
+            switch (sparingSoort) {
                 case 1:
                     deurTexture.src = "access/media/img/deur_1.png";
                 break;
@@ -379,15 +378,13 @@ function SparingMogelijkheid_en_teken() {
                 case 3:
                     deurTexture.src = "access/media/img/deur_3.png";
                 break;
-            }
-            switch (raamSoort) {
-                case 1:
+                case 4:
                     deurTexture.src = "access/media/img/raam_1.png";
                 break;
-                case 2:
+                case 5:
                     deurTexture.src = "access/media/img/raam_2.png";
                 break;
-                case 3:
+                case 6:
                     deurTexture.src = "access/media/img/raam_3.png";
                 break;
             }
