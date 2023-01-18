@@ -107,7 +107,7 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
     muur_B_en_H_check();
     SparingReset();
     werkelijkeMuurAfmetingen();
-    if (zeroCheck == 0) {//Zero check.
+    if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {//Zero check.
         knopPress = 1;
         steensoort = "waalformaat";
         cv_cls();
@@ -124,7 +124,7 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
     muur_B_en_H_check();
     SparingReset();
     werkelijkeMuurAfmetingen();
-    if (zeroCheck == 0) {//Zero check.
+    if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {//Zero check.
         knopPress = 1;
         steensoort = "dikformaat";
         cv_cls();
@@ -140,7 +140,7 @@ document.getElementById("#stone3").addEventListener("click", () => {//Knop steen
     muur_B_en_H_check();
     werkelijkeMuurAfmetingen();
     SparingReset();
-    if (zeroCheck == 0) {//Zero check.
+    if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {//Zero check.
         knopPress = 1;
         steensoort = "ysselformaat";
         cv_cls();
@@ -197,7 +197,7 @@ function zet_schaal() {//Zet schaal op origin als zero check waar is, anders sch
     cv_cls();
     get_B_en_H();
     muur_B_en_H_check();
-    if (zeroCheck == 0) {//Als zero check niet is doe dan...
+    if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {//Als zero check niet is doe dan...
         teken();
     }
     else {//Als zero check waar is doe dan...
@@ -208,7 +208,7 @@ function zet_schaal() {//Zet schaal op origin als zero check waar is, anders sch
 function half_steen_verband() {
     get_B_en_H();
     muur_B_en_H_check();
-    if (zeroCheck == 0) {
+    if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {
         cv_cls();
         steenVerband = 1;
         knopPress = 1;
@@ -232,7 +232,7 @@ function tegel_verband() {
 document.getElementById("$hoogte").addEventListener("change", () => {
     get_B_en_H();
     muur_B_en_H_check();
-    if (zeroCheck == 0) {
+    if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {
         cv_cls();
         teken();
     }
@@ -240,7 +240,7 @@ document.getElementById("$hoogte").addEventListener("change", () => {
 document.getElementById("$breedte").addEventListener("change", () => {
     get_B_en_H();
     muur_B_en_H_check();
-    if (zeroCheck == 0) {
+    if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {
         cv_cls();
         teken();
     }
@@ -477,4 +477,22 @@ function halfSteensTeken() {
     }
     rijY - 4;
     werkelijkeMuurAfmetingen();
+}
+function muurAfmetingenErrorCheck() {
+    if (muurDx > 11000 && muurDy > 3000) {
+        window.alert("Muur is te hoog en te breed. (Max hoogte: 3000mm, breedte: 11000mm)");
+        return "error";
+    }
+    else {
+        if (muurDx > 11000) {
+            window.alert("Muur is te breed. (Max breedte: 11000mm)");
+            return "error";
+        }
+        else {
+            if (muurDy > 3000) {
+                window.alert("Muur is te hoog. (Max hoogte: 3000mm)");
+                return "error";
+            }
+        }
+    }
 }
