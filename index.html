@@ -2,13 +2,12 @@
 <html>
     <head>
         <title>BGDD - Baksteen Calculator</title>
-        <meta name="author" content="Dijkstra draisma, Bakestone INC">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="access/media/img/favicon.ico">
-        <link rel="stylesheet" href="access/css/style.css">
-        <script src="access/js/script.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js" defer></script>
-        <script src="access/Stuk-jszip-2ceb998/dist/jszip.js" defer></script>
+        <meta name="author" content="Bouw Groep Dijkstra Draisma, Bakestone INC"> <!-- Authors -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive -->
+        <link rel="icon" type="image/x-icon" href="access/media/img/favicon.ico"> <!-- Favicon -->
+        <link rel="stylesheet" href="access/css/style.css"> <!-- Style file -->
+        <script src="access/js/script.js" defer></script><!-- Eigen code -->
+        <script src="access/js/jspdf.js" defer></script><!-- jsPdf lib -->
     </head>
     <body>
         <div class="logo" onclick="BGDD_website()" title="Ga naar de website van BGDD"></div> <!-- Logo links boven -->
@@ -77,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <canvas id="canvas" height="2000" width="4000"></canvas>
+            <canvas id="canvas" height="2000" width="4000"></canvas> <!-- Canvas -->
             <div class="zijnav"> <!-- Zij-nav rechts -->
                 <div class="patronen_Halfsteen" onclick="half_steen_verband()" id="$halfsteen"><p class="steen_p">Half steen verband</p></div>
                 <table>

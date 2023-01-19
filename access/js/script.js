@@ -5,12 +5,12 @@ let voegDx = 10;
 let voegDy = 10;
 let muurDx = 500;
 let muurDy = 300;
+let sparingCommand = 0;
 let om_en_om = 0;
 let schaalSlider = 5.6;
 let zeroCheck = 0;
 let brickImage_ONLY_onload = 0;
 let knopPress = 0;
-let ACOBH = 0; //Aantal Clicks On Button Halfsteen
 let stoneCount = 0;
 let stoneCountPreNum = 0;
 let steenVerband = 0;
@@ -212,9 +212,6 @@ function half_steen_verband() {
         document.getElementById("$halfsteen").style.backgroundColor = "rgba(25, 35, 230, 0.711)";
         document.getElementById("$tegel").style.backgroundColor = "rgb(0, 15, 186)";
         teken();
-        if (ACOBH > 1) {
-            document.getElementById("$stone_count").innerHTML = (stoneCount);
-        }
     }
 }
 function tegel_verband() {
@@ -323,19 +320,20 @@ function SparingReset() {
 function tekenSparing() {
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
+        sparingCommand = ctx.drawImage(deurTexture, /* x-as */SPRP_NR_MIS, /* y-as */(werkelijkeHoogteMuur - SPRHMIS), /* breedte */SPRBMIS, /* hoogte */SPRHMIS);
         if (knopPress == 1) {
-            setTimeout(() => {ctx.drawImage(/* Texture voor sparingen */deurTexture, ((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), ((werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1)))) - (SPRP_H_MIS * (steenDy - - voegDy)), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), /*  */(steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));}, 50);
+            setTimeout(() => {sparingCommand}, 100);
         }
         else {
-                              ctx.drawImage(deurTexture, ((SPRP_NR_MIS * steenDx) - - (voegDx * SPRP_NR_MIS)), ((werkelijkeHoogteMuur - (steenDy * SPRHMIS) - (voegDy * (SPRHMIS - 1)))) - (SPRP_H_MIS * (steenDy - - voegDy)), ((steenDx * SPRBMIS) - - (voegDx * (SPRBMIS - 1))), (steenDy * SPRHMIS) - - (voegDy * (SPRHMIS - 1)));
+            sparingCommand;
         }
     }
 }
 function krijgSparingsMaten() {
-    SPRHMIS = Math.round(document.getElementById("$sparingHoogte").value / steenDy);
-    SPRBMIS = Math.round(document.getElementById("$sparingBreedte").value / steenDx);
-    SPRP_H_MIS = Math.round(document.getElementById("$sparingPositieHoogte").value / steenDy);
-    SPRP_NR_MIS = Math.round(document.getElementById("$sparingPositieNaarRechts").value / steenDx);
+    SPRHMIS = Number(document.getElementById("$sparingHoogte").value);
+    SPRBMIS = Number(document.getElementById("$sparingBreedte").value);
+    SPRP_H_MIS = Number(document.getElementById("$sparingPositieHoogte").value);
+    SPRP_NR_MIS = Number(document.getElementById("$sparingPositieNaarRechts").value);
 }
 function sparingSoortCheck() {
     if (sparingSoort >= 1 && sparingSoort <= 3) {return "deur";}
@@ -344,7 +342,7 @@ function sparingSoortCheck() {
 }
 function SparingMogelijkheid_en_teken() {
     krijgSparingsMaten();
-    if (zeroCheck == 0 && (currentDeuren < $maxDeuren()) && SPRBMIS <= rijX && SPRHMIS <= rijY) {
+    if (zeroCheck == 0 && (currentDeuren < $maxDeuren()) && SPRBMIS <= werkelijkeBreedteMuur && SPRHMIS <= werkelijkeHoogteMuur) {
         if (SPRP_NR_MIS <= -1) {
             window.alert("Voer een groter getal in voor de 'Positie naar rechts' voor de " + sparingSoortCheck() + ".")
         }
@@ -368,7 +366,7 @@ function SparingMogelijkheid_en_teken() {
             }
         }
         else {
-            switch (sparingSoort) {
+            switch (sparingSoort) {//deurTexture src setter.
                 case 1:
                     deurTexture.src = "access/media/img/deur_1.png";
                 break;
@@ -496,9 +494,8 @@ function muurAfmetingenErrorCheck() {
         }
     }
 }
-document.getElementById("$knop").addEventListener("click", () => {
-    cv_cls();
-    let txtHeight = 0;
+document.getElementById("$knop").addEventListener("click", () => {//Pdf download
+    werkelijkeMuurAfmetingen();
     let centerTxt = 148.50004166666665;
     let ctx = document.getElementById("canvas");
     const canvas = document.querySelector('canvas');
@@ -506,19 +503,24 @@ document.getElementById("$knop").addEventListener("click", () => {
     const context = canvas.getContext('2d');
     const {jsPDF} = window.jspdf;
     const pdf = new jsPDF('l');
-    teken();
     let width_pdf_png = pdf.internal.pageSize.getWidth();
-    console.log("width:" + width_pdf_png);
     let imgData = canvas.toDataURL("image/jpeg", 1.0); //oare metode
     //Pagina 1.
     pdf.setTextColor(0, 0, 0); //text zwart.
     pdf.setFontSize(40);
-    pdf.text("Baksteen calculator", centerTxt, 15, null, null, "center");
+    pdf.text("Baksteen calculator", centerTxt, 15, null, null, "center", 'https://google.com');
+    pdf.setFontSize(17);
+    pdf.text("Statestieken van uw muur", centerTxt, 30, null, null, "center");
     pdf.setFontSize(20);
-    pdf.text("Bakestone", centerTxt, 35, null, null, "center");
-    pdf.text("Bakestone", centerTxt, 40, null, null, "center");
+    pdf.text("Steensoort: ", 30, 80);
+    pdf.text("" + steensoort + ".", 77, 80);
+    pdf.text("Breedte muur: ", 30, 90);
+    pdf.text("" + werkelijkeBreedteMuur + "mm.", 80, 90);
+    pdf.text("Hoogte muur: ", 30, 100);
+    pdf.text("" + werkelijkeHoogteMuur + "mm.", 80, 100);
     pdf.addPage();
     //Pagina 2.
-    pdf.addImage(imgData, 'JPEG', 0, 0, width_pdf_png, 148.50004166666665);
+    pdf.addImage(imgData, 'JPEG', 0, 0, width_pdf_png, centerTxt);
+    //Einde PDF generation.
     pdf.save("Muur.pdf");
 });
