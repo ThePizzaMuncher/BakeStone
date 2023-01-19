@@ -497,6 +497,7 @@ function muurAfmetingenErrorCheck() {
     }
 }
 document.getElementById("$knop").addEventListener("click", () => {
+    cv_cls();
     let ctx = document.getElementById("canvas");
     const canvas = document.querySelector('canvas');
     const download = document.querySelector('button');
