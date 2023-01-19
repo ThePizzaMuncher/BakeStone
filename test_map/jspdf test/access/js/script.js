@@ -4,11 +4,8 @@ document.getElementById("$knop").addEventListener("click", () => {
     const canvas = document.querySelector('canvas');
     const download = document.querySelector('button');
     const context = canvas.getContext('2d');
-    const {
-      jsPDF
-    } = window.jspdf;
+    const {jsPDF} = window.jspdf;
     const pdf = new jsPDF();
-    
     context.fillStyle = 'yellow';
     context.fillRect(0, 0, 100, 100);
     const imgData = canvas.toDataURL("image/jpeg", 1.0);
@@ -17,5 +14,5 @@ document.getElementById("$knop").addEventListener("click", () => {
     pdf.setTextColor(0, 0, 255); //text blauw.
     let tekst = "Goedendag!";
     pdf.text(tekst, 105, 10, null, null, "center");
-    pdf.save("Bakestone_wall.pdf");
+    pdf.save("Muur.pdf");
 });
