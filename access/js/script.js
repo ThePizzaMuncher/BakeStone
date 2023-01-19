@@ -10,9 +10,9 @@ let schaalSlider = 5.6;
 let zeroCheck = 0;
 let brickImage_ONLY_onload = 0;
 let knopPress = 0;
+let ACOBH = 0; //Aantal Clicks On Button Halfsteen
 let stoneCount = 0;
 let stoneCountPreNum = 0;
-let stoneCountHalf = 0;
 let steenVerband = 0;
 let rijY = 0;
 let rijX = 0;
@@ -42,7 +42,6 @@ brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen text
 function teken() {//Algemene teken functie.
     berekenen_steen_plek_x();
     stoneCount = 0; //Aantal stenen wordt gereset.
-    stoneCountHalf = 0; //Aantal halve stenen worden gereset.
     rijY = 0; //Rij y wordt gereset.
     rijX = 0; //Rij x wordt gereset.
     halfsteenSwitch = 0;
@@ -50,7 +49,6 @@ function teken() {//Algemene teken functie.
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
         ctx.scale(schaalSlider, schaalSlider);
-        ctx.strokeStyle = 'red';
         let koppenMaat = steenDz + voegDx;
         let lagenMaat = steenDy + voegDy;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
@@ -68,7 +66,6 @@ function teken() {//Algemene teken functie.
                             }
                             else {
                                 halfSteensTeken();
-                                halfsteenSwitch += 1;
                             }
                         break;
                     }
@@ -215,6 +212,9 @@ function half_steen_verband() {
         document.getElementById("$halfsteen").style.backgroundColor = "rgba(25, 35, 230, 0.711)";
         document.getElementById("$tegel").style.backgroundColor = "rgb(0, 15, 186)";
         teken();
+        if (ACOBH > 1) {
+            document.getElementById("$stone_count").innerHTML = (stoneCount);
+        }
     }
 }
 function tegel_verband() {
@@ -475,7 +475,7 @@ function halfSteensTeken() {
             }
         }
     }
-    rijY - 4;
+    rijY - 0;
     werkelijkeMuurAfmetingen();
 }
 function muurAfmetingenErrorCheck() {
@@ -498,19 +498,27 @@ function muurAfmetingenErrorCheck() {
 }
 document.getElementById("$knop").addEventListener("click", () => {
     cv_cls();
+    let txtHeight = 0;
+    let centerTxt = 148.50004166666665;
     let ctx = document.getElementById("canvas");
     const canvas = document.querySelector('canvas');
     const download = document.querySelector('button');
     const context = canvas.getContext('2d');
     const {jsPDF} = window.jspdf;
-    const pdf = new jsPDF();
-    context.fillStyle = 'yellow';
-    context.fillRect(0, 0, 100, 100);
-    const imgData = canvas.toDataURL("image/jpeg", 1.0);
-    pdf.addImage(imgData, 'JPEG', 0, 0);
+    const pdf = new jsPDF('l');
+    teken();
+    let width_pdf_png = pdf.internal.pageSize.getWidth();
+    console.log("width:" + width_pdf_png);
+    let imgData = canvas.toDataURL("image/jpeg", 1.0); //oare metode
+    //Pagina 1.
+    pdf.setTextColor(0, 0, 0); //text zwart.
+    pdf.setFontSize(40);
+    pdf.text("Baksteen calculator", centerTxt, 15, null, null, "center");
+    pdf.setFontSize(20);
+    pdf.text("Bakestone", centerTxt, 35, null, null, "center");
+    pdf.text("Bakestone", centerTxt, 40, null, null, "center");
     pdf.addPage();
-    pdf.setTextColor(0, 0, 255); //text blauw.
-    let tekst = "Goedendag!";
-    pdf.text(tekst, 105, 10, null, null, "center");
+    //Pagina 2.
+    pdf.addImage(imgData, 'JPEG', 0, 0, width_pdf_png, 148.50004166666665);
     pdf.save("Muur.pdf");
 });

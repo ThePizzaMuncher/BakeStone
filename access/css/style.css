@@ -34,6 +34,7 @@ hr, .line_2 {
     width: 60vw;
     height: 30vw;
     aspect-ratio: auto;
+    background-color: rgb(255, 255, 255);
 }
 .flex {
     display: flex;
