@@ -24,6 +24,7 @@ let halfsteenSwitch = 0;
 let matenError = 0;
 let variabele_aan_of_uit = 0;
 let ArrHalfsteen = [];
+let sparingenArr = [];
 let steensoort = "waalformaat";
 let maxDeuren = 0;
 let currentDeuren = 0;
@@ -37,6 +38,7 @@ let werkelijkeHoogteMuur = 0;
 let KeuzeResetSparingen = "";
 let brickImage = new Image();
 let deurTexture = new Image();
+let eersteSparing = 0;
 let laagVoorHalfsteen = 0;
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
@@ -321,6 +323,9 @@ function tekenSparing() {
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         sparingCommand = ctx.drawImage(deurTexture, /* x-as */SPRP_NR_MIS, /* y-as */(werkelijkeHoogteMuur - SPRHMIS), /* breedte */SPRBMIS, /* hoogte */SPRHMIS);
+        for (let quickvaremm = 1; quickvaremm <= currentDeuren; ++quickvaremm) {
+            sparingenArr[quickvaremm] = {"texture": deurTexture, "x-as": SPRP_NR_MIS, "y-as": (werkelijkeHoogteMuur - SPRHMIS), "breedte": SPRBMIS, "hoogte": SPRHMIS}
+        }
         if (knopPress == 1) {
             setTimeout(() => {sparingCommand}, 100);
         }
@@ -328,6 +333,16 @@ function tekenSparing() {
             sparingCommand;
         }
     }
+    ++eersteSparing;
+    if (eersteSparing == 1) {
+        deurTexture.onload = () => {
+            sparingArrReset();
+            tekenSparing();
+        }
+    }
+}
+function sparingArrReset() {
+    sparingenArr = [];
 }
 function krijgSparingsMaten() {
     SPRHMIS = Number(document.getElementById("$sparingHoogte").value);
