@@ -321,7 +321,7 @@ function SparingReset() {
 function tekenSparing() {
     deurTexture.onload = () => {
         if (canvas.getContext) {
-            //sparingenArr.push([{"texture": deurTexture, "x-as": SPRP_NR_MIS, "y-as": (werkelijkeHoogteMuur - SPRHMIS), "breedte": SPRBMIS, "hoogte": SPRHMIS}]);
+            sparingenArr.push([{"texture": deurTexture, "x-as": SPRP_NR_MIS, "y-as": (werkelijkeHoogteMuur - SPRHMIS), "breedte": SPRBMIS, "hoogte": SPRHMIS}]);
             var ctx = canvas.getContext("2d");
             sparingCommand = ctx.drawImage(deurTexture, /* x-as */SPRP_NR_MIS, /* y-as */(werkelijkeHoogteMuur - SPRHMIS), /* breedte */SPRBMIS, /* hoogte */SPRHMIS);
             if (knopPress == 1) {
