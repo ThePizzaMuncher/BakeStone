@@ -38,7 +38,6 @@ let werkelijkeHoogteMuur = 0;
 let KeuzeResetSparingen = "";
 let brickImage = new Image();
 let deurTexture = new Image();
-let eersteSparing = 0;
 let laagVoorHalfsteen = 0;
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 function teken() {//Algemene teken functie.
@@ -320,24 +319,17 @@ function SparingReset() {
     currentDeuren = 0;
 }
 function tekenSparing() {
-    if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
-        sparingCommand = ctx.drawImage(deurTexture, /* x-as */SPRP_NR_MIS, /* y-as */(werkelijkeHoogteMuur - SPRHMIS), /* breedte */SPRBMIS, /* hoogte */SPRHMIS);
-        for (let quickvaremm = 1; quickvaremm <= currentDeuren; ++quickvaremm) {
-            sparingenArr[quickvaremm] = {"texture": deurTexture, "x-as": SPRP_NR_MIS, "y-as": (werkelijkeHoogteMuur - SPRHMIS), "breedte": SPRBMIS, "hoogte": SPRHMIS}
-        }
-        if (knopPress == 1) {
-            setTimeout(() => {sparingCommand}, 100);
-        }
-        else {
-            sparingCommand;
-        }
-    }
-    ++eersteSparing;
-    if (eersteSparing == 1) {
-        deurTexture.onload = () => {
-            sparingArrReset();
-            tekenSparing();
+    deurTexture.onload = () => {
+        if (canvas.getContext) {
+            //sparingenArr.push([{"texture": deurTexture, "x-as": SPRP_NR_MIS, "y-as": (werkelijkeHoogteMuur - SPRHMIS), "breedte": SPRBMIS, "hoogte": SPRHMIS}]);
+            var ctx = canvas.getContext("2d");
+            sparingCommand = ctx.drawImage(deurTexture, /* x-as */SPRP_NR_MIS, /* y-as */(werkelijkeHoogteMuur - SPRHMIS), /* breedte */SPRBMIS, /* hoogte */SPRHMIS);
+            if (knopPress == 1) {
+                setTimeout(() => {sparingCommand}, 100);
+            }
+            else {
+                sparingCommand;
+            }
         }
     }
 }
