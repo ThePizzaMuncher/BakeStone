@@ -86,7 +86,8 @@ function teken() {//Algemene teken functie.
     }
     document.getElementById("$stone_count").innerHTML = stoneCount;
     if (deurTexture.src != '') {
-        tekenSparing();
+        --currentDeuren;
+        SparingMogelijkheid_en_teken();
     }
 }
 brickImage.onload = () => {//Hier wordt getekend waneer de brickImage ready is om een img te printen.
@@ -321,14 +322,15 @@ function SparingReset() {
 function tekenSparing() {
     deurTexture.onload = () => {
         if (canvas.getContext) {
-            sparingenArr.push([{"texture": deurTexture, "x-as": SPRP_NR_MIS, "y-as": (werkelijkeHoogteMuur - SPRHMIS), "breedte": SPRBMIS, "hoogte": SPRHMIS}]);
+            sparingenArr.push({"texture": deurTexture, "xAs": SPRP_NR_MIS, "yAs": (werkelijkeHoogteMuur - SPRHMIS), "breedte": SPRBMIS, "hoogte": SPRHMIS});
             var ctx = canvas.getContext("2d");
-            sparingCommand = ctx.drawImage(deurTexture, /* x-as */SPRP_NR_MIS, /* y-as */(werkelijkeHoogteMuur - SPRHMIS), /* breedte */SPRBMIS, /* hoogte */SPRHMIS);
-            if (knopPress == 1) {
-                setTimeout(() => {sparingCommand}, 100);
-            }
-            else {
-                sparingCommand;
+            for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
+                if (knopPress == 1) {
+                    setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
+                }
+                else {
+                    ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);;
+                }
             }
         }
     }
