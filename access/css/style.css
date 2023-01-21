@@ -1,7 +1,7 @@
 * {
     /* border: 2px solid green */
 }
-.stone1, .stone2, .stone3,  .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1, .zijnav_links, .verbanden_knop, .verband_tegel, .verband_half {
+.stone1, .stone2, .stone3,  .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1, .zijnav_links, .verbanden_knop, .verband_tegel, .verband_half, .pdf {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
@@ -93,7 +93,7 @@ hr, .line_2 {
     background-image: url("../media/img/ysselformaat.png");
     background-size: 100%;
 }
-.stone1:hover, .stone2:hover, .stone3:hover, .patronen_Halfsteen:hover, .patronen_Tegel:hover, .logo:hover, .patronen:hover, .deur_1_textr:hover, .deur_2_textr:hover, .deur_3_textr:hover, .raam_1_textr:hover, .raam_2_textr:hover, .raam_3_textr:hover {
+.stone1:hover, .stone2:hover, .stone3:hover, .patronen_Halfsteen:hover, .patronen_Tegel:hover, .logo:hover, .patronen:hover, .deur_1_textr:hover, .deur_2_textr:hover, .deur_3_textr:hover, .raam_1_textr:hover, .raam_2_textr:hover, .raam_3_textr:hover, .pdf:hover {
     cursor: pointer;
 }
 
@@ -286,8 +286,8 @@ p {
 }
 .verbanden_knop {
     color: white;
-    width: 10vw;
-    height: 3vw;
+    width: 11vw;
+    height: 4vw;
     background-color: rgb(0, 45, 98);
     font-size: 1.2vw;
     display: flex;
@@ -305,6 +305,7 @@ p {
     min-width: 10vw;
     z-index: 1;
     height: 5vw;
+    width: 11vw;
 }
 .verbanden_dropdown:hover .verbanden_content {
     display: flex;
@@ -315,12 +316,12 @@ p {
 .verbanden_knop:hover {
     background-color: rgba(0, 46, 98, 0.591);
 }
-.verbanden_content p {
+.verbanden_content p, .pdf p {
     color: white;
     font-size: 1.2vw;
     text-shadow: 0.25vw 0.25vw 0.25vw black;
 }
-.verband_tegel, .verband_half {
+.verband_tegel, .verband_half, .pdf {
     height: 2.5vw;
     width: 100%;
     justify-content: center;
@@ -330,5 +331,13 @@ p {
 }
 .verband_tegel {
     background-color: rgba(25, 35, 230, 0.711);
+}
+.pdf {
+    background-color: rgba(0, 46, 98, 0.932);
+    height: 4vw;
+    width: 11vw;
+}
+.pdf:hover {
+    background-color: rgba(0, 46, 98, 0.729);
 }
 /* @media empire */
