@@ -78,7 +78,13 @@
             </div>
             <canvas id="canvas" height="2000" width="4000"></canvas> <!-- Canvas -->
             <div class="zijnav"> <!-- Zij-nav rechts -->
-                <div class="patronen_Halfsteen" onclick="half_steen_verband()" id="$halfsteen"><p class="steen_p">Half steen verband</p></div>
+                <div class="verbanden_dropdown">
+                    <div class="verbanden_knop">Steen verbanden</div>
+                    <div class="verbanden_content">
+                        <div class="verband_tegel" onclick="tegel_verband()" id="$tegel"><p>Tegelverband</p></div>
+                        <div class="verband_half" onclick="half_steen_verband()" id="$halfsteen"><p>Halfsteens verband</p></div>
+                    </div>
+                </div>
                 <table>
                     <tr>
                         <td><p class="maten">Voeg hoogte:&nbsp;</p></td>
@@ -91,7 +97,6 @@
                         <td><p class="maten">(in mm)</p></td>
                     </tr>
                 </table>
-                <div class="patronen_Tegel" onclick="tegel_verband()" id="$tegel"><p class="steen_p">Tegel verband</p></div>
             </div>
             <div class="navbar_line"><hr class="line_2"></div></div> <!-- streep door de div's -->
         </div>

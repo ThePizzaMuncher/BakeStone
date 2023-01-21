@@ -1,7 +1,7 @@
 * {
     /* border: 2px solid green */
 }
-.stone1, .stone2, .stone3, .patronen_Halfsteen, .patronen_Tegel, .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1, .zijnav_links {
+.stone1, .stone2, .stone3,  .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1, .zijnav_links, .verbanden_knop, .verband_tegel, .verband_half {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
@@ -97,7 +97,7 @@ hr, .line_2 {
     cursor: pointer;
 }
 
-.steen, .patronen_Halfsteen, .patronen_Tegel, .steen_p {
+.steen,  .steen_p {
     font-size: 2vw;
     color: white;
     text-shadow: 3px 3px 3px black;
@@ -106,16 +106,8 @@ hr, .line_2 {
     width: 4vw;
     cursor: grab;
 }
-p, .patronen_Halfsteen, .patronen_Tegel {
+p {
     font-size: 1.06vw;
-}
-.patronen_Halfsteen, .patronen_Tegel {
-    width: 14vw;
-    height: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(0, 15, 186);
 }
 .patronen_Tegel {
     background-color: rgba(25, 35, 230, 0.711);
@@ -291,5 +283,52 @@ p, .patronen_Halfsteen, .patronen_Tegel {
 }
 .cursorLoad:hover {
     cursor: progress;
+}
+.verbanden_knop {
+    color: white;
+    width: 10vw;
+    height: 3vw;
+    background-color: rgb(0, 45, 98);
+    font-size: 1.2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.verbanden_dropdown {
+    position: relative;
+    display: inline-block;
+}
+.verbanden_content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0);
+    min-width: 10vw;
+    z-index: 1;
+    height: 5vw;
+}
+.verbanden_dropdown:hover .verbanden_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.verbanden_knop:hover {
+    background-color: rgba(0, 46, 98, 0.591);
+}
+.verbanden_content p {
+    color: white;
+    font-size: 1.2vw;
+    text-shadow: 0.25vw 0.25vw 0.25vw black;
+}
+.verband_tegel, .verband_half {
+    height: 2.5vw;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: rgb(0, 15, 186);
+}
+.verband_tegel {
+    background-color: rgba(25, 35, 230, 0.711);
 }
 /* @media empire */
