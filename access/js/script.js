@@ -40,6 +40,8 @@ let brickImage = new Image();
 let deurTexture = new Image();
 let laagVoorHalfsteen = 0;
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
+console.log("%cBaksteen Calculator", "color: lightblue; font-size: 4vw;");
+console.log("%cBakestone INC | BGDD", "color: green; font-size: 1.2vw;");
 function teken() {//Algemene teken functie.
     berekenen_steen_plek_x();
     stoneCount = 0; //Aantal stenen wordt gereset.
@@ -104,7 +106,6 @@ function BGDD_website() {//Doorverwijzing naar BGDD website.
 document.getElementById("#stone1").addEventListener("click", () => {//Knop steen 1 listener. (Waalformaat baksteen)
     get_B_en_H();
     muur_B_en_H_check();
-    SparingReset();
     werkelijkeMuurAfmetingen();
     if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {//Zero check.
         knopPress = 1;
@@ -121,7 +122,6 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
 document.getElementById("#stone2").addEventListener("click", () => {//Knop steen 2 listener. (Dikformaat baksteen)
     get_B_en_H();
     muur_B_en_H_check();
-    SparingReset();
     werkelijkeMuurAfmetingen();
     if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {//Zero check.
         knopPress = 1;
@@ -138,7 +138,6 @@ document.getElementById("#stone3").addEventListener("click", () => {//Knop steen
     get_B_en_H();
     muur_B_en_H_check();
     werkelijkeMuurAfmetingen();
-    SparingReset();
     if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {//Zero check.
         knopPress = 1;
         steensoort = "ysselformaat";
@@ -316,13 +315,14 @@ function $maxDeuren() {
     return maxDeuren;
 }
 function SparingReset() {
+    sparingArrReset();
     deurTexture.src = '';
     currentDeuren = 0;
 }
 function tekenSparing() {
     deurTexture.onload = () => {
         if (canvas.getContext) {
-            sparingenArr.push({"texture": deurTexture, "xAs": SPRP_NR_MIS, "yAs": (werkelijkeHoogteMuur - SPRHMIS), "breedte": SPRBMIS, "hoogte": SPRHMIS});
+            sparingenArr.push({"texture": deurTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "breedte": SPRBMIS, "hoogte": SPRHMIS});
             var ctx = canvas.getContext("2d");
             for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
                 if (knopPress == 1) {
