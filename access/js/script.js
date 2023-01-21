@@ -39,6 +39,14 @@ let werkelijkeHoogteMuur = 0;
 let KeuzeResetSparingen = "";
 let brickImage = new Image();
 let deurTexture = new Image();
+let sparingTexture = [
+    new Image().src = '../access/media/img/deur_1.png',
+    new Image().src = '../access/media/img/deur_2.png',
+    new Image().src = '../access/media/img/deur_3.png',
+    new Image().src = '../access/media/img/raam_1.png',
+    new Image().src = '../access/media/img/raam_2.png',
+    new Image().src = '../access/media/img/raam_3.png'
+]
 let laagVoorHalfsteen = 0;
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 console.log("%cBaksteen Calculator", "color: lightblue; font-size: 4vw;");
@@ -276,7 +284,6 @@ function berekenen_steen_plek_x() {
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         let koppenMaat = steenDz + voegDx;
-        let lagenMaat = steenDy + voegDy;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++steen_plek_x;
         }
