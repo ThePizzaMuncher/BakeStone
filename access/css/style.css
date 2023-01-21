@@ -93,7 +93,7 @@ hr, .line_2 {
     background-image: url("../media/img/ysselformaat.png");
     background-size: 100%;
 }
-.stone1:hover, .stone2:hover, .stone3:hover, .patronen_Halfsteen:hover, .patronen_Tegel:hover, .logo:hover, .patronen:hover, .deur_1_textr:hover, .deur_2_textr:hover, .deur_3_textr:hover, .raam_1_textr:hover, .raam_2_textr:hover, .raam_3_textr:hover, .pdf:hover {
+.stone1:hover, .stone2:hover, .stone3:hover, .patronen_Halfsteen:hover, .patronen_Tegel:hover, .logo:hover, .patronen:hover, .deur_1_textr:hover, .deur_2_textr:hover, .deur_3_textr:hover, .raam_1_textr:hover, .raam_2_textr:hover, .raam_3_textr:hover, .pdf:hover, .verband_tegel:hover, .verband_half:hover {
     cursor: pointer;
 }
 

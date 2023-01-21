@@ -14,6 +14,7 @@ let knopPress = 0;
 let stoneCount = 0;
 let stoneCountPreNum = 0;
 let steenVerband = 0;
+let steenVerbandNaam = "";
 let rijY = 0;
 let rijX = 0;
 let xPos_2 = 0;
@@ -514,10 +515,21 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     const pdf = new jsPDF('l');
     let width_pdf_png = pdf.internal.pageSize.getWidth();
     let imgData = canvas.toDataURL("image/jpeg", 1.0); //oare metode
+    if (steenVerband == 0) {
+        steenVerbandNaam = "tegelverband";
+    }
+    else {
+        if (steenVerband == 1) {
+            steenVerbandNaam = "halfsteensverband";
+        }
+        else {
+            steenVerbandNaam = "onbekend";
+        }
+    }
     //Pagina 1.
     pdf.setTextColor(0, 0, 0); //text zwart.
     pdf.setFontSize(40);
-    pdf.text("Baksteen calculator", centerTxt, 15, null, null, "center", 'https://google.com');
+    pdf.text("Baksteen calculator", centerTxt, 15, null, null, "center");
     pdf.setFontSize(17);
     pdf.text("Statestieken van uw muur", centerTxt, 30, null, null, "center");
     pdf.setFontSize(20);
@@ -527,6 +539,10 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("" + werkelijkeBreedteMuur + "mm.", 80, 90);
     pdf.text("Hoogte muur: ", 30, 100);
     pdf.text("" + werkelijkeHoogteMuur + "mm.", 80, 100);
+    pdf.text("Aantal stenen:", 30, 110);
+    pdf.text("" + stoneCount + ".", 80, 110);
+    pdf.text("steen verband: ", 30, 120);
+    pdf.text("" + steenVerbandNaam + ".", 80, 120);
     pdf.addPage();
     //Pagina 2.
     pdf.addImage(imgData, 'JPEG', 0, 0, width_pdf_png, centerTxt);
