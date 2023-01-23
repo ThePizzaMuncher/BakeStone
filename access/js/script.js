@@ -282,7 +282,6 @@ function berekenen_steen_plek_x() {
     steen_plek_x = 0;
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
         let koppenMaat = steenDz + voegDx;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++steen_plek_x;
@@ -365,8 +364,8 @@ function krijgSparingsMaten() {
     SPRP_NR_MIS = Number(document.getElementById("$sparingPositieNaarRechts").value);
 }
 function sparingSoortCheck() {
-    if (sparingSoort >= 1 && sparingSoort <= 3) {return "deur";}
-    if (sparingSoort >= 4 && sparingSoort <= 6) {return "raam";}
+    if (sparingSoort >= 0 && sparingSoort <= 2) {return "deur";}
+    if (sparingSoort >= 3 && sparingSoort <= 5) {return "raam";}
     else                                        {return "sparing";}
 }
 function SparingMogelijkheid_en_teken() {
