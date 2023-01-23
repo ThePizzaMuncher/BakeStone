@@ -280,6 +280,7 @@ function berekenen_steen_plek_x() {
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
         let koppenMaat = steenDx + voegDx;
+        koppenMaat /= 2;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++steen_plek_x;
         }
@@ -448,6 +449,7 @@ function halfSteensTeken() {
         ctx.scale(schaalSlider, schaalSlider);
         let koppenMaat = steenDx + voegDx;
         let lagenMaat = steenDy + voegDy;
+        koppenMaat /= 2;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Prefire berekening rijX
             xPos_2 = xPos;
             ++rijX;
