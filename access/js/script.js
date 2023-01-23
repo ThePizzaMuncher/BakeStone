@@ -18,6 +18,8 @@ let steenVerbandNaam = "";
 let rijY = 0;
 let rijX = 0;
 let xPos_2 = 0;
+let aantalDeuren = 0;
+let aantalRamen = 0;
 let steensoortHalf_maat = 0;
 let steen_plek_x = 0;
 let steen_plekHalf_status = 0;
@@ -289,31 +291,37 @@ function berekenen_steen_plek_x() {
 document.getElementById("deur_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 0;
+    ++aantalDeuren;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_2").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 1;
+    ++aantalDeuren;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_3").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 2;
+    ++aantalDeuren;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 3;
+    ++aantalRamen;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_2").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 4;
+    ++aantalRamen;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_3").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 5;
+    ++aantalRamen;
     SparingMogelijkheid_en_teken();
 });
 function werkelijkeMuurAfmetingen() {
@@ -503,11 +511,8 @@ function muurAfmetingenErrorCheck() {
 }
 document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     werkelijkeMuurAfmetingen();
+    get_voeg_B_en_H();
     let centerTxt = 148.50004166666665;
-    let ctx = document.getElementById("canvas");
-    const canvas = document.querySelector('canvas');
-    const download = document.querySelector('button');
-    const context = canvas.getContext('2d');
     const {jsPDF} = window.jspdf;
     const pdf = new jsPDF('l');
     let width_pdf_png = pdf.internal.pageSize.getWidth();
@@ -538,11 +543,19 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("" + werkelijkeHoogteMuur + "mm.", 80, 100);
     pdf.text("Aantal stenen:", 30, 110);
     pdf.text("" + stoneCount + ".", 80, 110);
-    pdf.text("steen verband: ", 30, 120);
+    pdf.text("Steen verband: ", 30, 120);
     pdf.text("" + steenVerbandNaam + ".", 80, 120);
+    pdf.text("Voeg hoogte: ", 30, 130);
+    pdf.text("" + voegDy + "mm.", 80, 130);
+    pdf.text("Voeg breedte: ", 30, 140);
+    pdf.text("" + voegDx + "mm.", 80, 140);
+    pdf.setFontSize(17);
+    pdf.text("Hieronder nog een foto van uw muur.", centerTxt, 170, null, null, "center");
+    pdf.setFontSize(20);
     pdf.addPage();
     //Pagina 2.
     pdf.addImage(imgData, 'JPEG', 0, 0, width_pdf_png, centerTxt);
+    pdf.addImage("access/media/img/Bakestone_logo.png", 'JPEG', 250, 185, 20, 20);
     //Einde PDF generation.
     pdf.save("Muur.pdf");
 });
