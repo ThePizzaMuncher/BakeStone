@@ -61,7 +61,8 @@ function teken() {//Algemene teken functie.
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
         ctx.scale(schaalSlider, schaalSlider);
-        let koppenMaat = steenDz + voegDx;
+        let koppenMaat = steenDx + voegDx;
+        koppenMaat /= 2;
         let lagenMaat = steenDy + voegDy;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++rijX;
@@ -123,8 +124,6 @@ document.getElementById("#stone1").addEventListener("click", () => {//Knop steen
         brickImage.src = 'access/media/img/waalformaat-steen-1.png';
         steenDx = 210;
         steenDy = 50;
-        voegDx = 10;
-        voegDy = 10;
         teken();
     }
 });
@@ -139,7 +138,6 @@ document.getElementById("#stone2").addEventListener("click", () => {//Knop steen
         brickImage.src = 'access/media/img/dikformaat-steen-1.png';
         steenDx = 215;
         steenDy = 101;
-        voegDx = 12;
         teken();
     }
 });
@@ -154,7 +152,6 @@ document.getElementById("#stone3").addEventListener("click", () => {//Knop steen
         brickImage.src = 'access/media/img/ysselformaat-steen-1.png';
         steenDx = 160;
         steenDy = 78;
-        voegDx = -15.5;
         teken();
     }
 });
@@ -282,7 +279,7 @@ function berekenen_steen_plek_x() {
     steen_plek_x = 0;
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
-        let koppenMaat = steenDz + voegDx;
+        let koppenMaat = steenDx + voegDx;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
             ++steen_plek_x;
         }
@@ -449,7 +446,7 @@ function halfSteensTeken() {
     if (canvas.getContext) {//Als canvas is gemaakt doe dan uitvoeren voorbereiden tekenen.
         var ctx = canvas.getContext("2d");
         ctx.scale(schaalSlider, schaalSlider);
-        let koppenMaat = steenDz + voegDx;
+        let koppenMaat = steenDx + voegDx;
         let lagenMaat = steenDy + voegDy;
         for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Prefire berekening rijX
             xPos_2 = xPos;
