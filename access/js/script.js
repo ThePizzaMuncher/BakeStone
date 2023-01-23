@@ -96,7 +96,7 @@ function teken() {//Algemene teken functie.
         }
     }
     document.getElementById("$stone_count").innerHTML = stoneCount;
-    if (deurTexture.src != '') {
+    if (currentDeuren != 0) {
         --currentDeuren;
         SparingMogelijkheid_en_teken();
     }
@@ -290,27 +290,33 @@ function berekenen_steen_plek_x() {
     }
 }
 document.getElementById("deur_1").addEventListener("click", () => {
-    sparingSoort = 1;
+    knopPress = 1;
+    sparingSoort = 0;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_2").addEventListener("click", () => {
-    sparingSoort = 2;
+    knopPress = 1;
+    sparingSoort = 1;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_3").addEventListener("click", () => {
-    sparingSoort = 3;
+    knopPress = 1;
+    sparingSoort = 2;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_1").addEventListener("click", () => {
-    sparingSoort = 4;
+    knopPress = 1;
+    sparingSoort = 3;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_2").addEventListener("click", () => {
-    sparingSoort = 5;
+    knopPress = 1;
+    sparingSoort = 4;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_3").addEventListener("click", () => {
-    sparingSoort = 6;
+    knopPress = 1;
+    sparingSoort = 5;
     SparingMogelijkheid_en_teken();
 });
 function werkelijkeMuurAfmetingen() {
@@ -324,24 +330,35 @@ function $maxDeuren() {
 }
 function SparingReset() {
     sparingArrReset();
-    deurTexture.src = '';
     currentDeuren = 0;
 }
 function tekenSparing() {
-    deurTexture.onload = () => {
-        if (canvas.getContext) {
-            sparingenArr.push({"texture": deurTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "breedte": SPRBMIS, "hoogte": SPRHMIS});
-            var ctx = canvas.getContext("2d");
-            for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
-                if (knopPress == 1) {
-                    setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
-                }
-                else {
-                    ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);;
+    setTimeout(() => {
+        if (knopPress == 1) {
+            if (canvas.getContext) {
+                let immedzj = new Image();
+                immedzj.src = sparingTexture[sparingSoort];
+                sparingenArr.push({"texture": immedzj, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "breedte": SPRBMIS, "hoogte": SPRHMIS});
+                var ctx = canvas.getContext("2d");
+                for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
+                    if (knopPress == 1) {
+                        setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
+                    }
+                    else {
+                        ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);;
+                    }
                 }
             }
         }
-    }
+        else {
+            if (canvas.getContext) {
+                var ctx = canvas.getContext("2d");
+                for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
+                    ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);
+                }
+            }
+        }
+    }, 100)
 }
 function sparingArrReset() {
     sparingenArr = [];
@@ -383,26 +400,6 @@ function SparingMogelijkheid_en_teken() {
             }
         }
         else {
-            switch (sparingSoort) {//deurTexture src setter.
-                case 1:
-                    deurTexture.src = "access/media/img/deur_1.png";
-                break;
-                case 2:
-                    deurTexture.src = "access/media/img/deur_2.png";
-                break;
-                case 3:
-                    deurTexture.src = "access/media/img/deur_3.png";
-                break;
-                case 4:
-                    deurTexture.src = "access/media/img/raam_1.png";
-                break;
-                case 5:
-                    deurTexture.src = "access/media/img/raam_2.png";
-                break;
-                case 6:
-                    deurTexture.src = "access/media/img/raam_3.png";
-                break;
-            }
             ++currentDeuren;
             tekenSparing();
         }
