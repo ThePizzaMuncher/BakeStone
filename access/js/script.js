@@ -104,6 +104,11 @@ function teken() {//Algemene teken functie.
         --currentDeuren;
         SparingMogelijkheid_en_teken();
     }
+    werkelijkeMuurAfmetingen();
+    document.getElementById("pijl_txt_h").innerHTML = werkelijkeBreedteMuur;
+    document.getElementById("pijl_txt_v").innerHTML = werkelijkeHoogteMuur;
+    document.getElementById("$pijl_h_txt").title = "Werkelijke muur breedte: " + werkelijkeBreedteMuur + "mm";
+    document.getElementById("$pijl_v_txt").title = "Werkelijke muur hoogte: " + werkelijkeHoogteMuur + "mm";
 }
 brickImage.onload = () => {//Hier wordt getekend waneer de brickImage ready is om een img te printen.
     switch (brickImage_ONLY_onload) {
