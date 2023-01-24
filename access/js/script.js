@@ -41,6 +41,7 @@ let werkelijkeHoogteMuur = 0;
 let KeuzeResetSparingen = "";
 let brickImage = new Image();
 let deurTexture = new Image();
+let imgPDF = new Image();
 let sparingTexture = [
     new Image().src = '../access/media/img/deur_1.png',
     new Image().src = '../access/media/img/deur_2.png',
@@ -511,12 +512,13 @@ function muurAfmetingenErrorCheck() {
 }
 document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     werkelijkeMuurAfmetingen();
-    get_voeg_B_en_H();
+    voegDx = Number(document.getElementById("$voeg_b").value);
+    voegDy = Number(document.getElementById("$voeg_h").value);
     let centerTxt = 148.50004166666665;
     const {jsPDF} = window.jspdf;
     const pdf = new jsPDF('l');
     let width_pdf_png = pdf.internal.pageSize.getWidth();
-    let imgData = canvas.toDataURL("image/jpeg", 1.0); //oare metode
+    imgPDF.src = canvas.toDataURL("image/jpeg", 1.0); //oare metode
     let datum = new Date();
     if (steenVerband == 0) {
         steenVerbandNaam = "tegelverband";
@@ -561,7 +563,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.setFontSize(20);
     pdf.addPage();
     //Pagina 2.
-    pdf.addImage(imgData, 'JPEG', 0, 0, width_pdf_png, centerTxt);
+    pdf.addImage(imgPDF, 'png', 0, 0, width_pdf_png, centerTxt);
     pdf.addImage("access/media/img/Bakestone_logo.png", 'JPEG', 200, 166, (774 / 8), (225 / 8));
     pdf.addImage("access/media/img/BGDD.png", 'JPEG', 0, 166, (1060 / 8), (207 / 8))
     //Einde PDF generation.
