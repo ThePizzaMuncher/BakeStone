@@ -555,7 +555,8 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.addPage();
     //Pagina 2.
     pdf.addImage(imgData, 'JPEG', 0, 0, width_pdf_png, centerTxt);
-    pdf.addImage("access/media/img/Bakestone_logo.png", 'JPEG', 200, 148.5, (774 / 8), (225 / 8));
+    pdf.addImage("access/media/img/Bakestone_logo.png", 'JPEG', 200, 166, (774 / 8), (225 / 8));
+    pdf.addImage("access/media/img/BGDD.png", 'JPEG', 0, 166, (1060 / 8), (207 / 8))
     //Einde PDF generation.
     pdf.save("Muur.pdf");
 });
