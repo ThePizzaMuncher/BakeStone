@@ -517,6 +517,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     const pdf = new jsPDF('l');
     let width_pdf_png = pdf.internal.pageSize.getWidth();
     let imgData = canvas.toDataURL("image/jpeg", 1.0); //oare metode
+    let datum = new Date();
     if (steenVerband == 0) {
         steenVerbandNaam = "tegelverband";
     }
@@ -549,8 +550,14 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("" + voegDy + "mm.", 80, 130);
     pdf.text("Voeg breedte: ", 30, 140);
     pdf.text("" + voegDx + "mm.", 80, 140);
+    pdf.text("Aantal deuren: ", 30, 150);
+    pdf.text("" + aantalDeuren + ".", 80, 150);
+    pdf.text("Aantal ramen: ", 30, 160);
+    pdf.text("" + aantalRamen + ".", 80, 160);
     pdf.setFontSize(17);
-    pdf.text("Hieronder nog een foto van uw muur.", centerTxt, 170, null, null, "center");
+    pdf.text("Hieronder een grafische weergave van uw muur.", centerTxt, 195, null, null, "center");
+    pdf.setFontSize(13);
+    pdf.text("" + datum.getDate() + "-" + (datum.getMonth() - - 1) + "-" + datum.getFullYear(), 272, 206);
     pdf.setFontSize(20);
     pdf.addPage();
     //Pagina 2.
