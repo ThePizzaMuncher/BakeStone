@@ -340,4 +340,19 @@ p {
 .pdf:hover {
     background-color: rgba(0, 46, 98, 0.729);
 }
+.pijl_horizontaal, .pijl_verticaal {
+    width: 20vw;
+    height: 3vw;
+    background-image: url("../media/img/pijl.png");
+    background-size: 100%;
+    position: relative;
+    top: -5vw;
+    right: -18.55vw;
+}
+.pijl_verticaal {
+    transform: rotate(270deg);
+    position: relative;
+    top: -18vw;
+    right: -8.85vw;
+}
 /* @media empire */
