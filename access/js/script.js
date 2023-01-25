@@ -521,7 +521,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     voegDy = Number(document.getElementById("$voeg_h").value);
     let centerTxt = 148.50004166666665;
     const {jsPDF} = window.jspdf;
-    const pdf = new jsPDF('l');
+    const pdf = new jsPDF('l');//PDF kantelen waardoor img er beter op past.
     let width_pdf_png = pdf.internal.pageSize.getWidth();
     imgPDF.src = canvas.toDataURL("image/jpeg", 1.0); //oare metode
     let datum = new Date();
@@ -562,9 +562,15 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         pdf.text("" + aantalDeuren + ".", 80, 150);
         pdf.text("Aantal ramen: ", 30, 160);
         pdf.text("" + aantalRamen + ".", 80, 160);
+        for (let $i$ = 0; $i$ < aantalDeuren; ++$i$) {
+            console.log("deuren");
+        }
     }
-    pdf.setFontSize(17);
-    pdf.text("Hieronder een grafische weergave van uw muur.", centerTxt, 195, null, null, "center");
+    else {
+        pdf.setFontSize(17);
+        pdf.text("Hieronder een grafische weergave van uw muur.", centerTxt, 195, null, null, "center");
+        pdf.setFontSize(20);
+    }
     pdf.setFontSize(13);
     pdf.text("" + datum.getDate() + "-" + (datum.getMonth() - - 1) + "-" + datum.getFullYear(), 272, 206);
     pdf.setFontSize(20);
