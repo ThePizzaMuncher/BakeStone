@@ -557,10 +557,12 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("" + voegDy + "mm.", 80, 130);
     pdf.text("Voeg breedte: ", 30, 140);
     pdf.text("" + voegDx + "mm.", 80, 140);
-    pdf.text("Aantal deuren: ", 30, 150);
-    pdf.text("" + aantalDeuren + ".", 80, 150);
-    pdf.text("Aantal ramen: ", 30, 160);
-    pdf.text("" + aantalRamen + ".", 80, 160);
+    if (currentDeuren > 0) {
+        pdf.text("Aantal deuren: ", 30, 150);
+        pdf.text("" + aantalDeuren + ".", 80, 150);
+        pdf.text("Aantal ramen: ", 30, 160);
+        pdf.text("" + aantalRamen + ".", 80, 160);
+    }
     pdf.setFontSize(17);
     pdf.text("Hieronder een grafische weergave van uw muur.", centerTxt, 195, null, null, "center");
     pdf.setFontSize(13);
