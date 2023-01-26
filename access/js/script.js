@@ -342,14 +342,16 @@ function $maxDeuren() {
 function SparingReset() {
     sparingArrReset();
     currentDeuren = 0;
+    aantalDeuren = 0;
+    aantalRamen = 0;
 }
 function tekenSparing() {
     if (knopPress == 1) {
         setTimeout(() => {
             if (canvas.getContext) {
-                let immedzj = new Image();
-                immedzj.src = sparingTexture[sparingSoort];
-                sparingenArr.push({"texture": immedzj, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "breedte": SPRBMIS, "hoogte": SPRHMIS});
+                let variabeleSparingTexture = new Image();
+                variabeleSparingTexture.src = sparingTexture[sparingSoort];
+                sparingenArr.push({"texture": variabeleSparingTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "breedte": SPRBMIS, "hoogte": SPRHMIS});
                 var ctx = canvas.getContext("2d");
                 for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
                     setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
@@ -541,7 +543,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.setFontSize(40);
     pdf.text("Baksteen calculator", centerTxt, 15, null, null, "center");
     pdf.setFontSize(17);
-    pdf.text("Statestieken van uw muur", centerTxt, 30, null, null, "center");
+    pdf.text("Statistieken van uw muur", centerTxt, 30, null, null, "center");
     pdf.setFontSize(20);
     pdf.text("Steensoort: ", 30, 80);
     pdf.text("" + steensoort + ".", 77, 80);
@@ -557,16 +559,30 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("" + voegDy + "mm.", 80, 130);
     pdf.text("Voeg breedte: ", 30, 140);
     pdf.text("" + voegDx + "mm.", 80, 140);
-    if (currentDeuren > 0) {
+    pdf.setProperties({
+        title : "Muur generator"
+    });
+    if (currentDeuren > 0) {//Als er sparingen zijn doe dan...
         pdf.text("Aantal deuren: ", 30, 150);
         pdf.text("" + aantalDeuren + ".", 80, 150);
         pdf.text("Aantal ramen: ", 30, 160);
         pdf.text("" + aantalRamen + ".", 80, 160);
-        for (let $i$ = 0; $i$ < aantalDeuren; ++$i$) {
-            console.log("deuren");
+        pdf.addPage();//Nieuwe pagina.
+        pdf.setFontSize(30);
+        pdf.text("Sparingen", centerTxt, 13, null, null, "center");
+        pdf.setFontSize(20);
+        let variabeleHoogtePDF = 20;
+        for (let $i$ = 0; $i$ < aantalDeuren; ++$i$) {//Voor aantal deuren doe...
+            variabeleHoogtePDF += 10;
+            pdf.text("Deur " + ($i$ - - 1) + " hoogte: ", 30, variabeleHoogtePDF);
+            pdf.text("" + sparingenArr[$i$].hoogte + " mm.", 80, variabeleHoogtePDF);
+            variabeleHoogtePDF += 10;
+            pdf.text("Deur " + ($i$ - - 1) + " breedte: ", 30, variabeleHoogtePDF);
+            pdf.text("" + sparingenArr[$i$].breedte + " mm.", 80, variabeleHoogtePDF);
         }
+        variabeleHoogtePDF = 13;
     }
-    else {
+    else {//Als er geen sparingen zijn doe dan...
         pdf.setFontSize(17);
         pdf.text("Hieronder een grafische weergave van uw muur.", centerTxt, 195, null, null, "center");
         pdf.setFontSize(20);
@@ -578,7 +594,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     //Pagina 2.
     pdf.addImage(imgPDF, 'png', 0, 0, width_pdf_png, centerTxt);
     pdf.addImage("access/media/img/Bakestone_logo.png", 'JPEG', 200, 166, (774 / 8), (225 / 8));
-    pdf.addImage("access/media/img/BGDD.png", 'JPEG', 0, 166, (1060 / 8), (207 / 8))
+    pdf.addImage("access/media/img/BGDD.png", 'JPEG', 0, 166, (1060 / 8), (207 / 8));
     //Einde PDF generation.
     pdf.save("Muur.pdf");
 });
