@@ -376,11 +376,9 @@ function krijgSparingsMaten() {
 }
 function sparingSoortCheck() {
     if (sparingSoort >= 0 && sparingSoort <= 2) {
-        ++aantalDeuren;
         return "deur";
     }
     if (sparingSoort >= 3 && sparingSoort <= 5) {
-        ++aantalRamen;
         return "raam";
     }
     else {
