@@ -299,32 +299,32 @@ function berekenen_steen_plek_x() {
 document.getElementById("deur_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 0;
-    SparingMogelijkheid_en_teken();
+        SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_2").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 1;
-    SparingMogelijkheid_en_teken();
+        SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_3").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 2;
-    SparingMogelijkheid_en_teken();
+        SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 3;
-    SparingMogelijkheid_en_teken();
+        SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_2").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 4;
-    SparingMogelijkheid_en_teken();
+        SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_3").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 5;
-    SparingMogelijkheid_en_teken();
+        SparingMogelijkheid_en_teken();
 });
 function werkelijkeMuurAfmetingen() {
     werkelijkeBreedteMuur = ((steenDx * rijX) - - (rijX * voegDx - voegDx));
@@ -376,18 +376,18 @@ function krijgSparingsMaten() {
 }
 function sparingSoortCheck() {
     if (sparingSoort >= 0 && sparingSoort <= 2) {
-        return "deur";
+        return "De deur";
     }
     if (sparingSoort >= 3 && sparingSoort <= 5) {
-        return "raam";
+        return "Het raam";
     }
     else {
-        return "sparing";
+        return "De sparing";
     }
 }
 function SparingMogelijkheid_en_teken() {
     krijgSparingsMaten();
-    if (zeroCheck == 0 && (currentDeuren < $maxDeuren()) && SPRBMIS <= werkelijkeBreedteMuur && SPRHMIS <= werkelijkeHoogteMuur) {
+    if (zeroCheck == 0 && (currentDeuren < $maxDeuren()) && SPRBMIS <= werkelijkeBreedteMuur && SPRHMIS <= werkelijkeHoogteMuur && (SPRP_H_MIS + SPRHMIS) <= werkelijkeHoogteMuur) {
         if (SPRP_NR_MIS <= -1) {
             window.alert("Voer een groter getal in voor de 'Positie naar rechts' voor de " + sparingSoortCheck() + ".")
         }
@@ -431,21 +431,6 @@ function SparingMogelijkheid_en_teken() {
                     if (!KeuzeResetSparingen.includes("n") && !KeuzeResetSparingen.includes("N")) {
 						window.alert("Ongeldige invoer!");
 					}
-                }
-            }
-        }
-        else {
-            if (SPRHMIS > rijY) {
-                window.alert("De " + sparingSoortCheck() + " is te hoog voor de muur.");
-            }
-            else {
-                if (SPRBMIS > rijX) {
-                    if (sparingSoortCheck() == "raam") {
-                        window.alert("Het " + sparingSoortCheck() + " is te breedt voor de muur.");
-                    }
-                    else {
-                        window.alert("De " + sparingSoortCheck() + " is te breedt voor de muur.");
-                    }
                 }
             }
         }
@@ -520,6 +505,41 @@ function muurAfmetingenErrorCheck() {
         }
     }
 }
+function SparingPDFNaam($i$) {
+    if (sparingenArr[$i$]) {
+        if (sparingenArr[$i$].texture.src.includes("deur")) {
+            ++deurNaamVar;
+            return "Deur " + Math.round(deurNaamVar) + "";
+        }
+        else {
+            if (sparingenArr[$i$].texture.src.includes("raam")) {
+                ++raamNaamVar;
+                return "Raam " + Math.round(raamNaamVar) + "";
+            }
+        }
+    }
+    else {
+        return "Er zijn geen sparingen!";
+    }
+}
+function sparingSoortAdd() {//Geeft aan hoeveel deuren en ramen er in de muur zitten in de PDF.
+    if (sparingSoort >= 0 && sparingSoort <= 2) {
+        ++aantalDeuren;
+    }
+    if (sparingSoort >= 3 && sparingSoort <= 5) {
+        ++aantalRamen;
+    }
+}
+document.getElementById("$reset").addEventListener("click", () => {//Reset knop voor alle sparingen.
+    if (currentDeuren != 0) {
+        SparingReset();
+        cv_cls();
+        teken();
+    }
+    else {
+        window.alert("Er zitten geen sparingen in de muur.");
+    }
+});
 document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     werkelijkeMuurAfmetingen();
     voegDx = Number(document.getElementById("$voeg_b").value);
@@ -600,35 +620,10 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("" + datum.getDate() + "-" + (datum.getMonth() - - 1) + "-" + datum.getFullYear(), 272, 206);
     pdf.setFontSize(20);
     pdf.addPage();
-    //Pagina 2.
+    //Laatste pagina.
     pdf.addImage(imgPDF, 'png', 0, 0, width_pdf_png, centerTxt);
     pdf.addImage("access/media/img/Bakestone_logo.png", 'JPEG', 200, 166, (774 / 8), (225 / 8));
     pdf.addImage("access/media/img/BGDD.png", 'JPEG', 0, 166, (1060 / 8), (207 / 8));
     //Einde PDF generation.
     pdf.save("Muur.pdf");
 });
-function SparingPDFNaam($i$) {
-    if (sparingenArr[$i$]) {
-        if (sparingenArr[$i$].texture.src.includes("deur")) {
-            ++deurNaamVar;
-            return "Deur " + Math.round(deurNaamVar) + "";
-        }
-        else {
-            if (sparingenArr[$i$].texture.src.includes("raam")) {
-                ++raamNaamVar;
-                return "Raam " + Math.round(raamNaamVar) + "";
-            }
-        }
-    }
-    else {
-        return "Er zijn geen sparingen!";
-    }
-}
-function sparingSoortAdd() {//Geeft aan hoeveel deuren en ramen er in de muur zitten.
-    if (sparingSoort >= 0 && sparingSoort <= 2) {
-        ++aantalDeuren;
-    }
-    if (sparingSoort >= 3 && sparingSoort <= 5) {
-        ++aantalRamen;
-    }
-}

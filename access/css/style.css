@@ -1,7 +1,7 @@
 * {
     /* border: 2px solid green */
 }
-.stone1, .stone2, .stone3,  .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .steen_textures, .rij_1, .zijnav_links, .verbanden_knop, .verband_tegel, .verband_half, .pdf {
+.stone1, .stone2, .stone3,  .sparingen, .slider, .deur, .deur_1, .deur_2, .deur_3, .slider::-webkit-scrollbar-thumb, .slider::-webkit-scrollbar, .raam, .raam_1, .raam_2, .raam_3, .sparingen_reset, .rij_1, .zijnav_links, .verbanden_knop, .verband_tegel, .verband_half, .pdf {
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
@@ -142,7 +142,7 @@ p {
     justify-content: center;
     height: 3vw;
 }
-.slider p, .flex_txt {
+.slider p, .flex_txt, .flex_txt_reset {
     color: white;
     justify-content: center;
     align-items: center;
@@ -152,6 +152,9 @@ p {
 }
 .flex_txt {
     font-size: 1.1vw;
+}
+.flex_txt_reset {
+    font-size: 1.4vw;
 }
 .slider {
     width: 15vw;
@@ -220,7 +223,7 @@ p {
     height: 9vw;
     background-image: url("../media/img/raam_3.png");
 }
-.steen_textures {
+.sparingen_reset {
     background-color: rgba(212, 4, 4, 0.365);
     position: relative;
     width: 15vw;
@@ -233,6 +236,9 @@ p {
     align-items: center;
     display: flex;
     flex-direction: column;
+}
+.sparingen_reset:active {
+    background-color: rgba(109, 30, 30, 0.365);
 }
 .rij_1 {
     width: 14vw;
