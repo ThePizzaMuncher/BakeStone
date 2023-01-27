@@ -347,7 +347,7 @@ function tekenSparing() {
             if (canvas.getContext) {
                 let variabeleSparingTexture = new Image();
                 variabeleSparingTexture.src = sparingTexture[sparingSoort];
-                sparingenArr.push({"texture": variabeleSparingTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "breedte": SPRBMIS, "hoogte": SPRHMIS});
+                sparingenArr.push({"texture": variabeleSparingTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "yAsVisueel": SPRP_H_MIS, "breedte": SPRBMIS, "hoogte": SPRHMIS});
                 var ctx = canvas.getContext("2d");
                 for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
                     setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
@@ -575,17 +575,15 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         pdf.addPage();//Nieuwe pagina.
         pdf.setFontSize(30);
         pdf.text("Sparingen", centerTxt, 13, null, null, "center");
-        pdf.setFontSize(20);
+        pdf.setFontSize(16);
         let variabeleHoogtePDF = 20; //De hoogte van de text in de for loops in PDF
         for (let $i$ = 0; $i$ < currentDeuren; ++$i$) {//Voor aantal deuren doe...
             variabeleHoogtePDF += 10;
             pdf.text(SparingPDFNaam($i$) + " hoogte: ", 30, variabeleHoogtePDF);
-            pdf.text("" + sparingenArr[$i$].hoogte + " mm.", 80, variabeleHoogtePDF);
-            variabeleHoogtePDF += 10;
-            pdf.text(SparingPDFNaam($i$) + " breedte: ", 30, variabeleHoogtePDF);
-            pdf.text("" + sparingenArr[$i$].breedte + " mm.", 80, variabeleHoogtePDF);
-            variabeleHoogtePDF += 5;
+            pdf.text("" + sparingenArr[$i$].hoogte + " mm, breedte: " + sparingenArr[$i$].breedte + "mm. / Positie: verticaal: " + sparingenArr[$i$].yAsVisueel + "mm, horizontaal: " + sparingenArr[$i$].xAs + "mm.", 70, variabeleHoogtePDF);
+            variabeleHoogtePDF += 7;
         }
+        //Loop var's reset.
         deurNaamVar = 0;
         raamNaamVar = 0;
         variabeleHoogtePDF = 13;
@@ -609,13 +607,13 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
 function SparingPDFNaam($i$) {
     if (sparingenArr[$i$]) {
         if (sparingenArr[$i$].texture.src.includes("deur")) {
-            deurNaamVar += 0.5
+            ++deurNaamVar;
             return "Deur " + Math.round(deurNaamVar) + "";
         }
         else {
             if (sparingenArr[$i$].texture.src.includes("raam")) {
-                raamNaamVar += 0.5;
-                return "raam " + Math.round(deurNaamVar) + "";
+                ++raamNaamVar;
+                return "Raam " + Math.round(raamNaamVar) + "";
             }
         }
     }
