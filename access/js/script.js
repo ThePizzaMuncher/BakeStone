@@ -363,14 +363,6 @@ function tekenSparing() {
             }
         }
     }
-    if (sparingSoortCheck() == "deur") {
-        ++aantalDeuren;
-    }
-    else {
-        if (sparingSoortCheck() == "raam") {
-            ++aantalRamen;
-        }
-    }
     
 }
 function sparingArrReset() {
@@ -383,9 +375,17 @@ function krijgSparingsMaten() {
     SPRP_NR_MIS = Number(document.getElementById("$sparingPositieNaarRechts").value);
 }
 function sparingSoortCheck() {
-    if (sparingSoort >= 0 && sparingSoort <= 2) {return "deur";}
-    if (sparingSoort >= 3 && sparingSoort <= 5) {return "raam";}
-    else                                        {return "sparing";}
+    if (sparingSoort >= 0 && sparingSoort <= 2) {
+        ++aantalDeuren;
+        return "deur";
+    }
+    if (sparingSoort >= 3 && sparingSoort <= 5) {
+        ++aantalRamen;
+        return "raam";
+    }
+    else {
+        return "sparing";
+    }
 }
 function SparingMogelijkheid_en_teken() {
     krijgSparingsMaten();
@@ -568,6 +568,9 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         title : "Muur generator"
     });
     if (currentDeuren > 0) {//Als er sparingen zijn doe dan...
+        for (let $i$ = 0; $i$ < currentDeuren; ++$i$) {//Voor aantal sparingen doe...
+            sparingSoortAdd();
+        }
         pdf.text("Aantal deuren: ", 30, 150);
         pdf.text("" + aantalDeuren + ".", 80, 150);
         pdf.text("Aantal ramen: ", 30, 160);
@@ -577,7 +580,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         pdf.text("Sparingen", centerTxt, 13, null, null, "center");
         pdf.setFontSize(16);
         let variabeleHoogtePDF = 20; //De hoogte van de text in de for loops in PDF
-        for (let $i$ = 0; $i$ < currentDeuren; ++$i$) {//Voor aantal deuren doe...
+        for (let $i$ = 0; $i$ < currentDeuren; ++$i$) {//Voor aantal sparingen doe...
             variabeleHoogtePDF += 10;
             pdf.text(SparingPDFNaam($i$) + " hoogte: ", 30, variabeleHoogtePDF);
             pdf.text("" + sparingenArr[$i$].hoogte + " mm, breedte: " + sparingenArr[$i$].breedte + "mm. / Positie: verticaal: " + sparingenArr[$i$].yAsVisueel + "mm, horizontaal: " + sparingenArr[$i$].xAs + "mm.", 70, variabeleHoogtePDF);
@@ -587,6 +590,8 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         deurNaamVar = 0;
         raamNaamVar = 0;
         variabeleHoogtePDF = 13;
+        aantalDeuren = 0;
+        aantalRamen = 0;
     }
     else {//Als er geen sparingen zijn doe dan...
         pdf.setFontSize(17);
@@ -619,5 +624,13 @@ function SparingPDFNaam($i$) {
     }
     else {
         return "Er zijn geen sparingen!";
+    }
+}
+function sparingSoortAdd() {//Geeft aan hoeveel deuren en ramen er in de muur zitten.
+    if (sparingSoort >= 0 && sparingSoort <= 2) {
+        ++aantalDeuren;
+    }
+    if (sparingSoort >= 3 && sparingSoort <= 5) {
+        ++aantalRamen;
     }
 }
