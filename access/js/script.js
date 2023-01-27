@@ -29,6 +29,8 @@ let variabele_aan_of_uit = 0;
 let ArrHalfsteen = [];
 let sparingenArr = [];
 let steensoort = "waalformaat";
+let deurNaamVar = 0;
+let raamNaamVar = 0;
 let maxDeuren = 0;
 let currentDeuren = 0;
 let sparingSoort = 0;
@@ -297,37 +299,31 @@ function berekenen_steen_plek_x() {
 document.getElementById("deur_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 0;
-    ++aantalDeuren;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_2").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 1;
-    ++aantalDeuren;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_3").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 2;
-    ++aantalDeuren;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 3;
-    ++aantalRamen;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_2").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 4;
-    ++aantalRamen;
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_3").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 5;
-    ++aantalRamen;
     SparingMogelijkheid_en_teken();
 });
 function werkelijkeMuurAfmetingen() {
@@ -367,6 +363,15 @@ function tekenSparing() {
             }
         }
     }
+    if (sparingSoortCheck() == "deur") {
+        ++aantalDeuren;
+    }
+    else {
+        if (sparingSoortCheck() == "raam") {
+            ++aantalRamen;
+        }
+    }
+    
 }
 function sparingArrReset() {
     sparingenArr = [];
@@ -571,15 +576,18 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         pdf.setFontSize(30);
         pdf.text("Sparingen", centerTxt, 13, null, null, "center");
         pdf.setFontSize(20);
-        let variabeleHoogtePDF = 20;
-        for (let $i$ = 0; $i$ < aantalDeuren; ++$i$) {//Voor aantal deuren doe...
+        let variabeleHoogtePDF = 20; //De hoogte van de text in de for loops in PDF
+        for (let $i$ = 0; $i$ < currentDeuren; ++$i$) {//Voor aantal deuren doe...
             variabeleHoogtePDF += 10;
-            pdf.text("Deur " + ($i$ - - 1) + " hoogte: ", 30, variabeleHoogtePDF);
+            pdf.text(SparingPDFNaam($i$) + " hoogte: ", 30, variabeleHoogtePDF);
             pdf.text("" + sparingenArr[$i$].hoogte + " mm.", 80, variabeleHoogtePDF);
             variabeleHoogtePDF += 10;
-            pdf.text("Deur " + ($i$ - - 1) + " breedte: ", 30, variabeleHoogtePDF);
+            pdf.text(SparingPDFNaam($i$) + " breedte: ", 30, variabeleHoogtePDF);
             pdf.text("" + sparingenArr[$i$].breedte + " mm.", 80, variabeleHoogtePDF);
+            variabeleHoogtePDF += 5;
         }
+        deurNaamVar = 0;
+        raamNaamVar = 0;
         variabeleHoogtePDF = 13;
     }
     else {//Als er geen sparingen zijn doe dan...
@@ -598,3 +606,20 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     //Einde PDF generation.
     pdf.save("Muur.pdf");
 });
+function SparingPDFNaam($i$) {
+    if (sparingenArr[$i$]) {
+        if (sparingenArr[$i$].texture.src.includes("deur")) {
+            deurNaamVar += 0.5
+            return "Deur " + Math.round(deurNaamVar) + "";
+        }
+        else {
+            if (sparingenArr[$i$].texture.src.includes("raam")) {
+                raamNaamVar += 0.5;
+                return "raam " + Math.round(deurNaamVar) + "";
+            }
+        }
+    }
+    else {
+        return "Er zijn geen sparingen!";
+    }
+}
