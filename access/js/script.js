@@ -29,10 +29,11 @@ let variabele_aan_of_uit = 0;
 let ArrHalfsteen = [];
 let sparingenArr = [];
 let steensoort = "waalformaat";
+let tmpFeedback = "";
 let deurNaamVar = 0;
 let raamNaamVar = 0;
 let maxDeuren = 0;
-let currentDeuren = 0;
+let currentSparingen = 0;
 let sparingSoort = 0;
 let SPRHMIS = 0; //Sparingen Hoogte Maat In Stenen.
 let SPRBMIS = 0; //Sparingen Breedte Maat In Stenen.
@@ -56,6 +57,7 @@ let laagVoorHalfsteen = 0;
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 console.log("%cBaksteen Calculator", "color: lightblue; font-size: 4vw;");
 console.log("%cBakestone INC | BGDD", "color: green; font-size: 1.2vw;");
+let copyright = "Wieger, Jonathan, Johannes, Julian. (Bakestone INC)";
 function teken() {//Algemene teken functie.
     berekenen_steen_plek_x();
     stoneCount = 0; //Aantal stenen wordt gereset.
@@ -102,8 +104,8 @@ function teken() {//Algemene teken functie.
         }
     }
     document.getElementById("$stone_count").innerHTML = stoneCount;
-    if (currentDeuren != 0) {
-        --currentDeuren;
+    if (currentSparingen != 0) {
+        --currentSparingen;
         SparingMogelijkheid_en_teken();
     }
     werkelijkeMuurAfmetingen();
@@ -337,7 +339,7 @@ function $maxDeuren() {
 }
 function SparingReset() {
     sparingArrReset();
-    currentDeuren = 0;
+    currentSparingen = 0;
     aantalDeuren = 0;
     aantalRamen = 0;
 }
@@ -349,7 +351,7 @@ function tekenSparing() {
                 variabeleSparingTexture.src = sparingTexture[sparingSoort];
                 sparingenArr.push({"texture": variabeleSparingTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "yAsVisueel": SPRP_H_MIS, "breedte": SPRBMIS, "hoogte": SPRHMIS});
                 var ctx = canvas.getContext("2d");
-                for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
+                for (let quicknumemm = 0; currentSparingen > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
                     setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
                 }
             }
@@ -358,7 +360,7 @@ function tekenSparing() {
     else {
         if (canvas.getContext) {
             var ctx = canvas.getContext("2d");
-            for (let quicknumemm = 0; currentDeuren > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
+            for (let quicknumemm = 0; currentSparingen > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
                 ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);
             }
         }
@@ -376,18 +378,19 @@ function krijgSparingsMaten() {
 }
 function sparingSoortCheck() {
     if (sparingSoort >= 0 && sparingSoort <= 2) {
-        return "De deur";
+        return "deur";
     }
     if (sparingSoort >= 3 && sparingSoort <= 5) {
-        return "Het raam";
+        return "raam";
     }
     else {
-        return "De sparing";
+        return "sparing";
     }
 }
 function SparingMogelijkheid_en_teken() {
     krijgSparingsMaten();
-    if (zeroCheck == 0 && (currentDeuren < $maxDeuren()) && SPRBMIS <= werkelijkeBreedteMuur && SPRHMIS <= werkelijkeHoogteMuur && (SPRP_H_MIS + SPRHMIS) <= werkelijkeHoogteMuur) {
+    werkelijkeMuurAfmetingen();
+    if (zeroCheck == 0 && (currentSparingen < $maxDeuren()) && SPRBMIS <= werkelijkeBreedteMuur && SPRHMIS <= werkelijkeHoogteMuur && (SPRP_H_MIS + SPRHMIS) <= werkelijkeHoogteMuur) {
         if (SPRP_NR_MIS <= -1) {
             window.alert("Voer een groter getal in voor de 'Positie naar rechts' voor de " + sparingSoortCheck() + ".")
         }
@@ -395,15 +398,26 @@ function SparingMogelijkheid_en_teken() {
             window.alert("Voer een groter getal in voor de 'Positie omhoog' voor de " + sparingSoortCheck() + ".")
         }
         if (SPRHMIS <= 0 || SPRBMIS <= 0) {
+            if (sparingSoortCheck().includes("deur")) {
+                tmpFeedback = "de deur";
+            }
+            else {
+                if (sparingSoortCheck().includes("raam")) {
+                    tmpFeedback = "het raam";
+                }
+                else {
+                    tmpFeedback = "de sparing";
+                }
+            }
             if (SPRHMIS <= 0 && SPRBMIS <= 0) {
-                window.alert("Voer een grotere breedte en hoogte in voor de " + sparingSoortCheck() + ".");
+                window.alert("Voer een grotere breedte en hoogte in voor " + tmpFeedback + ".");
             }
             else {
                 if (SPRHMIS <= 0) {
-                    window.alert("Voer een grotere hoogte in voor de " + sparingSoortCheck() + ".");
+                    window.alert("Voer een grotere hoogte in voor de " + tmpFeedback + ".");
                 }
                 if (SPRBMIS <= 0) {
-                    window.alert("Voer een grotere breedte in voor de " + sparingSoortCheck() + ".");
+                    window.alert("Voer een grotere breedte in voor de " + tmpFeedback + ".");
                 }
                 else {
                     window.alert("Error!");
@@ -411,13 +425,29 @@ function SparingMogelijkheid_en_teken() {
             }
         }
         else {
-            ++currentDeuren;
-            tekenSparing();
+            if ((SPRBMIS + SPRP_NR_MIS) > werkelijkeBreedteMuur) {//Sparingen totaal breedte check.
+                if (sparingSoortCheck() == "deur") {
+                    tmpFeedback = "De deur";
+                }
+                else {
+                    if (sparingSoortCheck() == "raam") {
+                        tmpFeedback = "Het raam";
+                    }
+                    else {
+                        tmpFeedback = "De sparing";
+                    }
+                }
+                window.alert(tmpFeedback + " is te breedt voor de muur, omdat " + SPRBMIS + "mm + " + SPRP_NR_MIS + "mm = " + (SPRBMIS + SPRP_NR_MIS) + "mm. Terwijl de muur maar " + werkelijkeBreedteMuur + "mm breedt is.");
+            }
+            else {
+                ++currentSparingen;
+                tekenSparing();
+            }
         }
     }
     else {
-        if (currentDeuren >= maxDeuren) {
-            if (currentDeuren == 0) {
+        if (currentSparingen >= maxDeuren) {
+            if (currentSparingen == 0) {
                 window.alert("De muur is te klein voor een " + sparingSoortCheck() + ".");
             }
             else {
@@ -434,6 +464,20 @@ function SparingMogelijkheid_en_teken() {
                 }
             }
         }
+    }
+    if ((SPRHMIS + SPRP_H_MIS) > werkelijkeHoogteMuur) {//Sparingen totaal hoogte check.
+        if (sparingSoortCheck() == "deur") {
+            tmpFeedback = "De deur";
+        }
+        else {
+            if (sparingSoortCheck() == "raam") {
+                tmpFeedback = "Het raam";
+            }
+            else {
+                tmpFeedback = "De sparing";
+            }
+        }
+        window.alert(tmpFeedback + " is te hoog voor de muur, omdat " + SPRHMIS + "mm + " + SPRP_H_MIS + "mm = " + (SPRHMIS + SPRP_H_MIS) + "mm. Terwijl de muur maar " + werkelijkeHoogteMuur + "mm hoog is.");
     }
 }
 function halfSteensTeken() {
@@ -531,7 +575,7 @@ function sparingSoortAdd() {//Geeft aan hoeveel deuren en ramen er in de muur zi
     }
 }
 document.getElementById("$reset").addEventListener("click", () => {//Reset knop voor alle sparingen.
-    if (currentDeuren != 0) {
+    if (currentSparingen != 0) {
         SparingReset();
         cv_cls();
         teken();
@@ -575,7 +619,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("Hoogte muur: ", 30, 100);
     pdf.text("" + werkelijkeHoogteMuur + "mm.", 80, 100);
     pdf.text("Aantal stenen:", 30, 110);
-    pdf.text("" + stoneCount + ".", 80, 110);
+    pdf.text("" + (rijX * rijY) + ".", 80, 110);
     pdf.text("Steen verband: ", 30, 120);
     pdf.text("" + steenVerbandNaam + ".", 80, 120);
     pdf.text("Voeg hoogte: ", 30, 130);
@@ -585,8 +629,8 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.setProperties({
         title : "Muur generator"
     });
-    if (currentDeuren > 0) {//Als er sparingen zijn doe dan...
-        for (let $i$ = 0; $i$ < currentDeuren; ++$i$) {//Voor aantal sparingen doe...
+    if (currentSparingen > 0) {//Als er sparingen zijn doe dan...
+        for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
             sparingSoortAdd();
         }
         pdf.text("Aantal deuren: ", 30, 150);
@@ -598,7 +642,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         pdf.text("Sparingen", centerTxt, 13, null, null, "center");
         pdf.setFontSize(16);
         let variabeleHoogtePDF = 20; //De hoogte van de text in de for loops in PDF
-        for (let $i$ = 0; $i$ < currentDeuren; ++$i$) {//Voor aantal sparingen doe...
+        for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
             variabeleHoogtePDF += 10;
             pdf.text(SparingPDFNaam($i$) + " hoogte: ", 30, variabeleHoogtePDF);
             pdf.text("" + sparingenArr[$i$].hoogte + " mm, breedte: " + sparingenArr[$i$].breedte + "mm. / Positie: verticaal: " + sparingenArr[$i$].yAsVisueel + "mm, horizontaal: " + sparingenArr[$i$].xAs + "mm.", 70, variabeleHoogtePDF);
