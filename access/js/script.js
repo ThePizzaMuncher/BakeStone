@@ -678,17 +678,27 @@ function stoneCountINCSPR() {//Geavanceerde stonecount functie die sparingen ook
 function collisionDetecion() {//Kijkt of er sparingen zijn die overlappen.
     for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
         if ($i$ != 0) {//Als er minimaal al 1 sparing is, doe dan...
-            if (sparingenArr[$i$].xAs < (sparingenArr[($i$ - 1)].xAs - - (sparingenArr[($i$ - 1)].breedte)) && sparingenArr) {
-                collisionError = 1;
-            } 
+//            if (sparingenArr[$i$].xAs < (sparingenArr[($i$ - 1)].xAs - - (sparingenArr[($i$ - 1)].breedte)) && sparingenArr) {
+//                collisionError = 1;
+//            }
+
+            if (
+                (
+                    (
+                        (sparingenArr[$i$].xAs - - sparingenArr[$i$].breedte) >= sparingenArr[($i$ - 1)].xAs) &&
+                        (sparingenArr[$i$].xAs <= (sparingenArr[($i$ - 1)].xAs - - sparingenArr[($i$ - 1)].breedte))
+                    )
+            ) {
+                alert("Dikke biem");
+            }
         }
     }
     switch (collisionError) {//Laat de fout aan de gebruiker zien.
         case 1:
             window.alert("De sparing overlapt een andere sparing! (horizontaal)");
-        break;
+            return "error";
+        case 2:
+            window.alert("Kees twee");
+            return "error";
     }
-    if (collisionError >= 1) {//Laat de code weten of er collision is.
-        return "error";
-    } 
 }
