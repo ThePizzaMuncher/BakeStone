@@ -20,6 +20,7 @@ let rijX = 0;
 let xPos_2 = 0;
 let aantalDeuren = 0;
 let aantalRamen = 0;
+let stoneCountAdvanced = 0;
 let steensoortHalf_maat = 0;
 let steen_plek_x = 0;
 let steen_plekHalf_status = 0;
@@ -89,10 +90,8 @@ function teken() {//Algemene teken functie.
                             }
                         break;
                     }
-                    stoneCount = (rijX * rijY);
                 }
                 else {//Als steenVerband tegel is doe dan...
-                    stoneCount = (rijX * rijY);
                     if (knopPress == 1) {
                             setTimeout(() => {ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);}, 50);
                     }
@@ -103,7 +102,7 @@ function teken() {//Algemene teken functie.
             }
         }
     }
-    document.getElementById("$stone_count").innerHTML = stoneCount;
+    document.getElementById("$stone_count").innerHTML = stoneCountINCSPR();
     if (currentSparingen != 0) {
         --currentSparingen;
         SparingMogelijkheid_en_teken();
@@ -301,32 +300,32 @@ function berekenen_steen_plek_x() {
 document.getElementById("deur_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 0;
-        SparingMogelijkheid_en_teken();
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_2").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 1;
-        SparingMogelijkheid_en_teken();
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_3").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 2;
-        SparingMogelijkheid_en_teken();
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 3;
-        SparingMogelijkheid_en_teken();
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_2").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 4;
-        SparingMogelijkheid_en_teken();
+    SparingMogelijkheid_en_teken();
 });
 document.getElementById("raam_3").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 5;
-        SparingMogelijkheid_en_teken();
+    SparingMogelijkheid_en_teken();
 });
 function werkelijkeMuurAfmetingen() {
     werkelijkeBreedteMuur = ((steenDx * rijX) - - (rijX * voegDx - voegDx));
@@ -442,6 +441,9 @@ function SparingMogelijkheid_en_teken() {
             else {
                 ++currentSparingen;
                 tekenSparing();
+                setTimeout(() => {//Aanpassen van totaal stenen.
+                    document.getElementById("$stone_count").innerHTML = stoneCountINCSPR();
+                }, 200);
             }
         }
     }
@@ -529,6 +531,7 @@ function halfSteensTeken() {
         }
     }
     rijY - 0;
+    document.getElementById("$stone_count").innerHTML = stoneCountINCSPR();
     werkelijkeMuurAfmetingen();
 }
 function muurAfmetingenErrorCheck() {
@@ -619,7 +622,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("Hoogte muur: ", 30, 100);
     pdf.text("" + werkelijkeHoogteMuur + "mm.", 80, 100);
     pdf.text("Aantal stenen:", 30, 110);
-    pdf.text("" + (rijX * rijY) + ".", 80, 110);
+    pdf.text("" + stoneCountINCSPR() + ".", 80, 110);
     pdf.text("Steen verband: ", 30, 120);
     pdf.text("" + steenVerbandNaam + ".", 80, 120);
     pdf.text("Voeg hoogte: ", 30, 130);
@@ -671,3 +674,12 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     //Einde PDF generation.
     pdf.save("Muur.pdf");
 });
+function stoneCountINCSPR() {//Geavanceerde stonecount functie die sparingen ook mee telt. Er gaan dan stenen af als er een sparing in zit.
+    stoneCountAdvanced = 0;
+    stoneCount = 0;
+    for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
+        stoneCountAdvanced += Number(sparingenArr[$i$].breedte / (steenDx - - voegDx)) * Number(sparingenArr[$i$].hoogte / (steenDy - - voegDy));
+    }
+    stoneCount = ((rijX * rijY) - stoneCountAdvanced);
+    return Math.round(stoneCount);
+}
