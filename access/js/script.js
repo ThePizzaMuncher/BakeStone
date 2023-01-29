@@ -588,6 +588,9 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     let width_pdf_png = pdf.internal.pageSize.getWidth();
     imgPDF.src = canvas.toDataURL("image/jpeg", 1.0); //oare metode
     let datum = new Date();
+    pdf.setProperties({
+        title : "Muur generator"
+    });
     if (steenVerband == 0) {
         steenVerbandNaam = "tegelverband";
     }
@@ -620,9 +623,9 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("" + voegDy + "mm.", 80, 130);
     pdf.text("Voeg breedte: ", 30, 140);
     pdf.text("" + voegDx + "mm.", 80, 140);
-    pdf.setProperties({
-        title : "Muur generator"
-    });
+    pdf.setFontSize(13);
+    pdf.text("" + datum.getDate() + "-" + (datum.getMonth() - - 1) + "-" + datum.getFullYear(), 272, 206);
+    pdf.setFontSize(20);
     if (currentSparingen > 0) {//Als er sparingen zijn doe dan...
         for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
             sparingSoortAdd();
@@ -654,9 +657,6 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         pdf.text("Hieronder een grafische weergave van uw muur.", centerTxt, 195, null, null, "center");
         pdf.setFontSize(20);
     }
-    pdf.setFontSize(13);
-    pdf.text("" + datum.getDate() + "-" + (datum.getMonth() - - 1) + "-" + datum.getFullYear(), 272, 206);
-    pdf.setFontSize(20);
     pdf.addPage();
     //Laatste pagina.
     pdf.addImage(imgPDF, 'png', 0, 0, width_pdf_png, centerTxt);
@@ -666,11 +666,20 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.save("Muur.pdf");
 });
 function stoneCountINCSPR() {//Geavanceerde stonecount functie die sparingen ook mee telt. Er gaan dan stenen af als er een sparing in zit.
-    stoneCountAdvanced = 0;
-    stoneCount = 0;
+    stoneCountAdvanced = 0;//Reset.
+    stoneCount = 0;//Reset.
     for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
         stoneCountAdvanced += Number(sparingenArr[$i$].breedte / (steenDx - - voegDx)) * Number(sparingenArr[$i$].hoogte / (steenDy - - voegDy));
     }
     stoneCount = ((rijX * rijY) - stoneCountAdvanced);
     return Math.round(stoneCount);
+}
+function collisionDetecion() {//Kijkt of er sparingen zijn die overlappen.
+    for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
+        if ($i$ != 0) {//Als er minimaal al 1 sparing is, doe dan...
+            if (sparingenArr[$i$].xAs < (sparingenArr[($i$ - 1)].xAs - - (sparingenArr[($i$ - 1)].breedte)) && sparingenArr) {
+                window.alert("De sparing overlapt een andere sparing! (horizontaal)");
+            } 
+        }
+    }
 }
