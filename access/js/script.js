@@ -17,6 +17,7 @@ let rijX = 0;
 let xPos_2 = 0;
 let aantalDeuren = 0;
 let aantalRamen = 0;
+let collisionError = 0;
 let stoneCountAdvanced = 0;
 let steen_plek_x = 0;
 let halfsteenSwitch = 0;
@@ -678,8 +679,16 @@ function collisionDetecion() {//Kijkt of er sparingen zijn die overlappen.
     for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
         if ($i$ != 0) {//Als er minimaal al 1 sparing is, doe dan...
             if (sparingenArr[$i$].xAs < (sparingenArr[($i$ - 1)].xAs - - (sparingenArr[($i$ - 1)].breedte)) && sparingenArr) {
-                window.alert("De sparing overlapt een andere sparing! (horizontaal)");
+                collisionError = 1;
             } 
         }
     }
+    switch (collisionError) {//Laat de fout aan de gebruiker zien.
+        case 1:
+            window.alert("De sparing overlapt een andere sparing! (horizontaal)");
+        break;
+    }
+    if (collisionError >= 1) {//Laat de code weten of er collision is.
+        return "error";
+    } 
 }
