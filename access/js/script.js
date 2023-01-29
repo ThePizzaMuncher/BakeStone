@@ -436,6 +436,7 @@ function SparingMogelijkheid_en_teken() {
                 setTimeout(() => {//Aanpassen van totaal stenen.
                     document.getElementById("$stone_count").innerHTML = stoneCountINCSPR();
                 }, 200);
+                collisionDetecion();
             }
         }
     }
@@ -460,17 +461,7 @@ function SparingMogelijkheid_en_teken() {
         }
     }
     if ((SPRHMIS + SPRP_H_MIS) > werkelijkeHoogteMuur) {//Sparingen totaal hoogte check.
-        if (sparingSoortCheck() == "deur") {
-            tmpFeedback = "De deur";
-        }
-        else {
-            if (sparingSoortCheck() == "raam") {
-                tmpFeedback = "Het raam";
-            }
-            else {
-                tmpFeedback = "De sparing";
-            }
-        }
+        tmpFeedFunctie();
         window.alert(tmpFeedback + " is te hoog voor de muur, omdat " + SPRHMIS + "mm + " + SPRP_H_MIS + "mm = " + (SPRHMIS + SPRP_H_MIS) + "mm. Terwijl de muur maar " + werkelijkeHoogteMuur + "mm hoog is.");
     }
 }
@@ -678,27 +669,32 @@ function stoneCountINCSPR() {//Geavanceerde stonecount functie die sparingen ook
 function collisionDetecion() {//Kijkt of er sparingen zijn die overlappen.
     for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
         if ($i$ != 0) {//Als er minimaal al 1 sparing is, doe dan...
-//            if (sparingenArr[$i$].xAs < (sparingenArr[($i$ - 1)].xAs - - (sparingenArr[($i$ - 1)].breedte)) && sparingenArr) {
-//                collisionError = 1;
-//            }
-
-            if (
-                (
-                    (
-                        (sparingenArr[$i$].xAs - - sparingenArr[$i$].breedte) >= sparingenArr[($i$ - 1)].xAs) &&
-                        (sparingenArr[$i$].xAs <= (sparingenArr[($i$ - 1)].xAs - - sparingenArr[($i$ - 1)].breedte))
-                    )
+        if (
+            (((sparingenArr[$i$].xAs - - sparingenArr[$i$].breedte) >= sparingenArr[($i$ - 1)].xAs) //x-as
+            && 
+            (sparingenArr[$i$].xAs <= (sparingenArr[($i$ - 1)].xAs - - sparingenArr[($i$ - 1)].breedte)))//x-as
+            &&
+            (((sparingenArr[$i$].yAs - - sparingenArr[$i$].hoogte) >= sparingenArr[($i$ - 1)].yAs)//y-as
+            &&
+            (sparingenArr[$i$].yAs <= (sparingenArr[($i$ - 1)].yAs - - sparingenArr[($i$ - 1)].hoogte)))//y-as
             ) {
-                alert("Dikke biem");
+            tmpFeedFunctie();
+            alert(tmpFeedback + " overlapt een andere sparing!");
+            return "error";
             }
         }
     }
-    switch (collisionError) {//Laat de fout aan de gebruiker zien.
-        case 1:
-            window.alert("De sparing overlapt een andere sparing! (horizontaal)");
-            return "error";
-        case 2:
-            window.alert("Kees twee");
-            return "error";
+}
+function tmpFeedFunctie() {
+    if (sparingSoortCheck() == "deur") {
+        tmpFeedback = "De deur";
+    }
+    else {
+        if (sparingSoortCheck() == "raam") {
+            tmpFeedback = "Het raam";
+        }
+        else {
+            tmpFeedback = "De sparing";
+        }
     }
 }
