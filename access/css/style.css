@@ -8,7 +8,7 @@
     border-bottom-left-radius: 1vw;
 }
 body {
-    background-color: white;
+    background-color: lightblue;
 }
 p {
     color: rgb(0, 0, 0);
@@ -385,9 +385,6 @@ p {
 }
 /* @media empire */
 @media only screen and (max-width: 2776px) {/* 4K */
-    body {
-      background-color: lightblue;
-    }
     .flex_txt {
         font-size: 1.3vw;
         z-index: 2;
@@ -402,11 +399,8 @@ p {
     }
 }
 @media only screen and (max-width: 1441px) {/* Laptop L */
-    body {
-      background-color: rgba(132, 1, 155, 0.473);
-    }
     [type~=number] {
-        width: 2vw;
+        width: 4vw;
         height: 1vw;
     }
     .flex_txt {
@@ -417,13 +411,10 @@ p {
         top: -5.215vw;
     }
     #riem {
-        margin-bottom: 1.3vw;
+        margin-bottom: 2vw;
     }
 }
 @media only screen and (max-width: 1025px) {/* Laptop */
-    body {
-        background-color: rgb(0, 255, 136);
-    }
     .flex_txt {
         font-size: 2vw;
     }
@@ -438,7 +429,7 @@ p {
         height: 40vw;
     }
     #riem {
-        margin-bottom: 5vw;
+        margin-bottom: 6vw;
     }
     .matenSparingen {
         margin-bottom: 0vw;
@@ -465,9 +456,6 @@ p {
     }
 }
 @media only screen and (max-width: 769px) {/* Tablet */
-    body {
-        background-color: red;
-    }
     .pijl_v_txt {
         bottom: -36vw;
         left: 7.9vw;
@@ -478,20 +466,5 @@ p {
     }
     #riem {
         margin-bottom: 6vw;
-    }
-}
-@media only screen and (max-width: 426px) {/* Mob. L */
-    body {
-        background-color: rgb(4, 0, 255);
-    }
-}
-@media only screen and (max-width: 376px) {/* Mob. M */
-    body {
-        background-color: rgb(234, 255, 0);
-    }
-}
-@media only screen and (max-width: 320px) {/* Mob. S */
-    body {
-        background-color: rgb(0, 75, 35);
     }
 }
