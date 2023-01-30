@@ -349,8 +349,6 @@ function tekenSparing() {
                 }
                 else {
                     --currentSparingen;
-                    stoneCountINCSPR();
-                    document.getElementById("$stone_count").innerHTML = ((rijX * rijY) - - (stoneCountAdvanced));
                 }
             }
         }, 50);
