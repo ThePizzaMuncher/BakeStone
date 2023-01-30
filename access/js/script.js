@@ -342,8 +342,15 @@ function tekenSparing() {
                 variabeleSparingTexture.src = sparingTexture[sparingSoort];
                 sparingenArr.push({"texture": variabeleSparingTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "yAsVisueel": SPRP_H_MIS, "breedte": SPRBMIS, "hoogte": SPRHMIS});
                 var ctx = canvas.getContext("2d");
-                for (let quicknumemm = 0; currentSparingen > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
-                    setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
+                if (collisionDetecion() != "error") {
+                    for (let quicknumemm = 0; currentSparingen > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
+                        setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
+                    }
+                }
+                else {
+                    --currentSparingen;
+                    stoneCountINCSPR();
+                    document.getElementById("$stone_count").innerHTML = ((rijX * rijY) - - (stoneCountAdvanced));
                 }
             }
         }, 50);
@@ -436,7 +443,6 @@ function SparingMogelijkheid_en_teken() {
                 setTimeout(() => {//Aanpassen van totaal stenen.
                     document.getElementById("$stone_count").innerHTML = stoneCountINCSPR();
                 }, 200);
-                collisionDetecion();
             }
         }
     }
