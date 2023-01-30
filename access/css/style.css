@@ -389,8 +389,16 @@ p {
       background-color: lightblue;
     }
     .flex_txt {
-        font-size: 1.5vw;
+        font-size: 1.3vw;
         z-index: 2;
+    }
+    [type~=number] {
+        width: 4vw;
+        height: 1.1vw;
+        font-size: 1.1vw;
+    }
+    #riem {
+        margin-bottom: 1vw;
     }
 }
 @media only screen and (max-width: 1441px) {/* Laptop L */
@@ -402,8 +410,14 @@ p {
         height: 1vw;
     }
     .flex_txt {
-        font-size: 2vw;
+        font-size: 1.4vw;
         z-index: 2;
+    }
+    .pijl_horizontaal {
+        top: -5.215vw;
+    }
+    #riem {
+        margin-bottom: 1.3vw;
     }
 }
 @media only screen and (max-width: 1025px) {/* Laptop */
@@ -411,13 +425,59 @@ p {
         background-color: rgb(0, 255, 136);
     }
     .flex_txt {
-        font-size: 20vw;
-        z-index: 2;
+        font-size: 2vw;
+    }
+    [type~=number] {
+        width: 2vw;
+        height: 1vw;
+    }
+    ::-webkit-scrollbar {
+        width: 1vw;
+    }
+    .zijnav_links {
+        height: 40vw;
+    }
+    #riem {
+        margin-bottom: 5vw;
+    }
+    .matenSparingen {
+        margin-bottom: 0vw;
+        height: 14vw;
+    }
+    .pijl_horizontaal {
+        top: -7.6vw;
+        right: -19.0231vw;
+    }
+    .pijl_verticaal {
+        top: -20.35vw;
+        right: -9.18vw;
+    }
+    .pijl_h_txt {
+        bottom: -18vw;
+        left: 19.1vw;
+    }
+    .pijl_v_txt {
+        bottom: -36vw;
+        left: 8.3vw;
+    }
+    [type~=number] {
+        width: 5.5vw;
     }
 }
 @media only screen and (max-width: 769px) {/* Tablet */
     body {
         background-color: red;
+    }
+    .pijl_v_txt {
+        bottom: -36vw;
+        left: 7.9vw;
+    }
+    .pijl_verticaal {
+        top: -20.34vw;
+        right: -9vw;
+    }
+    #riem {
+        margin-bottom: 6vw;
     }
 }
 @media only screen and (max-width: 426px) {/* Mob. L */

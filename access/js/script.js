@@ -348,7 +348,9 @@ function tekenSparing() {
                     }
                 }
                 else {
-                    --currentSparingen;
+                    cv_cls();
+                    SparingReset();
+                    teken();
                 }
             }
         }, 50);
@@ -673,7 +675,7 @@ function stoneCountINCSPR() {//Geavanceerde stonecount functie die sparingen ook
 function collisionDetecion() {//Kijkt of er sparingen zijn die overlappen.
     for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
         if ($i$ != 0) {//Als er minimaal al 1 sparing is, doe dan...
-        if (
+        if (//Kijkt voor sparingen collision.
             (((sparingenArr[$i$].xAs - - sparingenArr[$i$].breedte) >= sparingenArr[($i$ - 1)].xAs) //x-as
             && 
             (sparingenArr[$i$].xAs <= (sparingenArr[($i$ - 1)].xAs - - sparingenArr[($i$ - 1)].breedte)))//x-as
@@ -683,7 +685,7 @@ function collisionDetecion() {//Kijkt of er sparingen zijn die overlappen.
             (sparingenArr[$i$].yAs <= (sparingenArr[($i$ - 1)].yAs - - sparingenArr[($i$ - 1)].hoogte)))//y-as
             ) {
             tmpFeedFunctie();
-            alert(tmpFeedback + " overlapt een andere sparing!");
+            alert(tmpFeedback + " overlapt een andere sparing! Sparingen worden gereset.");
             return "error";
             }
         }
