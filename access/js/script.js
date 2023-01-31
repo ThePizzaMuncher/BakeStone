@@ -51,6 +51,7 @@ brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen text
 console.log("%cBaksteen Calculator", "color: lightblue; font-size: 4vw;");
 console.log("%cBakestone INC | BGDD", "color: green; font-size: 1.2vw;");
 let copyright = "Wieger, Jonathan, Johannes, Julian. (Bakestone INC)";
+let prefireSPRPDF = 1; //Prefire Sparingen PDF. (Voor een for loop)
 function teken() {//Algemene teken functie.
     berekenen_steen_plek_x();
     stoneCount = 0; //Aantal stenen wordt gereset.
@@ -292,6 +293,7 @@ function berekenen_steen_plek_x() {
 document.getElementById("deur_1").addEventListener("click", () => {
     knopPress = 1;
     sparingSoort = 0;
+    
     SparingMogelijkheid_en_teken();
 });
 document.getElementById("deur_2").addEventListener("click", () => {
@@ -544,12 +546,14 @@ function muurAfmetingenErrorCheck() {
 function SparingPDFNaam($i$) {
     if (sparingenArr[$i$]) {
         if (sparingenArr[$i$].texture.src.includes("deur")) {
-            ++deurNaamVar;
+            if (prefireSPRPDF == 0) {++deurNaamVar}
+            else {++aantalDeuren}
             return "Deur " + Math.round(deurNaamVar) + "";
         }
         else {
             if (sparingenArr[$i$].texture.src.includes("raam")) {
-                ++raamNaamVar;
+                if (prefireSPRPDF == 0) {++raamNaamVar}
+                else {++aantalRamen}
                 return "Raam " + Math.round(raamNaamVar) + "";
             }
         }
@@ -559,11 +563,8 @@ function SparingPDFNaam($i$) {
     }
 }
 function sparingSoortAdd() {//Geeft aan hoeveel deuren en ramen er in de muur zitten in de PDF.
-    if (sparingSoort >= 0 && sparingSoort <= 2) {
-        ++aantalDeuren;
-    }
-    if (sparingSoort >= 3 && sparingSoort <= 5) {
-        ++aantalRamen;
+    for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
+        
     }
 }
 document.getElementById("$reset").addEventListener("click", () => {//Reset knop voor alle sparingen.
@@ -587,7 +588,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     imgPDF.src = canvas.toDataURL("image/jpeg", 1.0); //oare metode
     let datum = new Date();
     pdf.setProperties({
-        title : "Muur generator"
+        title : "Muur calculator"
     });
     if (steenVerband == 0) {
         steenVerbandNaam = "tegelverband";
@@ -625,9 +626,12 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     pdf.text("" + datum.getDate() + "-" + (datum.getMonth() - - 1) + "-" + datum.getFullYear(), 272, 206);
     pdf.setFontSize(20);
     if (currentSparingen > 0) {//Als er sparingen zijn doe dan...
-        for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
-            sparingSoortAdd();
+        sparingSoortAdd();
+        prefireSPRPDF = 1;
+        for (let $i$ = 0; $i$ < currentSparingen; ++ $i$) {//Voor aantal sparingen doe...
+            SparingPDFNaam($i$);
         }
+        prefireSPRPDF = 0;
         pdf.text("Aantal deuren: ", 30, 150);
         pdf.text("" + aantalDeuren + ".", 80, 150);
         pdf.text("Aantal ramen: ", 30, 160);
