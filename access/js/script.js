@@ -647,6 +647,8 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
             pdf.text("" + sparingenArr[$i$].hoogte + " mm, breedte: " + sparingenArr[$i$].breedte + "mm. / Positie: verticaal: " + sparingenArr[$i$].yAsVisueel + "mm, horizontaal: " + sparingenArr[$i$].xAs + "mm.", 70, variabeleHoogtePDF);
             variabeleHoogtePDF += 7;
         }
+        variabeleHoogtePDF += 15;
+        pdf.text("Hieronder een grafische weergave van uw muur.", centerTxt, 195, null, null, "center");
         //Loop var's reset.
         deurNaamVar = 0;
         raamNaamVar = 0;
