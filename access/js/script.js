@@ -352,7 +352,7 @@ function tekenSparing() {
                     for (let quicknumemm = 0; currentSparingen > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
                         setTimeout(() => {
                             ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);
-                            ctx.font = "" + (((sparingenArr[quicknumemm].breedte * sparingenArr[quicknumemm].hoogte) / 5000) / 3) + "px Arial";
+                            ctx.font = "" + (((sparingenArr[quicknumemm].breedte * sparingenArr[quicknumemm].hoogte) / 5000) / 2) + "px Arial";
                             ctx.fillText(sparingenArr[quicknumemm].Counter, (sparingenArr[quicknumemm].xAs), sparingenArr[quicknumemm].yAs - - (((sparingenArr[0].breedte * sparingenArr[0].hoogte) / 5000) / 10 * 2 - - 15));
                         }, 100);
                     }
@@ -369,11 +369,9 @@ function tekenSparing() {
         if (canvas.getContext) {
             var ctx = canvas.getContext("2d");
             ctx.fillStyle = "red";
-            aantalD_A = 0;
-            aantalR_A = 0;
             for (let quicknumemm = 0; currentSparingen > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
                 ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);
-                ctx.font = "" + (((sparingenArr[quicknumemm].breedte * sparingenArr[quicknumemm].hoogte) / 5000) / 3) + "px Arial";
+                ctx.font = "" + (((sparingenArr[quicknumemm].breedte * sparingenArr[quicknumemm].hoogte) / 5000) / 2) + "px Arial";
                 ctx.fillText(sparingenArr[quicknumemm].Counter, (sparingenArr[quicknumemm].xAs), sparingenArr[quicknumemm].yAs - - (((sparingenArr[0].breedte * sparingenArr[0].hoogte) / 5000) / 10 * 2 - - 15));
             }
         }
