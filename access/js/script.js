@@ -27,6 +27,7 @@ let steensoort = "waalformaat";
 let tmpFeedback = "";
 let deurNaamVar = 0;
 let raamNaamVar = 0;
+let ARSC = 0; //Array sparingen counter.
 let maxDeuren = 0;
 let currentSparingen = 0;
 let sparingSoort = 0;
@@ -39,7 +40,7 @@ let werkelijkeHoogteMuur = 0;
 let KeuzeResetSparingen = "";
 let brickImage = new Image();
 let imgPDF = new Image();
-let sparingTexture = [
+let sparingTexture = [//De textures van de sparingen worden aangemaakt in een array.
     new Image().src = 'access/media/img/deur_1.png',
     new Image().src = 'access/media/img/deur_2.png',
     new Image().src = 'access/media/img/deur_3.png',
@@ -50,7 +51,7 @@ let sparingTexture = [
 brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Default steen texture.
 console.log("%cBaksteen Calculator", "color: lightblue; font-size: 4vw;");
 console.log("%cBakestone INC | BGDD", "color: green; font-size: 1.2vw;");
-let copyright = "Wieger, Jonathan, Johannes, Julian. (Bakestone INC)";
+let credits = "Wieger, Jonathan, Johannes, Julian. (Bakestone INC) | In opdracht van BGDD";
 let prefireSPRPDF = 1; //Prefire Sparingen PDF. (Voor een for loop)
 function teken() {//Algemene teken functie.
     berekenen_steen_plek_x();
@@ -65,7 +66,7 @@ function teken() {//Algemene teken functie.
         let koppenMaat = steenDx + voegDx;
         koppenMaat /= 2;
         let lagenMaat = steenDy + voegDy;
-        for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
+        for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe... (Prefire)
             ++rijX;
         }
         for (let yPos = 0; yPos < muurDy; yPos += lagenMaat) {//Voor de y-as var && lagenMaat doe...
@@ -73,7 +74,7 @@ function teken() {//Algemene teken functie.
             for (let xPos = 0; xPos < muurDx; xPos += (2 * koppenMaat)) {//Voor de x-as var && koppenMaat doe...
                 if (steenVerband == 1) {//Als steenVerband half-steen is doe dan...
                     halfsteenSwitch += 1;
-                    switch (halfsteenSwitch) {
+                    switch (halfsteenSwitch) {//Switch die kijkt of de muur als halfsteens of tegel verband moet worden getekend.
                         case 1:
                             if (knopPress == 1) {
                                 setTimeout(() => {halfSteensTeken(); halfsteenSwitch += 1;}, 50);
@@ -85,10 +86,10 @@ function teken() {//Algemene teken functie.
                     }
                 }
                 else {//Als steenVerband tegel is doe dan...
-                    if (knopPress == 1) {
+                    if (knopPress == 1) {//Als gebruiker op een knop heeft gedrukt doe dan...
                             setTimeout(() => {ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);}, 50);
                     }
-                    else {
+                    else {//Als de gebruiker de sliders gebruikt, doe dan...
                         ctx.drawImage(brickImage, xPos, yPos, steenDx, steenDy);
                     }
                 }
@@ -96,7 +97,7 @@ function teken() {//Algemene teken functie.
         }
     }
     document.getElementById("$stone_count").innerHTML = stoneCountINCSPR();
-    if (currentSparingen != 0) {
+    if (currentSparingen != 0) {//Tekent de sparingen als er sparingen in de muur zitten.
         --currentSparingen;
         SparingMogelijkheid_en_teken();
     }
@@ -107,28 +108,28 @@ function teken() {//Algemene teken functie.
     document.getElementById("$pijl_v_txt").title = "Werkelijke muur hoogte: " + werkelijkeHoogteMuur + "mm";
 }
 brickImage.onload = () => {//Hier wordt getekend waneer de brickImage ready is om een img te printen.
-    switch (brickImage_ONLY_onload) {
+    switch (brickImage_ONLY_onload) {//Als de pagina voor de eerste keer wordt ingeladen teken dan de muur.
         case 0:
             teken();
         break;
     }
-    brickImage_ONLY_onload = 1;
+    brickImage_ONLY_onload = 1;//Pagina is geladen, dus de onload wordt hier nu niet meer uitgevoerd.
 }
 function BGDD_website() {//Doorverwijzing naar BGDD website.
     window.open("https://BGDD.nl/", '_blank');
 }
 document.getElementById("#stone1").addEventListener("click", () => {//Knop steen 1 listener. (Waalformaat baksteen)
-    get_B_en_H();
-    muur_B_en_H_check();
-    werkelijkeMuurAfmetingen();
+    get_B_en_H();//Krijg de maten van de muur.
+    muur_B_en_H_check();//Kijkt of de muur niet te klein is en andere checks.
+    werkelijkeMuurAfmetingen();//Krijg de maten van de muur.
     if (zeroCheck == 0 && muurAfmetingenErrorCheck() != "error") {//Zero check.
-        knopPress = 1;
-        steensoort = "waalformaat";
-        cv_cls();
-        brickImage.src = 'access/media/img/waalformaat-steen-1.png';
-        steenDx = 210;
-        steenDy = 50;
-        teken();
+        knopPress = 1;//Gebruiker heeft op een knop gedrukt.
+        steensoort = "waalformaat";//Variabele steensoort wordt naar waalformaat gezet.
+        cv_cls();//Canvas legen.
+        brickImage.src = 'access/media/img/waalformaat-steen-1.png';//Het pad van de steen texture wordt ingesteld.
+        steenDx = 210;//Breedte steen.
+        steenDy = 50;//Hoogte steen.
+        teken();//Teken
     }
 });
 document.getElementById("#stone2").addEventListener("click", () => {//Knop steen 2 listener. (Dikformaat baksteen)
@@ -335,6 +336,7 @@ function SparingReset() {
     currentSparingen = 0;
     aantalDeuren = 0;
     aantalRamen = 0;
+    ARSC = 0;
 }
 function tekenSparing() {
     if (knopPress == 1) {
@@ -342,11 +344,17 @@ function tekenSparing() {
             if (canvas.getContext) {
                 let variabeleSparingTexture = new Image();
                 variabeleSparingTexture.src = sparingTexture[sparingSoort];
-                sparingenArr.push({"texture": variabeleSparingTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "yAsVisueel": SPRP_H_MIS, "breedte": SPRBMIS, "hoogte": SPRHMIS});
+                ++ARSC;
+                sparingenArr.push({"texture": variabeleSparingTexture, "xAs": SPRP_NR_MIS, "yAs": ((werkelijkeHoogteMuur - SPRHMIS) - SPRP_H_MIS), "yAsVisueel": SPRP_H_MIS, "breedte": SPRBMIS, "hoogte": SPRHMIS, "Counter": ARSC});
                 var ctx = canvas.getContext("2d");
                 if (collisionDetecion() != "error") {
+                    ctx.fillStyle = "red";
                     for (let quicknumemm = 0; currentSparingen > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
-                        setTimeout(() => {ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);}, 100);
+                        setTimeout(() => {
+                            ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);
+                            ctx.font = "" + (((sparingenArr[quicknumemm].breedte * sparingenArr[quicknumemm].hoogte) / 5000) / 3) + "px Arial";
+                            ctx.fillText(sparingenArr[quicknumemm].Counter, (sparingenArr[quicknumemm].xAs), sparingenArr[quicknumemm].yAs - - (((sparingenArr[0].breedte * sparingenArr[0].hoogte) / 5000) / 10 * 2 - - 15));
+                        }, 100);
                     }
                 }
                 else {
@@ -360,12 +368,16 @@ function tekenSparing() {
     else {
         if (canvas.getContext) {
             var ctx = canvas.getContext("2d");
+            ctx.fillStyle = "red";
+            aantalD_A = 0;
+            aantalR_A = 0;
             for (let quicknumemm = 0; currentSparingen > quicknumemm; ++quicknumemm) {//Voor current sparingen doe...
                 ctx.drawImage(sparingenArr[quicknumemm].texture, /* x-as */sparingenArr[quicknumemm].xAs, /* y-as */sparingenArr[quicknumemm].yAs, /* breedte */sparingenArr[quicknumemm].breedte, /* hoogte */sparingenArr[quicknumemm].hoogte);
+                ctx.font = "" + (((sparingenArr[quicknumemm].breedte * sparingenArr[quicknumemm].hoogte) / 5000) / 3) + "px Arial";
+                ctx.fillText(sparingenArr[quicknumemm].Counter, (sparingenArr[quicknumemm].xAs), sparingenArr[quicknumemm].yAs - - (((sparingenArr[0].breedte * sparingenArr[0].hoogte) / 5000) / 10 * 2 - - 15));
             }
         }
     }
-    
 }
 function sparingArrReset() {
     sparingenArr = [];
@@ -545,21 +557,8 @@ function muurAfmetingenErrorCheck() {
 }
 function SparingPDFNaam($i$) {
     if (sparingenArr[$i$]) {
-        if (sparingenArr[$i$].texture.src.includes("deur")) {
-            if (prefireSPRPDF == 0) {++deurNaamVar}
-            else {++aantalDeuren}
-            return "Deur " + Math.round(deurNaamVar) + "";
-        }
-        else {
-            if (sparingenArr[$i$].texture.src.includes("raam")) {
-                if (prefireSPRPDF == 0) {++raamNaamVar}
-                else {++aantalRamen}
-                return "Raam " + Math.round(raamNaamVar) + "";
-            }
-        }
-    }
-    else {
-        return "Er zijn geen sparingen!";
+        if (prefireSPRPDF == 0) {++deurNaamVar}
+        return "Sparing " + Math.round(deurNaamVar) + "";
     }
 }
 function sparingSoortAdd() {//Geeft aan hoeveel deuren en ramen er in de muur zitten in de PDF.
@@ -628,8 +627,18 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
     if (currentSparingen > 0) {//Als er sparingen zijn doe dan...
         sparingSoortAdd();
         prefireSPRPDF = 1;
+        aantalDeuren = 0;
+        aantalRamen = 0;
         for (let $i$ = 0; $i$ < currentSparingen; ++ $i$) {//Voor aantal sparingen doe...
             SparingPDFNaam($i$);
+            if (sparingenArr[$i$].texture.src.includes("deur")) {
+                ++aantalDeuren;
+            }
+            else {
+                if (sparingenArr[$i$].texture.src.includes("raam")) {
+                    ++aantalRamen;
+                }
+            }
         }
         prefireSPRPDF = 0;
         pdf.text("Aantal deuren: ", 30, 150);
@@ -643,7 +652,7 @@ document.getElementById("$knop").addEventListener("click", () => {//Pdf download
         let variabeleHoogtePDF = 20; //De hoogte van de text in de for loops in PDF
         for (let $i$ = 0; $i$ < currentSparingen; ++$i$) {//Voor aantal sparingen doe...
             variabeleHoogtePDF += 10;
-            pdf.text(SparingPDFNaam($i$) + " hoogte: ", 30, variabeleHoogtePDF);
+            pdf.text(SparingPDFNaam($i$) + " hoogte: ", 10, variabeleHoogtePDF);
             pdf.text("" + sparingenArr[$i$].hoogte + " mm, breedte: " + sparingenArr[$i$].breedte + "mm. / Positie: verticaal: " + sparingenArr[$i$].yAsVisueel + "mm, horizontaal: " + sparingenArr[$i$].xAs + "mm.", 70, variabeleHoogtePDF);
             variabeleHoogtePDF += 7;
         }
