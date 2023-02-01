@@ -1,22 +1,14 @@
-let steenDx = 210;
-let steenDy = 50;
-let steenDz = 100;
-let voegDx = 10;
-let voegDy = 10;
-let muurDx = 500;
-let muurDy = 300;
+let steenDx = 210, steenDy = 50, steenDz = 100;
+let voegDx = 10, voegDy = 10;
+let muurDx = 500, muurDy = 300;
 let schaalSlider = 5.6;
 let zeroCheck = 0;
 let brickImage_ONLY_onload = 0;
 let knopPress = 0;
 let stoneCount = 0;
-let steenVerband = 0;
-let steenVerbandNaam = "";
-let rijY = 0;
-let rijX = 0;
-let xPos_2 = 0;
-let aantalDeuren = 0;
-let aantalRamen = 0;
+let steenVerband = 0, steenVerbandNaam = "";
+let rijY = 0, rijX = 0, xPos_2 = 0;
+let aantalDeuren = 0, aantalRamen = 0;
 let collisionError = 0;
 let stoneCountAdvanced = 0;
 let steen_plek_x = 0;
@@ -25,21 +17,15 @@ let matenError = 0;
 let sparingenArr = [];
 let steensoort = "waalformaat";
 let tmpFeedback = "";
-let deurNaamVar = 0;
-let raamNaamVar = 0;
+let deurNaamVar = 0, raamNaamVar = 0;
 let ARSC = 0; //Array sparingen counter.
-let maxDeuren = 0;
-let currentSparingen = 0;
-let sparingSoort = 0;
+let maxDeuren = 0, currentSparingen = 0, sparingSoort = 0;
 let SPRHMIS = 0; //Sparingen Hoogte Maat In Stenen.
 let SPRBMIS = 0; //Sparingen Breedte Maat In Stenen.
 let SPRP_H_MIS = 1; //Sparing Positie Hoogte Maten In Stenen.
 let SPRP_NR_MIS = 1; //Sparing Positie Naar Rechts Maten In Stenen.
-let werkelijkeBreedteMuur = 0;
-let werkelijkeHoogteMuur = 0;
-let KeuzeResetSparingen = "";
-let brickImage = new Image();
-let imgPDF = new Image();
+let werkelijkeBreedteMuur = 0, werkelijkeHoogteMuur = 0, KeuzeResetSparingen = "";
+let brickImage = new Image(), imgPDF = new Image();
 let sparingTexture = [//De textures van de sparingen worden aangemaakt in een array.
     new Image().src = 'access/media/img/deur_1.png',
     new Image().src = 'access/media/img/deur_2.png',
