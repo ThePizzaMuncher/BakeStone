@@ -1,4 +1,4 @@
-let steenDx = 210, steenDy = 50, steenDz = 100; //steenbreedte, ‐hoogte en ‐diepte
+let steenDx = 210, steenDy = 50, steenDz = 100; //steenbreedte, ‐hoogte en ‐diepte (Diepte is niet nodig)
 let voegDx = 10, voegDy = 10; //voegbreedte en ‐hoogte
 let muurDx = 500, muurDy = 300; //muurbreedte en ‐hoogte
 let schaalSlider = 5.6; //standaard zoomniveau
